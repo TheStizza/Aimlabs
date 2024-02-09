@@ -16,6 +16,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="App\Models\Revolver.obj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App\Models\Revolver.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="AssimpNet">
       <HintPath>AssimpNet.dll</HintPath>
     </Reference>
