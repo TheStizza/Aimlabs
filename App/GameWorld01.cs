@@ -60,12 +60,12 @@ namespace Aimlabs.App
             p1.SetOpacity(0); 
             AddGameObject(p1);
 
-            KWEngine.LoadModel("Gun", "./App/Models/Revolver.obj");
+            KWEngine.LoadModel("Gun", "./App/Models/Browning HP.fbx");
 
             Weapon fpw = new Weapon();
             fpw.SetModel("Gun");
-            fpw.SetOffset(0.0f, -0.1f, 0.1f); // Verschiebung relativ zur Kamera
-            fpw.SetScale(10.0f); // Skaliere das Objekt entsprechend
+            fpw.SetOffset(1.0f, 1.0f, 5.0f); // Verschiebung relativ zur Kamera
+            fpw.SetScale(1.0f); // Skaliere das Objekt entsprechend
             SetViewSpaceGameObject(fpw);
 
             // Zweiter Parameter der folgenden Methode ist ein Offset für die Kamera.
