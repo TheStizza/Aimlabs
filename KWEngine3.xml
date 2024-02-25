@@ -171,9 +171,29 @@
             Art des Bodengewächses
             </summary>
         </member>
-        <member name="F:KWEngine3.FoliageType.Grass">
+        <member name="F:KWEngine3.FoliageType.GrassFresh">
             <summary>
-            Gras
+            Gras (Variante 1)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.FoliageType.GrassDry">
+            <summary>
+            Gras (Variante 2)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.FoliageType.GrassDesert">
+            <summary>
+            Gras (Variante 3)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.FoliageType.GrassMinecraft">
+            <summary>
+            Gras (Variante 4)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.FoliageType.Fern">
+            <summary>
+            Strauch
             </summary>
         </member>
         <member name="T:KWEngine3.InstanceMode">
@@ -1312,20 +1332,27 @@
             Klasse für Bodengewächse (z.B. Gras)
             </summary>
         </member>
-        <member name="M:KWEngine3.GameObjects.FoliageObject.#ctor">
+        <member name="M:KWEngine3.GameObjects.FoliageObject.#ctor(KWEngine3.FoliageType)">
             <summary>
             Konstruktormethode für das Bodengewächs mit einer Instanz
             </summary>
+            <param name="type">Art des Gewächses</param>
         </member>
-        <member name="M:KWEngine3.GameObjects.FoliageObject.#ctor(System.Int32)">
+        <member name="M:KWEngine3.GameObjects.FoliageObject.#ctor(KWEngine3.FoliageType,System.Int32)">
             <summary>
             Konstruktormethode für das Bodengewächs mit mehreren Instanzen
             </summary>
-            <param name="instanceCount">Anzahl der Instanzen</param>
+            <param name="type">Art des Gewächses</param>
+            <param name="instanceCount">Anzahl der Instanzen (Werte zwischen 1 und 262144)</param>
         </member>
         <member name="P:KWEngine3.GameObjects.FoliageObject.Name">
             <summary>
             Name des Objekts
+            </summary>
+        </member>
+        <member name="P:KWEngine3.GameObjects.FoliageObject.Type">
+            <summary>
+            Art des Bodengewächses
             </summary>
         </member>
         <member name="P:KWEngine3.GameObjects.FoliageObject.IsInsideScreenSpace">
@@ -1343,6 +1370,11 @@
             Gibt die Position des Bodengewächses an
             </summary>
         </member>
+        <member name="P:KWEngine3.GameObjects.FoliageObject.Roughness">
+            <summary>
+            Gibt die aktuelle Rauheit der Gewächsoberfläche an
+            </summary>
+        </member>
         <member name="P:KWEngine3.GameObjects.FoliageObject.PatchSize">
             <summary>
             Gibt die Ausweitung des Gewächses an
@@ -1353,9 +1385,19 @@
             Gibt die Anzahl der für das Gewächs gerenderten Instanzen zurück
             </summary>
         </member>
-        <member name="P:KWEngine3.GameObjects.FoliageObject.Rotation">
+        <member name="P:KWEngine3.GameObjects.FoliageObject.IsShadowReceiver">
             <summary>
-            Gibt die aktuelle Rotation als Quaternion an
+            Gibt an, ob Schatten auf das Objekt geworfen werden können (Standard: true)
+            </summary>
+        </member>
+        <member name="P:KWEngine3.GameObjects.FoliageObject.IsAffectedByLight">
+            <summary>
+            Gibt an, ob dieses Objekt auf Licht reagiert (Standard: true)
+            </summary>
+        </member>
+        <member name="P:KWEngine3.GameObjects.FoliageObject.IsSizeReducedAtCorners">
+            <summary>
+            Gibt an, ob die Gewächsbestandteile zum Rand der Gewächsfläche in ihrer Größe verringert werden (Standard: true)
             </summary>
         </member>
         <member name="M:KWEngine3.GameObjects.FoliageObject.SetInstanceCount(System.Int32)">
@@ -1363,6 +1405,18 @@
             Setzt die (ungefähre) Anzahl an benötigten Instanzen für das Gewächs
             </summary>
             <param name="instanceCount">Anzahl der gewünschten Instanzen</param>
+        </member>
+        <member name="M:KWEngine3.GameObjects.FoliageObject.SetSwayFactor(System.Single)">
+            <summary>
+            Gibt an, wie stark das Gras sich im Wind wiegt
+            </summary>
+            <param name="swayFactor">Verstärkungsfaktor (Werte zwischen 0 und 1, Standard: 0.05f)</param>
+        </member>
+        <member name="M:KWEngine3.GameObjects.FoliageObject.SetRoughness(System.Single)">
+            <summary>
+            Gibt an, wie rau die Oberfläche des Gewächses ist (0f = glatt, 1f = rau)
+            </summary>
+            <param name="r">Grad der Rauheit</param>
         </member>
         <member name="M:KWEngine3.GameObjects.FoliageObject.SetColor(OpenTK.Mathematics.Vector4)">
             <summary>
@@ -1402,31 +1456,34 @@
         </member>
         <member name="M:KWEngine3.GameObjects.FoliageObject.SetScale(System.Single,System.Single,System.Single)">
             <summary>
-            Gibt die Größe je Gewächsteil (Standardwert: 1)
+            Gibt die Größe je Gewächsteil an(Standardwert: 1)
             </summary>
             <param name="width">Breite eines einzelnes Gewächsteils (muss positiv sein)</param>
             <param name="height">Höhe eines einzelnes Gewächsteils (muss positiv sein)</param>
             <param name="depth">Tiefe eines einzelnes Gewächsteils (muss positiv sein)</param>
         </member>
+        <member name="M:KWEngine3.GameObjects.FoliageObject.SetScale(System.Single)">
+            <summary>
+            Gibt die Größe je Gewächsteil an (Standardwert: 1)
+            </summary>
+            <param name="s">Skalierungsfaktor</param>
+        </member>
         <member name="M:KWEngine3.GameObjects.FoliageObject.SetScale(OpenTK.Mathematics.Vector3)">
             <summary>
-            Gibt die Größe je Gewächsteil (Standardwert: 1)
+            Gibt die Größe je Gewächsteil an (Standardwert: 1)
             </summary>
-            <param name="s">Skalierung (jede Vektorkomponente muss positiv sein)</param>
+            <param name="s">Skalierung (jede Vektorkomponente muss positiv sein, Maximalwert: 4096)</param>
         </member>
-        <member name="M:KWEngine3.GameObjects.FoliageObject.SetRotation(System.Single,System.Single,System.Single)">
+        <member name="M:KWEngine3.GameObjects.FoliageObject.AttachToTerrain(KWEngine3.GameObjects.TerrainObject)">
             <summary>
-            Setzt die Rotation des Gewächsfeldes (in Grad, Rotationsreihenfolge: Z -> Y -> X)
+            Richtet das Gewächs bzgl. seiner Höhe am übergebenen Terrain aus
             </summary>
-            <param name="x">x-Rotation (in Grad)</param>
-            <param name="y">y-Rotation (in Grad)</param>
-            <param name="z">z-Rotation (in Grad)</param>
+            <param name="t">Terrain-Objekt, an dem sich das Gewächs orientieren soll</param>
         </member>
-        <member name="M:KWEngine3.GameObjects.FoliageObject.SetRotation(OpenTK.Mathematics.Quaternion)">
+        <member name="M:KWEngine3.GameObjects.FoliageObject.DetachFromTerrain">
             <summary>
-            Setzt die Rotation des Gewächsfeldes
+            Löst die Bindung zum aktuell festgelegten Terrain-Objekt
             </summary>
-            <param name="r">Rotation als Quaternion</param>
         </member>
         <member name="T:KWEngine3.GameObjects.GameObject">
             <summary>
@@ -1436,6 +1493,11 @@
         <member name="P:KWEngine3.GameObjects.GameObject.ID">
             <summary>
             Interne ID des Objekts
+            </summary>
+        </member>
+        <member name="P:KWEngine3.GameObjects.GameObject.FlowFieldCost">
+            <summary>
+            Gibt die Kosten dieser Instanz auf einem (optionalen) Flowfield an (1 = kein Hindernis, 255 = unüberwindbares Hindernis; Standardwert: 1)
             </summary>
         </member>
         <member name="P:KWEngine3.GameObjects.GameObject.IsCollisionObject">
@@ -2968,6 +3030,123 @@
             Gibt die (relative) Mitte des Fensters in Pixeln an
             </summary>
         </member>
+        <member name="T:KWEngine3.Helper.FlowField">
+            <summary>
+            Klasse zum Erstellen einer FlowField-Instanz für KI-Navigation
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.FlowField.GridCellCount">
+            <summary>
+            Anzahl der Zellen im Feld (in allen drei Dimensionen, wobei nur X- und Z-Dimension zählen)
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.FlowField.CellRadius">
+            <summary>
+            Radius einer Zelle
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.FlowField.Center">
+            <summary>
+            Mittelpunkt der FlowField-Instanz
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.FlowField.IsVisible">
+            <summary>
+            Gibt an, ob die Instanz zu Debugging-Zwecken sichtbar gemacht werden soll
+            </summary>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.#ctor(System.Single,System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32,System.Type[])">
+            <summary>
+            Erzeugt ein FlowField für die angegebenen GameObject-Typen
+            </summary>
+            <param name="positionX">X-Koordinate des Mittelpunkts</param>
+            <param name="positionY">Y-Koordinate des Mittelpunkts</param>
+            <param name="positionZ">Z-Koordinate des Mittelpunkts</param>
+            <param name="cellCountX">Anzahl Zellen in X-Richtung</param>
+            <param name="cellCountZ">Anzahl Zellen in Z-Richtung</param>
+            <param name="cellRadius">Radius je Zelle</param>
+            <param name="fieldHeight">Höhe des Felds</param>
+            <param name="types">Liste der Klassen, die das FlowField scannen soll</param>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.#ctor(OpenTK.Mathematics.Vector3,System.Int32,System.Int32,System.Single,System.Int32,System.Type[])">
+            <summary>
+            Erzeugt ein FlowField für die angegebenen GameObject-Typen
+            </summary>
+            <param name="center">Mittelpunkt des Felds</param>
+            <param name="cellCountX">Anzahl Zellen in X-Richtung</param>
+            <param name="cellCountZ">Anzahl Zellen in Z-Richtung</param>
+            <param name="cellRadius">Radius je Zelle</param>
+            <param name="fieldHeight">Höhe des Felds</param>
+            <param name="types">Liste der Klassen, die das FlowField scannen soll</param>
+            <exception cref="T:System.Exception">Eine genannte Klasse erbt nicht von GameObject</exception>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.ContainsXZ(KWEngine3.GameObjects.GameObject)">
+            <summary>
+            Prüft anhand der XZ-Achsen, ob ein Objekt ansatzweise innerhalb des Feldes liegt
+            </summary>
+            <param name="g">zu prüfendes Objekt</param>
+            <returns>true, wenn das Objekt im Feld liegt</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.ContainsXZ(OpenTK.Mathematics.Vector3)">
+            <summary>
+            Prüft anhand der XZ-Achsen, ob eine Position innerhalb des Feldes liegt
+            </summary>
+            <param name="position">zu prüfende Position</param>
+            <returns>true, wenn die Position im Feld liegt</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.Contains(KWEngine3.GameObjects.GameObject)">
+            <summary>
+            Prüft, ob ein Objekt ansatzweise innerhalb des Feldes liegt
+            </summary>
+            <param name="g">zu prüfendes Objekt</param>
+            <returns>true, wenn das Objekt im Feld liegt</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.Contains(OpenTK.Mathematics.Vector3)">
+            <summary>
+            Prüft, ob eine Position innerhalb des Feldes liegt
+            </summary>
+            <param name="position">zu prüfende Position</param>
+            <returns>true, wenn die Position im Feld liegt</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.Update">
+            <summary>
+            Führt einen Scan über alle im FlowField liegenden Objekte durch und berechnet die Wegkosten pro Knoten neu
+            </summary>
+            <remarks>
+            Die Ausführung dieser Methode ist immer dann notwendig, wenn sich die Position, Rotation oder Skalierung eines 
+            für das FlowField relevanten Objekts ändert
+            </remarks>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.SetTarget(OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet die Richungsanweisungen im gesamten FlowField für die neue Zielposition
+            </summary>
+            <param name="position">Neue Positionsangabe</param>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.GetBestDirectionForPosition(OpenTK.Mathematics.Vector3)">
+            <summary>
+            Gibt die bestmögliche Bewegungsrichtung gemäß der aktuellen Position zurück
+            </summary>
+            <param name="position">aktuelle Position</param>
+            <returns>bestmögliche Bewegungsrichtung</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.IsPositionInsideDestinationCell(OpenTK.Mathematics.Vector3)">
+            <summary>
+            Gibt an, ob die übergebene Position in der Zielzelle liegt (falls festgelegt)
+            </summary>
+            <param name="position">Zu prüfende Position</param>
+            <returns>true, wenn die Position in der Zielzelle liegt</returns>
+        </member>
+        <member name="P:KWEngine3.Helper.FlowField.HasTarget">
+            <summary>
+            Gibt an, ob derzeit ein Zielpunkt im FlowField gesetzt ist
+            </summary>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.UnsetTarget">
+            <summary>
+            Löscht ein aktuell festgesetztes Ziel im FlowField
+            </summary>
+        </member>
         <member name="P:KWEngine3.Helper.HelperDDS.BitmapImage">
             <summary>
             Returns a System.Imaging.Bitmap containing the DDS image.
@@ -4136,6 +4315,18 @@
             <param name="x">Beschneidung in x-Richtung</param>
             <param name="y">Beschneidung in y-Richtung</param>
         </member>
+        <member name="M:KWEngine3.World.SetFlowField(KWEngine3.Helper.FlowField)">
+            <summary>
+            Setzt das FlowField-Objekt (es kann aktuell immer nur ein FlowField pro Welt existieren)
+            </summary>
+            <param name="f">FlowField-Objekt</param>
+        </member>
+        <member name="M:KWEngine3.World.GetFlowField">
+            <summary>
+            Erfragt die Referenz auf das aktuelle FlowField
+            </summary>
+            <returns>Referenz auf das FlowField - wenn keines vorhanden ist: null</returns>
+        </member>
         <member name="M:KWEngine3.World.AddExplosionObject(KWEngine3.GameObjects.ExplosionObject)">
             <summary>
             Fügt ein Explosionsobjekt hinzu
@@ -4293,12 +4484,19 @@
             </summary>
             <param name="yawPitch">Bewegung in x-/y-Richtung (Delta)</param>
         </member>
+        <member name="M:KWEngine3.World.GetTerrainObjectByName(System.String)">
+            <summary>
+            Durchsucht alle TerrainObject-Instanzen und gibt das erste Suchergebnis zum angegebenen Namen zurück
+            </summary>
+            <param name="name">gesuchter Name</param>
+            <returns>gefundenes Objekt (oder null)</returns>
+        </member>
         <member name="M:KWEngine3.World.GetTextObjectByName(System.String)">
             <summary>
             Durchsucht alle TextObject-Instanzen und gibt das erste Suchergebnis zum angegebenen Namen zurück
             </summary>
-            <param name="name"></param>
-            <returns></returns>
+            <param name="name">gesuchter Name</param>
+            <returns>gefundenes Objekt (oder null)</returns>
         </member>
         <member name="M:KWEngine3.World.GetGameObjectsByName(System.String)">
             <summary>
