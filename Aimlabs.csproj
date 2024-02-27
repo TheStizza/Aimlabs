@@ -16,8 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="App\Models\Beretta Pistol.fbx" />
-    <None Remove="App\Models\Browning HP.fbx" />
+    <None Remove="App\Models\BerettaPistol.fbx" />
     <None Remove="App\Models\Revolver.obj" />
     <None Remove="App\Textures\BrowningHP_Albedo.png" />
     <None Remove="App\Textures\BrowningHP_AO.png" />
@@ -27,25 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="App\Models\Beretta Pistol.fbx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App\Models\Browning HP.fbx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App\Textures\BrowningHP_Albedo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App\Textures\BrowningHP_AO.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App\Textures\BrowningHP_Metallic.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App\Textures\BrowningHP_Normal.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App\Textures\BrowningHP_Roughness.png">
+    <Content Include="App\Models\BerettaPistol.fbx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -99,6 +80,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="App\Models\BrowningHP.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App\Models\BrowningHP.gltf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App\Models\BrowningHP_Albedo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App\Models\BrowningHP_MetallicRoughness.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App\Models\BrowningHP_Normal.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="App\Textures\equirectangular_example.dds">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
