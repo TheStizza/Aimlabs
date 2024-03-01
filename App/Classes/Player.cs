@@ -18,15 +18,36 @@ namespace Aimlabs.App.Classes
             {
                 UpdateMovementAndFirstPersonCamera();
             }
+            Player p = CurrentWorld.GetGameObjectByName<Player>("p");
+            if (p != null)
+            {
+                Vector3 myposition = this.Position;
+                List<RayIntersection> rayObjects = HelperIntersection.RayTraceObjectsForViewVectorFast(
+                    myposition,
+                    LookAtVector,
+                    this,
+                    0,
+                    true,
+                    typeof(Player), typeof(Walls), typeof(Obstacle)
+                    );
+                if (rayObjects.Count > 0)
+                {
+                    foreach (RayIntersection r in rayObjects)
+                    {
+
+                    }
+                    GameObject firstObjectHitbyRay = rayObjects[0].Object;
+                    if (firstObjectHitbyRay is Target)
+                    {
+                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Stats.score = Stats.score + 1;
+                    }
+                }
+            }
         }
 
         private void UpdateMovementAndFirstPersonCamera()
         {
-            // Initialisiere zwei Variablen:
-            // forward == +1 -> Indikator für 'vorwärts'
-            // forward == -1 -> Indikator für 'rückwärts'
-            // strafe  == +1 -> Indikator für 'strafe rechts'
-            // strafe  == -1 -> Indikator für 'strafe links'
             int forward = 0;
             int strafe = 0;
             if (Keyboard.IsKeyDown(Keys.A))
@@ -37,18 +58,8 @@ namespace Aimlabs.App.Classes
                 forward += 1;
             if (Keyboard.IsKeyDown(Keys.S))
                 forward -= 1;
-
-            // Nutze die Informationen aus der Welt,
-            // um die Kamera entsprechend der Mausbewegungen
-            // rotieren zu lassen:
             CurrentWorld.AddCameraRotationFromMouseDelta();
-
-            // Bewege das Objekt entlang der aktuellen Blickrichtung
-            // mit Hilfe der Variablenwerte in 'forward' und 'strafe'.
-            // Der dritte Parameter ist die Geschwindigkeit.
             MoveAndStrafeAlongCameraXZ(forward, strafe, 0.01f);
-
-            // Für Free-Float-Verhalten die Tasten Q und E für Auf-/Absteigen:
             if (Keyboard.IsKeyDown(Keys.Q))
             {
                 MoveAlongVector(CurrentWorld.CameraLookAtVectorLocalUp, -0.01f);
@@ -57,9 +68,17 @@ namespace Aimlabs.App.Classes
             {
                 MoveAlongVector(CurrentWorld.CameraLookAtVectorLocalUp, 0.01f);
             }
-            // Aktualisiere die Kameraposition:
-            // (Erneut wird die Kamera um 0.4f Einheiten weiter oben platziert)
             CurrentWorld.UpdateCameraPositionForFirstPersonView(Center, Player.CAM_OFFSET);
+            List<Intersection> intersections = GetIntersections();
+            foreach (Intersection i in intersections)
+            {
+                GameObject collider = i.Object;
+                if(collider is Walls)
+                {
+                    Vector3 mtv = i.MTV;
+                    MoveOffset(mtv);
+                }
+            }
         }
     }
 }
