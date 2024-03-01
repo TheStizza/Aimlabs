@@ -88,6 +88,7 @@ namespace Aimlabs.App
             s1.SetModel("Sphere");
             s1.SetScale(0.3f, 0.3f, 0.3f);
             s1.SetPosition(0, 2, 0);
+            s1.IsCollisionObject = true;
             AddGameObject(s1);
 
             Walls w1 = new();

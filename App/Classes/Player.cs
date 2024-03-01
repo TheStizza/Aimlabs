@@ -37,7 +37,7 @@ namespace Aimlabs.App.Classes
 
                     }
                     GameObject firstObjectHitbyRay = rayObjects[0].Object;
-                    if (firstObjectHitbyRay is Target)
+                    if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
                     {
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Stats.score = Stats.score + 1;
