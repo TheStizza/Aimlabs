@@ -10,6 +10,9 @@ namespace Aimlabs.App
     {
         private const float ESC_COOLDOWN = 1f;
         private float _esc_timestamp = 0f;
+        private HUDObjectImage crosshair = new HUDObjectImage();
+        private HUDObjectImage CrosshairHit = new HUDObjectImage();
+
         public override void Act()
         {
             if(Keyboard.IsKeyDown(Keys.Escape) && WorldTime - _esc_timestamp > ESC_COOLDOWN)
@@ -26,10 +29,29 @@ namespace Aimlabs.App
                 }
                 _esc_timestamp = WorldTime;
             }
+            if (Mouse.IsButtonDown(MouseButton.Left))
+            {
+                crosshair.SetColor(0.3f,0.1f,0.1f);
+                crosshair.SetScale(30,20);
+                AddHUDObject(CrosshairHit);
+            }
+            else
+            {
+                crosshair.SetColor(0,1,0);
+                crosshair.SetScale(30,20);
+               
+                RemoveHUDObject(CrosshairHit);
+            }
         }
 
         public override void Prepare()
         {
+            crosshair. SetPosition(Window.Width / 2, Window.Height / 2);
+            crosshair.SetTexture("./app/Textures/Crosshair.png");
+            CrosshairHit.SetPosition(Window.Width / 2, Window.Height / 2);
+            CrosshairHit.SetTexture("./app/Textures/Corsshair hit.png");
+            CrosshairHit.SetScale(15, 15);
+            AddHUDObject(crosshair);
             SetCameraFOV(100);
 
             SetColorAmbient(0.8f, 0.8f, 0.8f);

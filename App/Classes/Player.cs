@@ -57,7 +57,6 @@ namespace Aimlabs.App.Classes
             {
                 MoveAlongVector(CurrentWorld.CameraLookAtVectorLocalUp, 0.01f);
             }
-
             // Aktualisiere die Kameraposition:
             // (Erneut wird die Kamera um 0.4f Einheiten weiter oben platziert)
             CurrentWorld.UpdateCameraPositionForFirstPersonView(Center, Player.CAM_OFFSET);
