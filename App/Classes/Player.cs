@@ -18,12 +18,12 @@ namespace Aimlabs.App.Classes
             {
                 UpdateMovementAndFirstPersonCamera();
             }
-            Player p = CurrentWorld.GetGameObjectByName<Player>("p");
+            Player p = CurrentWorld.GetGameObjectByName<Player>("Player #1");
             if (p != null)
             {
                 Vector3 myposition = this.Position;
                 List<RayIntersection> rayObjects = HelperIntersection.RayTraceObjectsForViewVectorFast(
-                    myposition,
+                    myposition + LookAtVector,
                     LookAtVector,
                     this,
                     0,
@@ -34,11 +34,14 @@ namespace Aimlabs.App.Classes
                 {
                     foreach (RayIntersection r in rayObjects)
                     {
-
+                       
                     }
+                    
                     GameObject firstObjectHitbyRay = rayObjects[0].Object;
+                    Console.WriteLine(firstObjectHitbyRay);
                     if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
                     {
+                        Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Stats.score = Stats.score + 1;
                     }

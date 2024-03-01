@@ -122,6 +122,7 @@ namespace Aimlabs.App
             AddGameObject(w4);
 
             Walls w5 = new();
+   
             w5.SetPosition(7.5f, 0, 0);
             w5.SetScale(20, 0.25f, 0.5f);
             w5.SetTexture("./App/Textures/iron_panel_metal.dds");
