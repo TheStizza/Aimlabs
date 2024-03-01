@@ -72,33 +72,62 @@ namespace Aimlabs.App
             f1.IsShadowCaster = true;
             AddGameObject(f1);
 
-            // Player-Objekt anlegen:
             Player p1 = new Player();
             p1.Name = "Player #1";
             p1.SetScale(1);
-            p1.SetPosition(0, 0, 0);
+            p1.SetPosition(8, 0, 0);
             p1.IsCollisionObject = true;
             p1.IsShadowCaster = false;
             p1.SetOpacity(0); 
             AddGameObject(p1);
 
+            Walls w1 = new();
+            w1.SetPosition(0, 0, 10);
+            w1.SetScale(20, 2, 0.5f);
+            w1.SetTexture("./App/Textures/iron_panel_metal.dds");
+            w1.IsCollisionObject = true;
+            AddGameObject(w1);
+
+            Walls w2 = new();
+            w2.SetPosition(0, 0, -10);
+            w2.SetScale(20, 2, 0.5f);
+            w2.SetTexture("./App/Textures/iron_panel_metal.dds");
+            w2.IsCollisionObject = true;
+            AddGameObject(w2);
+
+            Walls w3 = new();
+            w3.SetPosition(10, 0,0);
+            w3.SetScale(20, 2, 0.5f);
+            w3.SetTexture("./App/Textures/iron_panel_metal.dds");
+            w3.IsCollisionObject = true;
+            w3.SetRotation(0, 90, 0);
+            AddGameObject(w3);
+
+            Walls w4 = new();
+            w4.SetPosition(-10, 0,0);
+            w4.SetScale(20, 2, 0.5f);
+            w4.SetTexture("./App/Textures/iron_panel_metal.dds");
+            w4.IsCollisionObject = true;
+            w4.SetRotation(0, 90, 0);
+            AddGameObject(w4);
+
+            Walls w5 = new();
+            w5.SetPosition(7.5f, 0, 0);
+            w5.SetScale(20, 0.25f, 0.5f);
+            w5.SetTexture("./App/Textures/iron_panel_metal.dds");
+            w5.IsCollisionObject = true;
+            w5.SetRotation(0, 90, 0);
+            AddGameObject(w5);
+
+
             KWEngine.LoadModel("Gun", "./App/Models/BrowningHP.gltf");
 
             Weapon fpw = new Weapon();
             fpw.SetModel("Gun");
-            fpw.SetOffset(0.1f, -0.2f, 0.3f); // Verschiebung relativ zur Kamera
-            fpw.SetScale(0.5f); // Skaliere das Objekt entsprechend
+            fpw.SetOffset(0.1f, -0.2f, 0.3f);
+            fpw.SetScale(0.5f); 
             SetViewSpaceGameObject(fpw);
-
-            // Zweiter Parameter der folgenden Methode ist ein Offset für die Kamera.
-            // Die Kamera wird sonst auf p1.Position.Y gesetzt. Der zweite Parameter
-            // verschiebt die Kamera dann relativ zu dieser Position nach oben oder unten
-            // damit die Kamera nicht auf Fuß-/oder Bauchhöhe, sondern auf Kopfhöhe
-            // schwebt:
             SetCameraToFirstPersonGameObject(p1, Player.CAM_OFFSET);
-
-            // Platziere ein Sonnenlicht für mehr Plastizität:
-            // (schattenwerfende Lichter funktionieren wie Kameras: was im Blickfeld des Lichts ist, wirft Schatten)
             LightObject sun = new LightObject(LightType.Sun, ShadowQuality.High);
             sun.Name = "Sunlight";
             sun.SetPosition(-50f, 50f, 25f);
@@ -107,11 +136,8 @@ namespace Aimlabs.App
             sun.SetColor(1f, 1f, 1f, 3f);
             AddLightObject(sun);
 
-            // Deaktiviert den Mauszeiger und sorgt dafür, dass sich
-            // der Cursor nicht außerhalb des Programmfensters bewegen kann:
             MouseCursorGrab();
 
-            // Mausempfindlichkeit einstellen (negativer Wert = invertierte Y-Achse):
             KWEngine.MouseSensitivity = 0.1f;
         }
     }

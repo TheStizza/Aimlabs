@@ -9,9 +9,13 @@ namespace Aimlabs.App.Classes
 {
     public class Target : GameObject
     {
+        int Targethealth = 10;
         public override void Act()
         {
-
+            if(Targethealth == 0)
+            {
+              
+            }
         }
     }
 }
