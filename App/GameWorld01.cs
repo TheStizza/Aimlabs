@@ -81,6 +81,15 @@ namespace Aimlabs.App
             p1.SetOpacity(0); 
             AddGameObject(p1);
 
+            KWEngine.LoadModel("Sphere", "./App/Models/sphere.OBJ");
+
+            Targetball s1 = new Targetball();
+            s1.Name = "Sphere1";
+            s1.SetModel("Sphere");
+            s1.SetScale(0.3f, 0.3f, 0.3f);
+            s1.SetPosition(0, 2, 0);
+            AddGameObject(s1);
+
             Walls w1 = new();
             w1.SetPosition(0, 0, 10);
             w1.SetScale(20, 2, 0.5f);
