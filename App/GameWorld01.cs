@@ -94,45 +94,15 @@ namespace Aimlabs.App
             s1.IsCollisionObject = true;
             AddGameObject(s1);
 
-            Walls w1 = new();
-            w1.SetPosition(0, 0, 10);
-            w1.SetScale(20, 2, 0.5f);
-            w1.SetTexture("./App/Textures/iron_panel_metal.dds");
-            w1.IsCollisionObject = true;
-            AddGameObject(w1);
+            AddGameObject(new Walls("w1",0,0,10,"./App/Textures/iron_panel_metal.dds",20,2,0.5f,0,0,0));
 
-            Walls w2 = new();
-            w2.SetPosition(0, 0, -10);
-            w2.SetScale(20, 2, 0.5f);
-            w2.SetTexture("./App/Textures/iron_panel_metal.dds");
-            w2.IsCollisionObject = true;
-            AddGameObject(w2);
+            AddGameObject(new Walls("w2",0,0,-10,"./App/Textures/iron_panel_metal.dds",20,2,0.5f,0,0,0));
 
-            Walls w3 = new();
-            w3.SetPosition(10, 0,0);
-            w3.SetScale(20, 2, 0.5f);
-            w3.SetTexture("./App/Textures/iron_panel_metal.dds");
-            w3.IsCollisionObject = true;
-            w3.SetRotation(0, 90, 0);
-            AddGameObject(w3);
+            AddGameObject(new Walls("w3",10,0,0,"./App/Textures/iron_panel_metal.dds",20,2,0.5f,0,90,0));
 
-            Walls w4 = new();
-            w4.SetPosition(-10, 0,0);
-            w4.SetScale(20, 2, 0.5f);
-            w4.SetTexture("./App/Textures/iron_panel_metal.dds");
-            w4.IsCollisionObject = true;
-            w4.SetRotation(0, 90, 0);
-            AddGameObject(w4);
+            AddGameObject(new Walls("w4",-10,0,0,"./App/Textures/iron_panel_metal.dds",20,2,0.5f,0,90,0));
 
-            Walls w5 = new();
-   
-            w5.SetPosition(7.5f, 0, 0);
-            w5.SetScale(20, 0.25f, 0.5f);
-            w5.SetTexture("./App/Textures/iron_panel_metal.dds");
-            w5.IsCollisionObject = true;
-            w5.SetRotation(0, 90, 0);
-            AddGameObject(w5);
-
+            AddGameObject(new Walls("w5",7.5f,0,0,"./App/Textures/iron_panel_metal.dds",20,0.25f,0.5f,0,90,0));
 
             KWEngine.LoadModel("Gun", "./App/Models/BrowningHP.gltf");
 
@@ -142,6 +112,7 @@ namespace Aimlabs.App
             fpw.SetScale(0.5f); 
             SetViewSpaceGameObject(fpw);
             SetCameraToFirstPersonGameObject(p1, Player.CAM_OFFSET);
+            
             LightObject sun = new LightObject(LightType.Sun, ShadowQuality.High);
             sun.Name = "Sunlight";
             sun.SetPosition(-50f, 50f, 25f);
