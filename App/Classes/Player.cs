@@ -23,7 +23,7 @@ namespace Aimlabs.App.Classes
             {
                 Vector3 myposition = this.Position;
                 List<RayIntersection> rayObjects = HelperIntersection.RayTraceObjectsForViewVectorFast(
-                    myposition ,
+                    CurrentWorld.CameraPosition,
                     CurrentWorld.CameraLookAtVector,
                     this,
                     0,
