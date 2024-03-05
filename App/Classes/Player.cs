@@ -23,12 +23,12 @@ namespace Aimlabs.App.Classes
             {
                 Vector3 myposition = this.Position;
                 List<RayIntersection> rayObjects = HelperIntersection.RayTraceObjectsForViewVectorFast(
-                    myposition + LookAtVector,
-                    LookAtVector,
+                    myposition ,
+                    CurrentWorld.CameraLookAtVector,
                     this,
                     0,
                     true,
-                    typeof(Player), typeof(Walls), typeof(Obstacle)
+                    typeof(Player), typeof(Walls), typeof(Obstacle), typeof(Target), typeof(Targetball)
                     );
                 if (rayObjects.Count > 0)
                 {
@@ -39,7 +39,7 @@ namespace Aimlabs.App.Classes
                     
                     GameObject firstObjectHitbyRay = rayObjects[0].Object;
                     Console.WriteLine(firstObjectHitbyRay);
-                    if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
+                    if (firstObjectHitbyRay is Targetball)
                     {
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
@@ -62,6 +62,7 @@ namespace Aimlabs.App.Classes
             if (Keyboard.IsKeyDown(Keys.S))
                 forward -= 1;
             CurrentWorld.AddCameraRotationFromMouseDelta();
+
             MoveAndStrafeAlongCameraXZ(forward, strafe, 0.01f);
             if (Keyboard.IsKeyDown(Keys.Q))
             {

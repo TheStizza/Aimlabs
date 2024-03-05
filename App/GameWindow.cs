@@ -4,7 +4,7 @@ namespace Aimlabs.App
 {
     public class GameWindow : GLWindow
     {
-        public GameWindow() : base(2560, 1440)
+        public GameWindow() : base(1440, 720)
         {
             Title = "Aimlabs v0.0.1";
 
