@@ -81,11 +81,14 @@ namespace Aimlabs.App
             p1.SetOpacity(0); 
             AddGameObject(p1);
 
-            KWEngine.LoadModel("Sphere", "./App/Models/sphere.OBJ");
+            // Anm. v. KAR: Kugelmodell unnötig da Standardmodell KWSphere für Kugeln bereits eingebaut ist.
+            //              Außerdem fehlte die OBJ-Datei, weil sie nicht mit Rechtsklick -> "Ignorierte Datei zur Quellverwaltung..."
+            //              hinzugefügt wurde (muss bei OBJ-Dateien passieren).
+            //KWEngine.LoadModel("Sphere", "./App/Models/sphere.OBJ");
 
             Targetball s1 = new Targetball();
             s1.Name = "Sphere1";
-            s1.SetModel("Sphere");
+            s1.SetModel("KWSphere");
             s1.SetScale(0.3f, 0.3f, 0.3f);
             s1.SetPosition(0, 2, 0);
             s1.IsCollisionObject = true;

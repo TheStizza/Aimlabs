@@ -166,6 +166,41 @@
             Frees all graphics resources used by the renderer.
             </summary>
         </member>
+        <member name="T:KWEngine3.PositionMode">
+            <summary>
+            Gibt an, auf welchen Fixpunkt sich die SetPosition()-Methode bezieht, wenn sie aufgerufen wird (Standardwert: Position)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.PositionMode.Position">
+            <summary>
+            Bezieht sich auf die tatsächliche Position des Objekts (Standard)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.PositionMode.CenterOfHitbox">
+            <summary>
+            Bezieht sich auf den Mittelpunkt der Hitbox
+            </summary>
+        </member>
+        <member name="F:KWEngine3.PositionMode.BottomOfAABBHitbox">
+            <summary>
+            Bezieht sich auf die unterste Kante der achsenparallelen Hitbox (z.B. für 2D-Platformer)
+            </summary>
+        </member>
+        <member name="T:KWEngine3.FlowFieldMode">
+            <summary>
+            Modus, der bestimmt, wie genau das FlowField Hindernisse erkennt (Standard: Simple)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.FlowFieldMode.Simple">
+            <summary>
+            Pro Zelle wird ein Strahl in der Zellenmitte verwendet, um Hindernisse zu finden (ungenau, aber schneller)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.FlowFieldMode.Box">
+            <summary>
+            Pro Zelle wird die gesamte Zelle als Hitbox mit den Hitboxen anderer Objekte verglichen (genauer, aber langsamer)
+            </summary>
+        </member>
         <member name="T:KWEngine3.FoliageType">
             <summary>
             Art des Bodengewächses
@@ -1018,6 +1053,13 @@
             <param name="y">y</param>
             /// <param name="meshId">ID des 3D-Modellanteils (Standard: 0)</param>
         </member>
+        <member name="M:KWEngine3.GameObjects.EngineObject.SetTextureClip(System.Single,System.Single)">
+            <summary>
+            Beschneidet den durch SetTextureRepeat() und SetTextureOffset() gewählten Texturteil weiter (für den Fall, dass z.B. Spritesheets einen zu großen Rand pro Zelle haben) 
+            </summary>
+            <param name="x">Beschneidung auf x-Achse (positiver Wert = Beschnitt nach innen, negativer Wert = Beschnitt nach außen)</param>
+            <param name="y">Beschneidung auf y-Achse (positiver Wert = Beschnitt nach innen, negativer Wert = Beschnitt nach außen)</param>
+        </member>
         <member name="M:KWEngine3.GameObjects.EngineObject.SetTextureRepeat(System.Single,System.Single)">
             <summary>
             Setzt die Texturwiederholung auf dem Objekt (Standard: 1)
@@ -1032,6 +1074,16 @@
             <param name="x">x</param>
             <param name="y">y</param>
             <param name="meshIndex">Nullbasierter Index des zu ändernden Meshs/Materials</param>
+        </member>
+        <member name="P:KWEngine3.GameObjects.EngineObject.TextureRepeat">
+            <summary>
+            Erfragt die aktuellen Werte für die Texturwiederholung
+            </summary>
+        </member>
+        <member name="P:KWEngine3.GameObjects.EngineObject.TextureOffset">
+            <summary>
+            Erfragt die aktuellen Werte für die Texturverschiebung
+            </summary>
         </member>
         <member name="M:KWEngine3.GameObjects.EngineObject.SetScale(System.Single)">
             <summary>
@@ -1138,6 +1190,12 @@
             <param name="x">Rotation um lokale x-Achse in Grad</param>
             <param name="y">Rotation um lokale y-Achse in Grad</param>
             <param name="z">Rotation um lokale z-Achse in Grad</param>
+        </member>
+        <member name="M:KWEngine3.GameObjects.EngineObject.AddRotation(OpenTK.Mathematics.Quaternion)">
+            <summary>
+            Fügt die übergebene Rotation der bestehenden hinzu
+            </summary>
+            <param name="additionalRotation">hinzuzufügende Rotatation</param>
         </member>
         <member name="M:KWEngine3.GameObjects.EngineObject.AddRotationX(System.Single,System.Boolean)">
             <summary>
@@ -1520,6 +1578,22 @@
             Konstruktormethode, der der 3D-Modellname mitgegeben werden kann
             </summary>
             <param name="modelname">Name des zu verwendenden 3D-Modells</param>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.SetPosition(System.Single,System.Single,System.Single,KWEngine3.PositionMode)">
+            <summary>
+            Setzt die Position des Objekts
+            </summary>
+            <param name="x">Position auf x-Achse</param>
+            <param name="y">Position auf y-Achse</param>
+            <param name="z">Position auf z-Achse</param>
+            <param name="mode">Bestimmt, auf welchen Fixpunkt des Objekts sich die Positionsangaben beziehen sollen</param>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.SetPositionY(System.Single,KWEngine3.PositionMode)">
+            <summary>
+            Setzt die y-Position der Instanz auf den gegebenen Wert
+            </summary>
+            <param name="y">Position auf y-Achse</param>
+            <param name="mode">Bestimmt, auf welchen Fixpunkt des Objekts sich die Positionsangaben beziehen sollen</param>
         </member>
         <member name="M:KWEngine3.GameObjects.GameObject.GetIntersectionWithTerrain">
             <summary>
@@ -3030,6 +3104,21 @@
             Gibt die (relative) Mitte des Fensters in Pixeln an
             </summary>
         </member>
+        <member name="M:KWEngine3.GLWindow.SetCursor(System.String)">
+            <summary>
+            Ersetzt den aktuellen Mauscursor durch den angegebenen Cursor
+            </summary>
+            <param name="cursorName">Name, unter dem der Cursor importiert wurde (wenn dieser Wert null ist, wird der Standardcursor geladen)</param>
+        </member>
+        <member name="M:KWEngine3.GLWindow.LoadCursorImage(System.String,System.String,System.Single,System.Single)">
+            <summary>
+            Importiert eine eigene Mauscursorgrafik und legt die Grafik unter dem angegebenen Namen in der Engine-Datenbank ab (gültige Dateiformate: PNG, CUR)
+            </summary>
+            <param name="name">Name der Grafik</param>
+            <param name="filename">Relativer Pfad zu der zu importierenden Datei</param>
+            <param name="tipX">Relative X-Position der Cursorspitze (von 0 bis 1, Standardwert: 0.5f)</param>
+            <param name="tipY">Relative Y-Position der Cursorspitze (von 0 bis 1, Standardwert: 0.5f)</param>
+        </member>
         <member name="T:KWEngine3.Helper.FlowField">
             <summary>
             Klasse zum Erstellen einer FlowField-Instanz für KI-Navigation
@@ -3055,7 +3144,17 @@
             Gibt an, ob die Instanz zu Debugging-Zwecken sichtbar gemacht werden soll
             </summary>
         </member>
-        <member name="M:KWEngine3.Helper.FlowField.#ctor(System.Single,System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32,System.Type[])">
+        <member name="P:KWEngine3.Helper.FlowField.TargetPosition">
+            <summary>
+            Gibt die letztbekannte Zielposition innerhalb des Feldes an
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.FlowField.Mode">
+            <summary>
+            Messmodus für die Erstellung der Streckenkosten (Simple oder Box)
+            </summary>
+        </member>
+        <member name="M:KWEngine3.Helper.FlowField.#ctor(System.Single,System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Int32,KWEngine3.FlowFieldMode,System.Type[])">
             <summary>
             Erzeugt ein FlowField für die angegebenen GameObject-Typen
             </summary>
@@ -3066,9 +3165,10 @@
             <param name="cellCountZ">Anzahl Zellen in Z-Richtung</param>
             <param name="cellRadius">Radius je Zelle</param>
             <param name="fieldHeight">Höhe des Felds</param>
+            <param name="mode">Genauigkeit bei der Messung der Hindernisse (Simple oder Box)</param>
             <param name="types">Liste der Klassen, die das FlowField scannen soll</param>
         </member>
-        <member name="M:KWEngine3.Helper.FlowField.#ctor(OpenTK.Mathematics.Vector3,System.Int32,System.Int32,System.Single,System.Int32,System.Type[])">
+        <member name="M:KWEngine3.Helper.FlowField.#ctor(OpenTK.Mathematics.Vector3,System.Int32,System.Int32,System.Single,System.Int32,KWEngine3.FlowFieldMode,System.Type[])">
             <summary>
             Erzeugt ein FlowField für die angegebenen GameObject-Typen
             </summary>
@@ -3077,6 +3177,7 @@
             <param name="cellCountZ">Anzahl Zellen in Z-Richtung</param>
             <param name="cellRadius">Radius je Zelle</param>
             <param name="fieldHeight">Höhe des Felds</param>
+            <param name="mode">Genauigkeit bei der Messung der Hindernisse (Simple oder Box)</param>
             <param name="types">Liste der Klassen, die das FlowField scannen soll</param>
             <exception cref="T:System.Exception">Eine genannte Klasse erbt nicht von GameObject</exception>
         </member>
@@ -3329,6 +3430,16 @@
             <summary>
             Helferklasse für Kollisionen und Schnittoperationen
             </summary>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperIntersection.GetIntersectionPointOnPlaneFromScreenSpace(System.Int32,System.Int32,KWEngine3.Plane,System.Single)">
+            <summary>
+            Ermittelt für die angegebenen Bildschirmkoordinaten, wo diese Koordinaten in der 3D-Welt liegen
+            </summary>
+            <param name="screenposX">X-Bildschirmkoordinate (relativ zum Anwendungsfenster, in Pixeln)</param>
+            <param name="screenposY">Y-Bildschirmkoordinate (relativ zum Anwendungsfenster, in Pixeln)</param>
+            <param name="planeNormal">Gibt an, wie die Fläche ausgerichtet ist, auf die die Bildschirmkoordinate projeziert wird</param>
+            <param name="planeHeight">Gibt die Höhe der Fläche an, auf die die Bildschirmkoordinate projeziert wird</param>
+            <returns>Schnittpunkt in 3D-Weltkoordinaten</returns>
         </member>
         <member name="M:KWEngine3.Helper.HelperIntersection.IsAnyObjectBelowPositionFast(OpenTK.Mathematics.Vector3,System.Single,KWEngine3.Helper.RayIntersection@,System.Type[])">
             <summary>
@@ -3634,6 +3745,23 @@
             Helferklasse für Rotationsberechnungen
             </summary>
         </member>
+        <member name="M:KWEngine3.Helper.HelperRotation.GetRotationForSlope(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Ermittelt die Rotation, die angenommen werden müsste, um sich entsprechend der durch slopeStart und slopeEnd beschriebenen Schräge auszurichten
+            </summary>
+            <param name="slopeStart">Anfangshöhe der Schräge</param>
+            <param name="slopeEnd">Endhöhe der Schräge</param>
+            <param name="currentLAV">Aktueller Look-At-Vektor des Objekts</param>
+            <returns>Berechnete Rotation als Quaternion</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperRotation.GetAngleForSlope(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Erfragt den Steigungswinkel für die angegebenen beiden Punkte der Steigung
+            </summary>
+            <param name="slopeStart">Startpunkt der Steigung</param>
+            <param name="slopeEnd">Endpunkt der Steigung</param>
+            <returns>Steigungswinkel (in Grad)</returns>
+        </member>
         <member name="M:KWEngine3.Helper.HelperRotation.RotateVector(OpenTK.Mathematics.Vector3,System.Single,KWEngine3.Plane)">
             <summary>
             Berechnet den Vektor, der entsteht, wenn der übergebene Vektor um die angegebenen Grad rotiert wird
@@ -3737,6 +3865,78 @@
             Helferklasse für Vektoroperationen
             </summary>
         </member>
+        <member name="M:KWEngine3.Helper.HelperVector.GetDeltaBetweenVectors(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet den Vektor, der vom angegebenen Startpunkt zum angegebenen Endpunkt zeigt
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="end">Endpunkt</param>
+            <returns>Delta-Vektor</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.GetDeltaBetweenVectorsXZ(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet den Vektor auf XZ-Ebene, der vom angegebenen Startpunkt zum angegebenen Endpunkt zeigt
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="end">Endpunkt</param>
+            <returns>Delta-Vektor</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.GetDeltaBetweenVectorsXY(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet den Vektor auf XY-Ebene, der vom angegebenen Startpunkt zum angegebenen Endpunkt zeigt
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="end">Endpunkt</param>
+            <returns>Delta-Vektor</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.GetDistanceBetweenVectors(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet die Distanz zwischen zwei Vektoren
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="end">Endpunkt</param>
+            <returns>Distanz</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.GetDistanceBetweenVectorsXZ(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet die Distanz zwischen zwei Vektoren auf der XZ-Ebene
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="end">Endpunkt</param>
+            <returns>Distanz</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.GetDistanceBetweenVectorsXY(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet die Distanz zwischen zwei Vektoren auf der XY-Ebene
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="end">Endpunkt</param>
+            <returns>Distanz</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.GetDirectionFromVectorToVector(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet den normalisierten Richtungsvektor, der vom Startpunkt zum Endpunkt führt
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="end">Endpunkt</param>
+            <returns>Richtungsvektor (normalisiert)</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.GetDirectionFromVectorToVectorXZ(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet den normalisierten Richtungsvektor, der auf XZ-Ebene vom Startpunkt zum Endpunkt führt
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="end">Endpunkt</param>
+            <returns>Richtungsvektor (normalisiert)</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.GetDirectionFromVectorToVectorXY(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
+            <summary>
+            Berechnet den normalisierten Richtungsvektor, der auf XY-Ebene vom Startpunkt zum Endpunkt führt
+            </summary>
+            <param name="start">Startpunkt</param>
+            <param name="end">Endpunkt</param>
+            <returns>Richtungsvektor (normalisiert)</returns>
+        </member>
         <member name="M:KWEngine3.Helper.HelperVector.ReflectVector(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
             <summary>
             Reflektiert den eingehenden Vektor 'directionIn' am Ebenenvektor 'surfaceNormal'
@@ -3751,7 +3951,7 @@
             auf dem durch den Ebenenvektor (surface normal) definierten Boden gerade zu stehen
             </summary>
             <param name="lav">Aktueller Look-At-Vektor</param>
-            <param name="surfaceNormal">Ebenenvektor</param>
+            <param name="surfaceNormal">Ebenenvektor (muss normalisiert sein!)</param>
             <returns>Neue zur Ebene passende Rotation (als Quaternion)</returns>
         </member>
         <member name="M:KWEngine3.Helper.HelperVector.GetUpVectorFromLookAtVector(OpenTK.Mathematics.Vector3)">
@@ -4274,6 +4474,13 @@
             </summary>
             <param name="color">Farbwerte (RGB, jeweils zwischen 0 und 1)</param>
         </member>
+        <member name="M:KWEngine3.World.GetBackgroundImageSize">
+            <summary>
+            Erfragt die Auflösung der aktuell gewählten Hintergrundtextur
+            </summary>
+            <returns>Auflösung der Hintergrundtextur in Pixeln</returns>
+            <remarks>Wenn kein Hintergrundbild festgelegt wurde, wird der Nullvektor (0|0) zurückgegeben</remarks>
+        </member>
         <member name="M:KWEngine3.World.SetBackgroundSkybox(System.String,System.Single,KWEngine3.SkyboxType)">
             <summary>
             Setzt die Skybox für den 3D-Hintergrund
@@ -4599,9 +4806,24 @@
             Blickrichtung der Kamera
             </summary>
         </member>
+        <member name="P:KWEngine3.World.CameraLookAtVectorXZ">
+            <summary>
+            Blickrichtung der Kamera ohne die Y-Achse zu berücksichtigen
+            </summary>
+        </member>
+        <member name="P:KWEngine3.World.CameraLookAtVectorLocalUpXZ">
+            <summary>
+            Blickrichtung der Kamera nach oben ohne die Y-Achse zu berücksichtigen
+            </summary>
+        </member>
         <member name="P:KWEngine3.World.CameraLookAtVectorLocalUp">
             <summary>
             Blickrichtung der Kamera nach oben
+            </summary>
+        </member>
+        <member name="P:KWEngine3.World.CameraLookAtVectorLocalRightXZ">
+            <summary>
+            Blickrichtung der Kamera nach rechts ohne die Y-Achse zu berücksichtigen
             </summary>
         </member>
         <member name="P:KWEngine3.World.CameraLookAtVectorLocalRight">
