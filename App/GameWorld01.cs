@@ -46,6 +46,9 @@ namespace Aimlabs.App
 
         public override void Prepare()
         {
+            KWEngine.LoadModel("Bot", "./App/Models/bot.gltf");
+            KWEngine.LoadModel("Gun", "./App/Models/BrowningHP.gltf");
+
             crosshair. SetPosition(Window.Width / 2, Window.Height / 2);
             crosshair.SetTexture("./app/Textures/Crosshair.png");
             CrosshairHit.SetPosition(Window.Width / 2, Window.Height / 2);
@@ -76,10 +79,12 @@ namespace Aimlabs.App
             p1.Name = "Player #1";
             p1.SetScale(1);
             p1.SetPosition(8, 0, 0);
+            p1.SetRotation(0, 90, 0);
             p1.IsCollisionObject = true;
             p1.IsShadowCaster = false;
             p1.SetOpacity(0); 
             AddGameObject(p1);
+            SetCameraToFirstPersonGameObject(p1, Player.CAM_OFFSET);
 
             // Anm. v. KAR: Kugelmodell unnötig da Standardmodell KWSphere für Kugeln bereits eingebaut ist.
             //              Außerdem fehlte die OBJ-Datei, weil sie nicht mit Rechtsklick -> "Ignorierte Datei zur Quellverwaltung..."
@@ -104,26 +109,38 @@ namespace Aimlabs.App
 
             AddGameObject(new Walls("w5",7.5f,0,0,"./App/Textures/iron_panel_metal.dds",20,0.25f,0.5f,0,90,0));
 
-            KWEngine.LoadModel("Gun", "./App/Models/BrowningHP.gltf");
+            
 
             Weapon fpw = new Weapon();
             fpw.SetModel("Gun");
             fpw.SetOffset(0.1f, -0.2f, 0.3f);
             fpw.SetScale(0.5f); 
             SetViewSpaceGameObject(fpw);
-            SetCameraToFirstPersonGameObject(p1, Player.CAM_OFFSET);
+            
             
             LightObject sun = new LightObject(LightType.Sun, ShadowQuality.High);
             sun.Name = "Sunlight";
-            sun.SetPosition(-50f, 50f, 25f);
-            sun.SetNearFar(25f, 125f);
-            sun.SetFOV(80);
+            sun.SetPosition(25f, 50f, 25f);
+            sun.SetNearFar(40f, 125f);
+            sun.SetFOV(65);
             sun.SetColor(1f, 1f, 1f, 3f);
             AddLightObject(sun);
+            SetColorAmbient(0.5f, 0.5f, 0.5f);
+            SetBackgroundBrightnessMultiplier(1.75f);
 
             MouseCursorGrab();
 
             KWEngine.MouseSensitivity = 0.1f;
+
+            // KAR: Test
+            Target t1 = new Target();
+            t1.SetModel("Bot");
+            t1.SetRotation(0, 90, 0);
+            t1.SetHitboxScale(0.4f, 1f, 1f);
+            t1.SetScale(0.75f);
+            t1.IsShadowCaster = true;
+            t1.Name = "Enemy Bot";
+            AddGameObject(t1);
         }
     }
 }

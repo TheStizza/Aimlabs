@@ -12,6 +12,12 @@ namespace Aimlabs.App.Classes
         int Targethealth = 10;
         public override void Act()
         {
+            if(HasAnimations)
+            {
+                SetAnimationID(13);
+                SetAnimationPercentageAdvance(0.001f);
+            }
+
             if(Targethealth == 0)
             {
               
