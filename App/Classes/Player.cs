@@ -39,7 +39,7 @@ namespace Aimlabs.App.Classes
                     
                     GameObject firstObjectHitbyRay = rayObjects[0].Object;
                     Console.WriteLine(firstObjectHitbyRay);
-                    if (firstObjectHitbyRay is Targetball)
+                    if (firstObjectHitbyRay is Targetball && Mouse.IsButtonDown(MouseButton.Left))
                     {
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);

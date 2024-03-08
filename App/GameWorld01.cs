@@ -99,17 +99,21 @@ namespace Aimlabs.App
             s1.IsCollisionObject = true;
             AddGameObject(s1);
 
-            AddGameObject(new Walls("w1",0,0,10,"./App/Textures/iron_panel_metal.dds",20,2,0.5f,0,0,0));
+            AddGameObject(new Walls("w1",0,0,10,"./App/Textures/wandtextur.jpg",20,8,0.5f,0,0,0));
 
-            AddGameObject(new Walls("w2",0,0,-10,"./App/Textures/iron_panel_metal.dds",20,2,0.5f,0,0,0));
+            AddGameObject(new Walls("w2",0,0,-10, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,0,0));
 
-            AddGameObject(new Walls("w3",10,0,0,"./App/Textures/iron_panel_metal.dds",20,2,0.5f,0,90,0));
+            AddGameObject(new Walls("w3",10,0,0, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,90,0));
 
-            AddGameObject(new Walls("w4",-10,0,0,"./App/Textures/iron_panel_metal.dds",20,2,0.5f,0,90,0));
+            AddGameObject(new Walls("w4",-10,0,0, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,90,0));
 
-            AddGameObject(new Walls("w5",7.5f,0,0,"./App/Textures/iron_panel_metal.dds",20,0.25f,0.5f,0,90,0));
+            AddGameObject(new Walls("w5",7.5f,0,0, "./App/Textures/Black.png", 20,0.5f,0.01f,0,90,0));
 
-            
+            AddGameObject(new Walls("w6", 0.05f, 4, 0.15f, "./App/Textures/wandtextur.jpg", 21, 20, 0.5f, 90, 0, 0));
+
+
+
+
 
             Weapon fpw = new Weapon();
             fpw.SetModel("Gun");
