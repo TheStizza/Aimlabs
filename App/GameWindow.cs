@@ -1,4 +1,5 @@
-﻿using KWEngine3;
+﻿using GruppeC.App;
+using KWEngine3;
 
 namespace Aimlabs.App
 {
@@ -8,8 +9,8 @@ namespace Aimlabs.App
         {
             Title = "Aimlabs v0.0.1";
 
-            GameWorld01 gws = new GameWorld01();
-            SetWorld(gws);
+            Startscreen sws = new Startscreen();
+            SetWorld(sws);
         }
     }
 }
