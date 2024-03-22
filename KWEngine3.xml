@@ -829,6 +829,11 @@
             Emissive Map
             </summary>
         </member>
+        <member name="F:KWEngine3.TextureType.Transparency">
+            <summary>
+            Transparency Map
+            </summary>
+        </member>
         <member name="T:KWEngine3.Plane">
             <summary>
             Bezeichnet die beiden Achsen, die die gewünschte Ebene aufspannen.
