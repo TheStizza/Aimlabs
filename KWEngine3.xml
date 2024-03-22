@@ -166,6 +166,69 @@
             Frees all graphics resources used by the renderer.
             </summary>
         </member>
+        <member name="T:KWEngine3.SingleRayMode">
+            <summary>
+            Bestimmt, in welche Richtung der Teststrahl geschossen wird (Standard: Y)
+            </summary>
+            <remarks>
+            Für 2D-Spiele aus der Vogelperspektive sollte i.d.R. Z verwendet werden
+            </remarks>
+        </member>
+        <member name="F:KWEngine3.SingleRayMode.Y">
+            <summary>
+            Schießt einen Strahl entlang der negativen lokalen Y-Achse der Instanz
+            </summary>
+        </member>
+        <member name="F:KWEngine3.SingleRayMode.Z">
+            <summary>
+            Schießt einen Strahl entlang der negativen lokalen Z-Achse der Instanz (für 2D-Games aus der Vogelperspektive)
+            </summary>
+        </member>
+        <member name="T:KWEngine3.MultiRayMode">
+            <summary>
+            Bestimmt, wie viele Strahlen für die Messung der Bodennähe verwendet und in welche Richtung sie geschossen werden
+            </summary>
+        </member>
+        <member name="F:KWEngine3.MultiRayMode.TwoRays2DPlatformerY">
+            <summary>
+            Verwendet zwei Strahlen entlang der lokalen negativen Y-Achse der Instanz (für 2D-Platformer)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.MultiRayMode.FourRaysZ">
+            <summary>
+            Verwendet vier Strahlen entlang der lokalen negativen Z-Achse der Instanz (für Top-Down-Platformer)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.MultiRayMode.FourRaysY">
+            <summary>
+            Verwendet vier Strahlen entlang der lokalen negativen Y-Achse der Instanz (für 3D-Platformer)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.MultiRayMode.EightRaysY">
+            <summary>
+            Verwendet acht Strahlen entlang der lokalen negativen Y-Achse der Instanz (für 3D-Platformer)
+            </summary>
+        </member>
+        <member name="T:KWEngine3.ColliderType">
+            <summary>
+            Art des Kollisionstyps
+            </summary>
+        </member>
+        <member name="F:KWEngine3.ColliderType.None">
+            <summary>
+            Ist kein Kollisionsobjekt
+            </summary>
+        </member>
+        <member name="F:KWEngine3.ColliderType.ConvexHull">
+            <summary>
+            Hat eine konvexe Hülle (Standardtyp)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.ColliderType.RayCollider">
+            <summary>
+            Eignet sich ausschließlich für raytraced Kollisionen
+            </summary>
+        </member>
         <member name="T:KWEngine3.PositionMode">
             <summary>
             Gibt an, auf welchen Fixpunkt sich die SetPosition()-Methode bezieht, wenn sie aufgerufen wird (Standardwert: Position)
@@ -1563,6 +1626,12 @@
             Gibt an, ob das Objekt ein Kollisionen erzeugen und überprüfen kann
             </summary>
         </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.SetColliderType(KWEngine3.ColliderType)">
+            <summary>
+            Setzt die Art wie bei diesem Objekt nach Kollisionen geprüft wird
+            </summary>
+            <param name="ct">Kollisionstyp (Standard: ConvexHull)</param>
+        </member>
         <member name="P:KWEngine3.GameObjects.GameObject.UpdateLast">
             <summary>
             Gibt an, ob das Objekt in der Liste aller Objekte zuletzt aktualisiert werden soll (z.B. für Spielerfiguren)
@@ -1807,6 +1876,25 @@
             <param name="rayDirectionNormalized">Normalisierter Richtungsvektor des Strahls (z.B. -Vector3.UnitY für einen Strahl nach unten)</param>
             <param name="typelist">Liste der Typen (Klassen), die für den Strahl getestet werden sollen</param>
             <returns>Nach Entfernung aufsteigend sortierte Liste der Messergebnisse</returns>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.RaytraceObjectsBelowPosition(KWEngine3.SingleRayMode,System.Single,System.Type[])">
+            <summary>
+            Schießt einen Strahl von der Mitte der Instanz nach unten und prüft, ob dieser Strahl in der Nähe liegende Objekte des angegebenen Typs trifft (Präzise, aber langsamer!)
+            </summary>
+            <param name="mode">Richtung des Strahls (Standard: Y-Achse)</param>
+            <param name="maxDistance">Trifft ein Strahl ein Objekt, wird es als Ergebnis verworfen, wenn die Strahlendistanz größer als die angegebene Distanz ist (abhängig von der Größe des Aufrufers)</param>
+            <param name="typelist">Liste der Typen (Klassen), die für den Strahl getestet werden sollen</param>
+            <returns>Ergebnis des Strahlentests (für das Objekt, das am wenigsten vom Strahl entfernt war)</returns>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.RaytraceObjectsBelowPositionMultiRay(KWEngine3.MultiRayMode,System.Single,System.Single,System.Type[])">
+            <summary>
+            Schießt mehrere Strahlen von der Mitte der Instanz nach unten und prüft, ob diese Strahlen in der Nähe liegende Objekte des angegebenen Typs treffen (Präzise, aber langsamer!)
+            </summary>
+            <param name="rayMode">Richtung und Anzahl der Teststrahlen</param>
+            <param name="sizeFactor">Die Strahlen werden innerhalb der Hitbox des Aufrufers gemäß dieses Faktors verteilt. Ist der Faktor 1, befinden sich die Strahlen an den Hitboxrändern. Ist er größer, befinden sich die Strahlen außerhalb der Hitbox.</param>
+            <param name="maxDistance">Trifft ein Strahl ein Objekt, wird es als Ergebnis verworfen, wenn die Strahlendistanz größer als die angegebene Distanz ist (abhängig von der Größe des Aufrufers)</param>
+            <param name="typelist">Liste der Typen (Klassen), die für den Strahl getestet werden sollen</param>
+            <returns>Ergebnis des Strahlentests</returns>
         </member>
         <member name="M:KWEngine3.GameObjects.GameObject.RaytraceObjectsNearbyFast(System.Single,System.Single,System.Single,OpenTK.Mathematics.Vector3,System.Type[])">
             <summary>
@@ -2354,7 +2442,7 @@
             Setzt die Nah- und Ferngrenze (Reichweite) des Lichts
             </summary>
             <param name="near">Nahgrenze (mind. 0.1f)</param>
-            <param name="far">Ferngrenze (muss größer als die Nahgrenze sein)</param>
+            <param name="far">Ferngrenze (muss größer als die Nahgrenze sein, Standardwert: 100)</param>
         </member>
         <member name="P:KWEngine3.GameObjects.LightObject.Position">
             <summary>
@@ -2858,7 +2946,7 @@
         </member>
         <member name="M:KWEngine3.GameObjects.ViewSpaceGameObject.SetTextureForPrimitiveModel(System.String,KWEngine3.TextureType)">
             <summary>
-            Setzt die Textur, falls das Modell des Objekts KWCube, KWSphere oder KWQuad ist
+            Setzt die Textur, falls das Modell des Objekts KWCube, KWSphere oder KWQuad(2D) ist
             </summary>
             <param name="file">Texturdatei (inkl. relativem Pfad)</param>
             <param name="type">Texturtyp</param>
@@ -3674,6 +3762,16 @@
             <param name="depth">Breite der Box</param>
             <returns>true, wenn der Punkt innerhalb der Box liegt</returns>
         </member>
+        <member name="M:KWEngine3.Helper.HelperIntersection.IsPointInsideRectangle(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,System.Single,System.Single)">
+            <summary>
+            Prüft, ob ein Punkt innerhalb eines Rechtecks auf XZ-Ebene liegt.
+            </summary>
+            <param name="pos">Zu prüfender Punkt</param>
+            <param name="center">Zentrum des Rechtecks</param>
+            <param name="width">Breite des Rechtecks</param>
+            <param name="depth">Breite des Rechtecks</param>
+            <returns>true, wenn der Punkt innerhalb des Rechtecks liegt</returns>
+        </member>
         <member name="M:KWEngine3.Helper.HelperIntersection.IsPointInsideSphere(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,System.Single)">
             <summary>
             Prüft, ob sich ein Punkt innerhalb einer Kugel befindet
@@ -3744,6 +3842,44 @@
             <summary>
             Helferklasse für Rotationsberechnungen
             </summary>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperRotation.SetMeshPreRotationYZX(KWEngine3.GameObjects.GameObject,System.Int32,System.Single,System.Single,System.Single)">
+            <summary>
+            Setzt die Vorab-Rotation eines Objekts für ein bestimmten Objektteil (Mesh) auf die angegebenen Gradzahlen (funktioniert nur für Objekte ohne Animationen)
+            </summary>
+            <remarks>Die Rotation wird in der Reihenfolge Y-&gt;Z-&gt;X durchgeführt</remarks>
+            <param name="g">Betroffenes Objekt</param>
+            <param name="meshId">Mesh-ID des 3D-Modells (beginnend bei 0)</param>
+            <param name="rotX">Rotation um die X-Achse (in Grad)</param>
+            <param name="rotY">Rotation um die Y-Achse (in Grad)</param>
+            <param name="rotZ">Rotation um die Z-Achse (in Grad)</param>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperRotation.AddMeshPreRotationX(KWEngine3.GameObjects.GameObject,System.Int32,System.Single)">
+            <summary>
+            Fügt einem bestimmten Mesh eines Objekts eine Rotation um die X-Achse zusätzlich zur bestehenden Rotation hinzu (funktioniert nur für Objekte ohne Animationen)
+            </summary>
+            <remarks>Die Rotation wird in der Reihenfolge Y-&gt;Z-&gt;X durchgeführt</remarks>
+            <param name="g">Betroffenes GameObject</param>
+            <param name="meshId">Mesh-ID des 3D-Modells (beginnend bei 0 für den ersten Mesh)</param>
+            <param name="degrees">Hinzufügende Grad für die Achse</param>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperRotation.AddMeshPreRotationY(KWEngine3.GameObjects.GameObject,System.Int32,System.Single)">
+            <summary>
+            Fügt einem bestimmten Mesh eines Objekts eine Rotation um die Y-Achse zusätzlich zur bestehenden Rotation hinzu (funktioniert nur für Objekte ohne Animationen)
+            </summary>
+            <remarks>Die Rotation wird in der Reihenfolge Y-&gt;Z-&gt;X durchgeführt</remarks>
+            <param name="g">Betroffenes GameObject</param>
+            <param name="meshId">Mesh-ID des 3D-Modells (beginnend bei 0 für den ersten Mesh)</param>
+            <param name="degrees">Hinzufügende Grad für die Achse</param>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperRotation.AddMeshPreRotationZ(KWEngine3.GameObjects.GameObject,System.Int32,System.Single)">
+            <summary>
+            Fügt einem bestimmten Mesh eines Objekts eine Rotation um die Z-Achse zusätzlich zur bestehenden Rotation hinzu (funktioniert nur für Objekte ohne Animationen)
+            </summary>
+            <remarks>Die Rotation wird in der Reihenfolge Y-&gt;Z-&gt;X durchgeführt</remarks>
+            <param name="g">Betroffenes GameObject</param>
+            <param name="meshId">Mesh-ID des 3D-Modells (beginnend bei 0 für den ersten Mesh)</param>
+            <param name="degrees">Hinzufügende Grad für die Achse</param>
         </member>
         <member name="M:KWEngine3.Helper.HelperRotation.GetRotationForSlope(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
             <summary>
@@ -3864,6 +4000,13 @@
             <summary>
             Helferklasse für Vektoroperationen
             </summary>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.IsVectorPointingUpward(OpenTK.Mathematics.Vector3)">
+            <summary>
+            Prüft, ob die Richtung dieses Vektors hauptsächlich in die positive Y-Achse zeigt (also aufwärts)
+            </summary>
+            <param name="v">zu prüfender Vektor</param>
+            <returns>true, wenn dieser Vektor hauptsächlich nach oben zeigt</returns>
         </member>
         <member name="M:KWEngine3.Helper.HelperVector.GetDeltaBetweenVectors(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
             <summary>
@@ -4103,6 +4246,76 @@
             <param name="other">Vergleichsobjekt</param>
             <returns>Sortierreihenfolge (-1 = näher, 0 = gleiche Entfernung, 1 = entfernter</returns>
         </member>
+        <member name="T:KWEngine3.Helper.RayIntersectionExtSet">
+            <summary>
+            Wrapper-Klasse, die die Entfernung der von mehreren Strahlen getroffenen Objekte und Verweise auf diese beinhaltet
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.Objects">
+            <summary>
+            Liste der getroffenen Objekte
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.DistanceMin">
+            <summary>
+            Die kleinste Distanz vom Aufrufer zum getroffenen Objekt
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.DistanceMax">
+            <summary>
+            Die größte Distanz vom Aufrufer zum getroffenen Objekt
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.DistanceAvg">
+            <summary>
+            Die durchschnittliche Distanz vom Aufrufer zum getroffenen Objekt
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.IntersectionPoints">
+            <summary>
+            Punkte, an dem die Strahlen auf Objekte trafen
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.SurfaceNormals">
+            <summary>
+            Ebenenvektoren der getroffenen Objekte
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.IntersectionPointNearest">
+            <summary>
+            Enthält den Schnittpunkt, der von allen Strahlen am nächsten am Strahlursprung war
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.IntersectionPointAvg">
+            <summary>
+            Enthält den Durchschnittswert aller ermittelten Schnittpunkte
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.SurfaceNormalNearest">
+            <summary>
+            Enthält den Vektor der Oberfläche des am nächsten liegenden Schnittpunkts
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.SurfaceNormalAvg">
+            <summary>
+            Enthält den durchschnittlichen Oberflächenvektor aller ermittelten Schnittpunktflächen
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.ObjectNearest">
+            <summary>
+            Referenz auf das Objekt, dessen Entfernung am kürzesten zum Strahlenursprung war
+            </summary>
+        </member>
+        <member name="M:KWEngine3.Helper.RayIntersectionExtSet.#ctor">
+            <summary>
+            Standardkonstruktor für die Instanz
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.IsValid">
+            <summary>
+            Gibt an, ob die Messung gültig und somit verwendbar ist
+            </summary>
+        </member>
         <member name="T:KWEngine3.Helper.RayTerrainIntersection">
             <summary>
             Wrapper-Klasse, die die Entfernung eines Objekts und den Schnittpunkt eines Strahls auf dem Terrain-Objekt beinhaltet
@@ -4182,6 +4395,27 @@
             Aktuelle Welt
             </summary>
         </member>
+        <member name="M:KWEngine3.KWEngine.PrintHitboxesForModel(System.String)">
+            <summary>
+            Gibt die Namen aller Hitboxen des angegebenen Modells auf der Editorkonsole aus
+            </summary>
+            <param name="modelname">Modellname</param>
+        </member>
+        <member name="M:KWEngine3.KWEngine.GetHitboxesForModel(System.String)">
+            <summary>
+            Gibt die Namen aller Hitboxen des angegebenen Modells auf der Editorkonsole aus
+            </summary>
+            <param name="modelname">Modellname</param>
+            <returns>Liste der Hitboxnamen</returns>
+        </member>
+        <member name="M:KWEngine3.KWEngine.SetHitboxEnabledForModel(System.String,System.String,System.Boolean)">
+            <summary>
+            Setzt die benannte Hitbox des Modells aktiv oder inaktiv
+            </summary>
+            <param name="modelname">Name des importierten 3D-Modells</param>
+            <param name="hitboxname">Name der zu ändernden Hitbox</param>
+            <param name="state">Status (true = aktiv, false = inaktiv)</param>
+        </member>
         <member name="P:KWEngine3.KWEngine.EditModeActive">
             <summary>
             Gibt an, ob der Edit-Modus aktiv ist
@@ -4204,9 +4438,9 @@
         </member>
         <member name="M:KWEngine3.KWEngine.LogWriteLine(System.Object)">
             <summary>
-            Schreibt eine Log-Zeile in das Ausgabefenster des Edit-Modus
+            Schreibt eine Log-Zeile in das Ausgabefenster des Edit-Modus (nur Debug-Modus)
             </summary>
-            <param name="message"></param>
+            <param name="message">Zu schreibende Nachricht</param>
         </member>
         <member name="M:KWEngine3.KWEngine.LogClear">
             <summary>
@@ -4274,13 +4508,19 @@
             <param name="height">Höhe</param>
             <param name="depth">Tiefe</param>
         </member>
-        <member name="M:KWEngine3.KWEngine.LoadModel(System.String,System.String,System.String)">
+        <member name="M:KWEngine3.KWEngine.LoadAnimationIntoModel(System.String,System.String)">
+            <summary>
+            Lädt die unter dem Dateinamen zu findenden Animationen in das (zuvor unter dem Namen angegebenen) 3D-Modell
+            </summary>
+            <param name="modelname">Name des bereits importierten Modells</param>
+            <param name="filename">Dateiname der zu importierenden Datei</param>
+        </member>
+        <member name="M:KWEngine3.KWEngine.LoadModel(System.String,System.String)">
             <summary>
             Lädt ein Modell aus einer Datei
             </summary>
             <param name="name">Name des Modells</param>
             <param name="filename">Datei des Modells</param>
-            <param name="callerName">(wird für interne Zwecke benötigt)</param>
         </member>
         <member name="M:KWEngine3.KWEngine.GetModelBoneNames(System.String)">
             <summary>
@@ -4318,6 +4558,12 @@
             <summary>
             Modellklasse
             </summary>
+        </member>
+        <member name="M:KWEngine3.Model.GeoModel.ToString">
+            <summary>
+            Gibt Auskunft über den Modellnamen
+            </summary>
+            <returns>Modellname</returns>
         </member>
         <member name="P:KWEngine3.Model.GeoModel.Root">
             <summary>
