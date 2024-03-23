@@ -184,27 +184,37 @@
             Schießt einen Strahl entlang der negativen lokalen Z-Achse der Instanz (für 2D-Games aus der Vogelperspektive)
             </summary>
         </member>
-        <member name="T:KWEngine3.MultiRayMode">
+        <member name="T:KWEngine3.RayMode">
             <summary>
             Bestimmt, wie viele Strahlen für die Messung der Bodennähe verwendet und in welche Richtung sie geschossen werden
             </summary>
         </member>
-        <member name="F:KWEngine3.MultiRayMode.TwoRays2DPlatformerY">
+        <member name="F:KWEngine3.RayMode.SingleY">
+            <summary>
+            Verwendet einen Strahl aus der Mitte der Hitbox entlang der lokalen negativen Y-Achse
+            </summary>
+        </member>
+        <member name="F:KWEngine3.RayMode.SingleZ">
+            <summary>
+            Verwendet einen Strahl aus der Mitte der Hitbox entlang der lokalen negativen Z-Achse
+            </summary>
+        </member>
+        <member name="F:KWEngine3.RayMode.TwoRays2DPlatformerY">
             <summary>
             Verwendet zwei Strahlen entlang der lokalen negativen Y-Achse der Instanz (für 2D-Platformer)
             </summary>
         </member>
-        <member name="F:KWEngine3.MultiRayMode.FourRaysZ">
+        <member name="F:KWEngine3.RayMode.FourRaysZ">
             <summary>
             Verwendet vier Strahlen entlang der lokalen negativen Z-Achse der Instanz (für Top-Down-Platformer)
             </summary>
         </member>
-        <member name="F:KWEngine3.MultiRayMode.FourRaysY">
+        <member name="F:KWEngine3.RayMode.FourRaysY">
             <summary>
             Verwendet vier Strahlen entlang der lokalen negativen Y-Achse der Instanz (für 3D-Platformer)
             </summary>
         </member>
-        <member name="F:KWEngine3.MultiRayMode.EightRaysY">
+        <member name="F:KWEngine3.RayMode.EightRaysY">
             <summary>
             Verwendet acht Strahlen entlang der lokalen negativen Y-Achse der Instanz (für 3D-Platformer)
             </summary>
@@ -1882,21 +1892,13 @@
             <param name="typelist">Liste der Typen (Klassen), die für den Strahl getestet werden sollen</param>
             <returns>Nach Entfernung aufsteigend sortierte Liste der Messergebnisse</returns>
         </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.RaytraceObjectsBelowPosition(KWEngine3.SingleRayMode,System.Single,System.Type[])">
-            <summary>
-            Schießt einen Strahl von der Mitte der Instanz nach unten und prüft, ob dieser Strahl in der Nähe liegende Objekte des angegebenen Typs trifft (Präzise, aber langsamer!)
-            </summary>
-            <param name="mode">Richtung des Strahls (Standard: Y-Achse)</param>
-            <param name="maxDistance">Trifft ein Strahl ein Objekt, wird es als Ergebnis verworfen, wenn die Strahlendistanz größer als die angegebene Distanz ist (abhängig von der Größe des Aufrufers)</param>
-            <param name="typelist">Liste der Typen (Klassen), die für den Strahl getestet werden sollen</param>
-            <returns>Ergebnis des Strahlentests (für das Objekt, das am wenigsten vom Strahl entfernt war)</returns>
-        </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.RaytraceObjectsBelowPositionMultiRay(KWEngine3.MultiRayMode,System.Single,System.Single,System.Type[])">
+        <member name="M:KWEngine3.GameObjects.GameObject.RaytraceObjectsBelowPosition(KWEngine3.RayMode,System.Single,System.Single,System.Single,System.Type[])">
             <summary>
             Schießt mehrere Strahlen von der Mitte der Instanz nach unten und prüft, ob diese Strahlen in der Nähe liegende Objekte des angegebenen Typs treffen (Präzise, aber langsamer!)
             </summary>
             <param name="rayMode">Richtung und Anzahl der Teststrahlen</param>
-            <param name="sizeFactor">Die Strahlen werden innerhalb der Hitbox des Aufrufers gemäß dieses Faktors verteilt. Ist der Faktor 1, befinden sich die Strahlen an den Hitboxrändern. Ist er größer, befinden sich die Strahlen außerhalb der Hitbox.</param>
+            <param name="sizeFactor">Wenn mehrere Strahlen gewählt sind, werden diese innerhalb der Hitbox des Aufrufers gemäß dieses Faktors verteilt. Ist der Faktor 1, befinden sich die Strahlen an den Hitboxrändern. Ist er größer, befinden sich die Strahlen außerhalb der Hitbox. Ist der Faktor kleiner als 1, befinden sich die Strahlen weiter innerhalb der Hitbox</param>
+            <param name="minDistance">Trifft ein Strahl ein Objekt, wird es als Ergebnis verworfen, wenn die Strahlendistanz kleiner als die angegebene Distanz ist (abhängig von der Größe des Aufrufers)</param>
             <param name="maxDistance">Trifft ein Strahl ein Objekt, wird es als Ergebnis verworfen, wenn die Strahlendistanz größer als die angegebene Distanz ist (abhängig von der Größe des Aufrufers)</param>
             <param name="typelist">Liste der Typen (Klassen), die für den Strahl getestet werden sollen</param>
             <returns>Ergebnis des Strahlentests</returns>
@@ -3719,7 +3721,7 @@
             <param name="typelist">Liste der Klassen, die getestet werden sollen</param>
             <returns>Liste der GameObjectDistance-Instanzen</returns>
         </member>
-        <member name="M:KWEngine3.Helper.HelperIntersection.RaytraceObject(KWEngine3.GameObjects.GameObject,OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3@,OpenTK.Mathematics.Vector3@,System.Boolean)">
+        <member name="M:KWEngine3.Helper.HelperIntersection.RaytraceObject(KWEngine3.GameObjects.GameObject,OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3@,OpenTK.Mathematics.Vector3@,System.String@,System.Boolean)">
             <summary>
             Berechnet den Schnittpunkt eines Strahls mit dem angegebenen GameObject
             </summary>
@@ -3728,6 +3730,7 @@
             <param name="rayDirection">Richtung des Strahls (MUSS normalisiert sein!)</param>
             <param name="intersectionPoint">Schnittpunkt (Ausgabe)</param>
             <param name="faceNormal">Ebene des Schnittpunkts (Ausgabe)</param>
+            <param name="hitboxname">Name der getroffenen Hitbox</param>
             <param name="includeNonCollisionObjects">Sollen Objekte berücksichtigt werden, die NICHT als Kollisionsobjekt markiert sind?</param>
             <returns>true, wenn der Strahl das GameObject getroffen hat</returns>
         </member>
@@ -4219,6 +4222,11 @@
             Das vom Strahl getroffene Objekt
             </summary>
         </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExt.HitboxName">
+            <summary>
+            Name der Hitbox, die getroffen wurde
+            </summary>
+        </member>
         <member name="P:KWEngine3.Helper.RayIntersectionExt.Distance">
             <summary>
             Die Distanz vom Aufrufer zum getroffenen Objekt
@@ -4266,11 +4274,6 @@
             Die kleinste Distanz vom Aufrufer zum getroffenen Objekt
             </summary>
         </member>
-        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.DistanceMax">
-            <summary>
-            Die größte Distanz vom Aufrufer zum getroffenen Objekt
-            </summary>
-        </member>
         <member name="P:KWEngine3.Helper.RayIntersectionExtSet.DistanceAvg">
             <summary>
             Die durchschnittliche Distanz vom Aufrufer zum getroffenen Objekt
@@ -4309,6 +4312,11 @@
         <member name="P:KWEngine3.Helper.RayIntersectionExtSet.ObjectNearest">
             <summary>
             Referenz auf das Objekt, dessen Entfernung am kürzesten zum Strahlenursprung war
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.ObjectNearestHitboxName">
+            <summary>
+            Name der Hitbox des Objekts, dessen Entfernung am kürzesten zum Strahlenursprung war
             </summary>
         </member>
         <member name="M:KWEngine3.Helper.RayIntersectionExtSet.#ctor">
