@@ -27,6 +27,7 @@
     <None Remove="App\Textures\BrowningHP_Metallic.png" />
     <None Remove="App\Textures\BrowningHP_Normal.png" />
     <None Remove="App\Textures\BrowningHP_Roughness.png" />
+    <None Remove="App\Textures\loading.png" />
     <None Remove="App\Textures\start.jpg" />
     <None Remove="App\Textures\startbutton.png" />
     <None Remove="App\Textures\startbutton2.png" />
@@ -44,6 +45,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\Black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App\Textures\loading.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\startbutton.png">

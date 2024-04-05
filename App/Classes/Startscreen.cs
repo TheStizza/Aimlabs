@@ -22,7 +22,7 @@ namespace GruppeC.App
             }
             if (_h.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
             {
-                Window.SetWorld(new GameWorld01());
+                Window.SetWorld(new loading());
             }
         }
 
