@@ -18,5 +18,15 @@ namespace Aimlabs.App.Classes
         {
            
         }
+        public void spawnnewTargetball()
+        {
+            Targetball Sphereball = new();
+            Name = "Sphereball";
+            SetModel("KWSphere");
+            SetPosition(HelperRandom.GetRandomNumber(1, 5), HelperRandom.GetRandomNumber(1, 3), HelperRandom.GetRandomNumber(1, 5));
+            SetScale(0.3f, 0.3f, 0.3f);
+            IsCollisionObject = true;
+            CurrentWorld.AddGameObject(Sphereball);
+        }
     }
 }

@@ -127,6 +127,14 @@ namespace Aimlabs.App
             s1.IsCollisionObject = true;
             AddGameObject(s1);
 
+            Targetball s2 = new Targetball();
+            s2.Name = "Sphere1";
+            s2.SetModel("KWSphere");
+            s2.SetScale(0.3f, 0.3f, 0.3f);
+            s2.SetPosition(1, 2, 0);
+            s2.IsCollisionObject = true;
+            AddGameObject(s2);
+
             AddGameObject(new Walls("w1",0,0,10,"./App/Textures/wandtextur.jpg",20,8,0.5f,0,0,0));
 
             AddGameObject(new Walls("w2",0,0,-10, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,0,0));

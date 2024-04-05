@@ -7,7 +7,7 @@ using KWEngine3.GameObjects;
 
 namespace Aimlabs.App.Classes
 {
-    internal class targetalgorithm
+    internal class Targetalgorythm
     {
 
     }
