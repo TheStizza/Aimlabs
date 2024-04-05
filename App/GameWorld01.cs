@@ -12,6 +12,9 @@ namespace Aimlabs.App
         private float _esc_timestamp = 0f;
         private HUDObjectImage crosshair = new HUDObjectImage();
         private HUDObjectImage CrosshairHit = new HUDObjectImage();
+        private HUDObjectText ingametime;
+        private HUDObjectText botscorex;
+        private HUDObjectText ballscorex;
 
         public override void Act()
         {
@@ -42,6 +45,9 @@ namespace Aimlabs.App
                
                 RemoveHUDObject(CrosshairHit);
             }
+            ingametime.SetText("Time:"+WorldTime);
+            ballscorex.SetText("Ballscore:" + Stats.ballscore);
+            botscorex.SetText("Botscore:" + Stats.botscore);
         }
 
         public override void Prepare()
@@ -56,6 +62,28 @@ namespace Aimlabs.App
             CrosshairHit.SetScale(15, 15);
             AddHUDObject(crosshair);
             SetCameraFOV(100);
+
+            ingametime = new HUDObjectText("Time:" + WorldTime);
+            ingametime.SetPosition(100f, 34f);
+            ingametime.Name = "time";
+            ingametime.SetScale(18);
+            ingametime.SetFont(FontFace.NovaMono);
+            AddHUDObject(ingametime);
+
+            botscorex = new HUDObjectText("Botscore:"+Stats.botscore);
+            botscorex.SetPosition(100f, 100f);
+            botscorex.Name = "Botscore";
+            botscorex.SetScale(18);
+            botscorex.SetFont(FontFace.NovaMono);
+            AddHUDObject(botscorex);
+
+            ballscorex = new HUDObjectText("Ballscore:" + Stats.ballscore);
+            ballscorex.SetPosition(100f, 166f);
+            ballscorex.Name = "Botscore";
+            ballscorex.SetScale(18);
+            ballscorex.SetFont(FontFace.NovaMono);
+            AddHUDObject(ballscorex);
+
 
             SetColorAmbient(0.8f, 0.8f, 0.8f);
             SetBackgroundSkybox("./App/Textures/equirectangular_example.dds", 0f, SkyboxType.Equirectangular);

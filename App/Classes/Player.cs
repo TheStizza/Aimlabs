@@ -43,7 +43,7 @@ namespace Aimlabs.App.Classes
                     {
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
-                        Stats.score = Stats.score + 1;
+                        Stats.ballscore = Stats.ballscore + 1;
                     }
                 }
             }
