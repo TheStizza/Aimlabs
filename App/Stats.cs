@@ -10,6 +10,7 @@ namespace Aimlabs.App.Classes
 {
     public class Stats
     {
-        public static int score = 0 ;
+        public static int ballscore = 0 ;
+        public static int botscore = 0;
     }
 }
