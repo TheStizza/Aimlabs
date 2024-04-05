@@ -34,6 +34,12 @@ namespace GruppeC.App
             _h.SetScale(500f,280f);
             AddHUDObject(_h);
 
+            _h = new HUDObjectImage("./App/Textures/settings2.png");
+            _h.SetPosition(1400f, 50f);
+            _h.Name = "settings";
+            _h.SetScale(100f, 100f);
+            AddHUDObject(_h);
+
             SetBackground2D("./App/Textures/backround.png");
         }
     }
