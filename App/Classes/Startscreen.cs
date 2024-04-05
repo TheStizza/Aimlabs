@@ -29,12 +29,12 @@ namespace GruppeC.App
         public override void Prepare()
         {
             _h = new HUDObjectImage("./App/Textures/startbutton2.png");
-            _h.SetPosition(350f, 360f);
+            _h.SetPosition(740f, 360f);
             _h.Name = "start";
-            _h.SetScale(450f,150f);
+            _h.SetScale(500f,280f);
             AddHUDObject(_h);
 
-            SetBackground2D("./App/Textures/start.jpg");
+            SetBackground2D("./App/Textures/backround.png");
         }
     }
 }
