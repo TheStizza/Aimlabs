@@ -10,6 +10,8 @@ namespace GruppeC.App
     public class Startscreen : World
     {
         private HUDObjectImage _h;
+        private HUDObjectImage _g;
+        private HUDObjectImage _f;
         public override void Act()
         {
             if (_h.IsMouseCursorOnMe() == true)
@@ -34,11 +36,17 @@ namespace GruppeC.App
             _h.SetScale(500f,280f);
             AddHUDObject(_h);
 
-            _h = new HUDObjectImage("./App/Textures/settings2.png");
-            _h.SetPosition(1400f, 50f);
-            _h.Name = "settings";
-            _h.SetScale(100f, 100f);
-            AddHUDObject(_h);
+            _g = new HUDObjectImage("./App/Textures/neusettings.png");
+            _g.SetPosition(1400f, 50f);
+            _g.Name = "settings";
+            _g.SetScale(100f, 100f);
+            AddHUDObject(_g);
+
+            _f = new HUDObjectImage("./App/Textures/highscore.png");
+            _f.SetPosition(100f, 50f);
+            _f.Name = "settings";
+            _f.SetScale(170f, 100f);
+            AddHUDObject(_f);
 
             SetBackground2D("./App/Textures/backround.png");
         }

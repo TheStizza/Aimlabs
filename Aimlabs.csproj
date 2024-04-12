@@ -28,7 +28,6 @@
     <None Remove="App\Textures\BrowningHP_Normal.png" />
     <None Remove="App\Textures\BrowningHP_Roughness.png" />
     <None Remove="App\Textures\loading.png" />
-    <None Remove="App\Textures\settings2.png" />
     <None Remove="App\Textures\start.jpg" />
     <None Remove="App\Textures\startbutton.png" />
     <None Remove="App\Textures\startbutton2.png" />
@@ -49,9 +48,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\loading.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App\Textures\settings2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\startbutton.png">
@@ -168,6 +164,9 @@
     <None Update="App\Textures\equirectangular_example.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="App\Textures\highscore.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="App\Textures\iron_panel_albedo.dds">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -178,6 +177,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="App\Textures\iron_panel_roughness.dds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App\Textures\neusettings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="assimp.dll">
