@@ -48,6 +48,28 @@ namespace Aimlabs.App
             ingametime.SetText("Time:"+WorldTime);
             ballscorex.SetText("Ballscore:" + Stats.ballscore);
             botscorex.SetText("Botscore:" + Stats.botscore);
+            if (Stats.start == true && Stats.spawned == false)
+            {
+                Targetball s1 = new Targetball();
+                s1.Name = "Sphere1";
+                s1.SetModel("KWSphere");
+                s1.SetScale(0.3f, 0.3f, 0.3f);
+                s1.SetPosition(0, 2, 0);
+                s1.IsCollisionObject = true;
+                AddGameObject(s1);
+
+                Targetball s2 = new Targetball();
+                s2.Name = "Sphere1";
+                s2.SetModel("KWSphere");
+                s2.SetScale(0.3f, 0.3f, 0.3f);
+                s2.SetPosition(1, 2, 0);
+                s2.IsCollisionObject = true;
+                AddGameObject(s2);
+                Stats.spawned = true;
+
+                Targetball.spawnnewTargetball();
+                   
+            }
         }
 
         public override void Prepare()
@@ -119,7 +141,7 @@ namespace Aimlabs.App
             //              hinzugefügt wurde (muss bei OBJ-Dateien passieren).
             //KWEngine.LoadModel("Sphere", "./App/Models/sphere.OBJ");
 
-            Targetball s1 = new Targetball();
+            /*Targetball s1 = new Targetball();
             s1.Name = "Sphere1";
             s1.SetModel("KWSphere");
             s1.SetScale(0.3f, 0.3f, 0.3f);
@@ -133,7 +155,16 @@ namespace Aimlabs.App
             s2.SetScale(0.3f, 0.3f, 0.3f);
             s2.SetPosition(1, 2, 0);
             s2.IsCollisionObject = true;
-            AddGameObject(s2);
+            AddGameObject(s2);*/
+
+            Startbutton huen = new Startbutton();
+            huen.Name = "Sphere1";
+            huen.SetScale(1, 2, 1);
+            huen.SetPosition(1, 2, 0);
+            huen.IsCollisionObject = true;
+            huen.SetTexture("./App/Textures/start.jpg");
+            huen.Name = "Starts";
+            AddGameObject(huen);
 
             AddGameObject(new Walls("w1",0,0,10,"./App/Textures/wandtextur.jpg",20,8,0.5f,0,0,0));
 

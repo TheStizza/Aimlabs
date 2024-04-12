@@ -12,5 +12,7 @@ namespace Aimlabs.App.Classes
     {
         public static int ballscore = 0 ;
         public static int botscore = 0;
+        public static bool start = false;
+        public static bool spawned = false;
     }
 }

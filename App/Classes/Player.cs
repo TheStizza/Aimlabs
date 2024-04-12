@@ -28,7 +28,7 @@ namespace Aimlabs.App.Classes
                     this,
                     0,
                     true,
-                    typeof(Player), typeof(Walls), typeof(Obstacle), typeof(Target), typeof(Targetball)
+                    typeof(Player), typeof(Walls), typeof(Obstacle), typeof(Target), typeof(Targetball), typeof(Startbutton)
                     );
                 if (rayObjects.Count > 0)
                 {
@@ -44,6 +44,17 @@ namespace Aimlabs.App.Classes
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Stats.ballscore = Stats.ballscore + 1;
+                    }
+                    else if (firstObjectHitbyRay is Target && Mouse.IsButtonPressed(MouseButton.Left))
+                    {
+                        Console.WriteLine("ich bin drin");
+                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Stats.botscore = Stats.botscore + 1;
+                    }
+                    else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left))
+                    {
+                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Stats.start = true;
                     }
                 }
             }
