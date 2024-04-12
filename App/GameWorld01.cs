@@ -65,10 +65,8 @@ namespace Aimlabs.App
                 s2.SetPosition(1, 2, 0);
                 s2.IsCollisionObject = true;
                 AddGameObject(s2);
-                Stats.spawned = true;
 
-                Targetball.spawnnewTargetball();
-                   
+                Stats.spawned = true;
             }
         }
 

@@ -44,6 +44,7 @@ namespace Aimlabs.App.Classes
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Stats.ballscore = Stats.ballscore + 1;
+                        Targetball.spawnnewTargetball();
                     }
                     else if (firstObjectHitbyRay is Target && Mouse.IsButtonPressed(MouseButton.Left))
                     {
