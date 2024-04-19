@@ -12,6 +12,7 @@ namespace GruppeC.App
         private HUDObjectImage _h;
         private HUDObjectImage _g;
         private HUDObjectImage _f;
+        private HUDObjectImage _e;
         public override void Act()
         {
             if (_h.IsMouseCursorOnMe() == true)
@@ -37,16 +38,22 @@ namespace GruppeC.App
             AddHUDObject(_h);
 
             _g = new HUDObjectImage("./App/Textures/neusettings.png");
-            _g.SetPosition(1400f, 50f);
+            _g.SetPosition(1350f, 50f);
             _g.Name = "settings";
             _g.SetScale(100f, 100f);
             AddHUDObject(_g);
 
             _f = new HUDObjectImage("./App/Textures/highscore.png");
             _f.SetPosition(100f, 50f);
-            _f.Name = "settings";
+            _f.Name = "highscore";
             _f.SetScale(170f, 100f);
             AddHUDObject(_f);
+
+            _e = new HUDObjectImage("./App/Textures/aimlabslogo.png");
+            _e.SetPosition(740f, 100f);
+            _e.Name = "aimlabslogo";
+            _e.SetScale(500f, 100f);
+            AddHUDObject(_e);
 
             SetBackground2D("./App/Textures/backround.png");
         }
