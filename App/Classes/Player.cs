@@ -28,7 +28,7 @@ namespace Aimlabs.App.Classes
                     this,
                     0,
                     true,
-                    typeof(Player), typeof(Walls), typeof(Obstacle), typeof(Target), typeof(Targetball), typeof(Startbutton)
+                    typeof(Player), typeof(Walls), typeof(Obstacle), typeof(Target), typeof(Targetball), typeof(Startbutton), typeof(BotAttachment)
                     );
                 if (rayObjects.Count > 0)
                 {
@@ -38,10 +38,10 @@ namespace Aimlabs.App.Classes
                     }
                     
                     GameObject firstObjectHitbyRay = rayObjects[0].Object;
-                    Console.WriteLine(firstObjectHitbyRay);
+                    //Console.WriteLine(firstObjectHitbyRay);
                     if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
                     {
-                        Console.WriteLine("ich bin drin");
+                        //Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Stats.ballscore = Stats.ballscore + 1;
                         Targetball.spawnnewTargetball();
@@ -49,7 +49,7 @@ namespace Aimlabs.App.Classes
                     }
                     else if (firstObjectHitbyRay is Target && Mouse.IsButtonPressed(MouseButton.Left))
                     {
-                        Console.WriteLine("ich bin drin");
+                        //Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Stats.botscore = Stats.botscore + 1;
                     }
