@@ -20,6 +20,7 @@
     <None Remove="App\Models\BrowningHP.gltf" />
     <None Remove="App\Models\Revolver.obj" />
     <None Remove="App\Models\sphere.OBJ" />
+    <None Remove="App\Textures\aimlabslogo.png" />
     <None Remove="App\Textures\backround.png" />
     <None Remove="App\Textures\Black.png" />
     <None Remove="App\Textures\BrowningHP_Albedo.png" />
@@ -39,6 +40,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Models\BrowningHP.gltf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App\Textures\aimlabslogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\backround.png">
