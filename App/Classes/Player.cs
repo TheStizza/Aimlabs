@@ -45,6 +45,7 @@ namespace Aimlabs.App.Classes
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Stats.ballscore = Stats.ballscore + 1;
                         Targetball.spawnnewTargetball();
+                        Stats.hit = true;
                     }
                     else if (firstObjectHitbyRay is Target && Mouse.IsButtonPressed(MouseButton.Left))
                     {

@@ -15,9 +15,13 @@ namespace Aimlabs.App
         private HUDObjectText ingametime;
         private HUDObjectText botscorex;
         private HUDObjectText ballscorex;
+        private double time = 0;
+        private double realtime = 0;
+        private int hittimer = 0;
 
         public override void Act()
         {
+
             if(Keyboard.IsKeyDown(Keys.Escape) && WorldTime - _esc_timestamp > ESC_COOLDOWN)
             {
                 if(GlobalSettings.IsPaused == false)
@@ -32,7 +36,20 @@ namespace Aimlabs.App
                 }
                 _esc_timestamp = WorldTime;
             }
-            if (Mouse.IsButtonDown(MouseButton.Left))
+            if(Stats.hit == true)
+            {
+                crosshair.SetColor(0.3f, 0.1f, 0.1f);
+                crosshair.SetScale(30, 20);
+                AddHUDObject(CrosshairHit);
+                Stats.hit = false;
+            }
+            else
+            {
+                crosshair.SetColor(0, 1, 0);
+                crosshair.SetScale(30, 20);
+                RemoveHUDObject(CrosshairHit);
+            }
+            /*if (Mouse.IsButtonDown(MouseButton.Left))
             {
                 crosshair.SetColor(0.3f,0.1f,0.1f);
                 crosshair.SetScale(30,20);
@@ -44,10 +61,19 @@ namespace Aimlabs.App
                 crosshair.SetScale(30,20);
                
                 RemoveHUDObject(CrosshairHit);
-            }
-            ingametime.SetText("Time:"+WorldTime);
+            }*/
+            ingametime.SetText("Time:"+realtime);
             ballscorex.SetText("Ballscore:" + Stats.ballscore);
             botscorex.SetText("Botscore:" + Stats.botscore);
+                            if(Stats.spawned == true)
+                            {
+                            time = time + 1;
+                            }
+                            if (time == 240)
+                            {
+                            realtime = realtime + 1;
+                            time = 0;
+                            }
             if (Stats.start == true && Stats.spawned == false)
             {
                 Targetball s1 = new Targetball();
@@ -202,14 +228,14 @@ namespace Aimlabs.App
             KWEngine.MouseSensitivity = 0.1f;
 
             // KAR: Test
-            Target t1 = new Target();
+            /*Target t1 = new Target();
             t1.SetModel("Bot");
             t1.SetRotation(0, 90, 0);
             t1.SetHitboxScale(0.4f, 1f, 1f);
             t1.SetScale(0.75f);
             t1.IsShadowCaster = true;
             t1.Name = "Enemy Bot";
-            AddGameObject(t1);
+            AddGameObject(t1);*/
         }
     }
 }

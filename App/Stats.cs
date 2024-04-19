@@ -14,5 +14,6 @@ namespace Aimlabs.App.Classes
         public static int botscore = 0;
         public static bool start = false;
         public static bool spawned = false;
+        public static bool hit = false;
     }
 }
