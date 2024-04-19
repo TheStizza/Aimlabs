@@ -77,14 +77,6 @@ namespace Aimlabs.App.Classes
             CurrentWorld.AddCameraRotationFromMouseDelta();
 
             MoveAndStrafeAlongCameraXZ(forward, strafe, 0.01f);
-            if (Keyboard.IsKeyDown(Keys.Q))
-            {
-                MoveAlongVector(CurrentWorld.CameraLookAtVectorLocalUp, -0.01f);
-            }
-            if (Keyboard.IsKeyDown(Keys.E))
-            {
-                MoveAlongVector(CurrentWorld.CameraLookAtVectorLocalUp, 0.01f);
-            }
             CurrentWorld.UpdateCameraPositionForFirstPersonView(Center, Player.CAM_OFFSET);
             List<Intersection> intersections = GetIntersections();
             foreach (Intersection i in intersections)

@@ -17,7 +17,6 @@ namespace Aimlabs.App
         private HUDObjectText ballscorex;
         private double time = 0;
         private double realtime = 0;
-        private int hittimer = 0;
 
         public override void Act()
         {

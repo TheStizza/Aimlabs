@@ -9,7 +9,6 @@ namespace GruppeC.App
 {
     public class loading : World
     {
-        private HUDObjectImage _h;
         public override void Act()
         {
             Window.SetWorld(new GameWorld01());
