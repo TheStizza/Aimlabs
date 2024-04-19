@@ -976,6 +976,11 @@
             Gibt an, ob das Objekt Transparenzanteile besitzt
             </summary>
         </member>
+        <member name="P:KWEngine3.GameObjects.EngineObject.IsInvisible">
+            <summary>
+            Gibt an, ob das Objekt gerade vollständig unsichtbar ist
+            </summary>
+        </member>
         <member name="P:KWEngine3.GameObjects.EngineObject.Center">
             <summary>
             Mittelpunkt des Objekts
@@ -1672,6 +1677,13 @@
             <param name="z">Position auf z-Achse</param>
             <param name="mode">Bestimmt, auf welchen Fixpunkt des Objekts sich die Positionsangaben beziehen sollen</param>
         </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.SetPosition(OpenTK.Mathematics.Vector3,KWEngine3.PositionMode)">
+            <summary>
+            Setzt die Position des Objekts
+            </summary>
+            <param name="position">Position auf XYZ-Achse</param>
+            <param name="mode">Bestimmt, auf welchen Fixpunkt des Objekts sich die Positionsangaben beziehen sollen</param>
+        </member>
         <member name="M:KWEngine3.GameObjects.GameObject.SetPositionY(System.Single,KWEngine3.PositionMode)">
             <summary>
             Setzt die y-Position der Instanz auf den gegebenen Wert
@@ -1853,6 +1865,16 @@
             </summary>
             <param name="meshIndex">Index des 3D-Mesh, für das die Hitbox getauscht werden soll</param>
             <param name="mode">Modus zur Bestimmung der richtigen Hitbox-Orientierung</param>
+        </member>
+        <member name="P:KWEngine3.GameObjects.GameObject.AnimationPercentage">
+            <summary>
+            Gibt Auskunft über den Prozentwert der aktuell gewählten Animation (Werte zwischen 0f und 1f)
+            </summary>
+        </member>
+        <member name="P:KWEngine3.GameObjects.GameObject.AnimationID">
+            <summary>
+            Gibt an, welche Animations-ID für diese Instanz aktuell gewählt ist. Beträgt der Wert -1, ist keine Animation gewählt.
+            </summary>
         </member>
         <member name="P:KWEngine3.GameObjects.GameObject.BlendTextureStates">
             <summary>
@@ -3270,7 +3292,7 @@
             <param name="center">Mittelpunkt des Felds</param>
             <param name="cellCountX">Anzahl Zellen in X-Richtung</param>
             <param name="cellCountZ">Anzahl Zellen in Z-Richtung</param>
-            <param name="cellRadius">Radius je Zelle</param>
+            <param name="cellRadius">Radius je Zelle (minimum: 0.1f)</param>
             <param name="fieldHeight">Höhe des Felds</param>
             <param name="mode">Genauigkeit bei der Messung der Hindernisse (Simple oder Box)</param>
             <param name="types">Liste der Klassen, die das FlowField scannen soll</param>
