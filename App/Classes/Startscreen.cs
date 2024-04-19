@@ -38,7 +38,7 @@ namespace GruppeC.App
             AddHUDObject(_h);
 
             _g = new HUDObjectImage("./App/Textures/neusettings.png");
-            _g.SetPosition(1400f, 50f);
+            _g.SetPosition(1350f, 50f);
             _g.Name = "settings";
             _g.SetScale(100f, 100f);
             AddHUDObject(_g);
