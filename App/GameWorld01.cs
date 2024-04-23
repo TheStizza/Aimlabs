@@ -15,6 +15,8 @@ namespace Aimlabs.App
         private HUDObjectText ingametime;
         private HUDObjectText botscorex;
         private HUDObjectText ballscorex;
+        private HUDObjectText clicks;
+        private HUDObjectText accuracy;
         private double time = 0;
         private double realtime = 0;
 
@@ -64,7 +66,12 @@ namespace Aimlabs.App
             ingametime.SetText("Time:"+realtime);
             ballscorex.SetText("Ballscore:" + Stats.ballscore);
             botscorex.SetText("Botscore:" + Stats.botscore);
-                            if(Stats.spawned == true)
+            clicks.SetText("Clicks:" + Stats.leftmouseclicks);
+            if (Stats.leftmouseclicks > 0)
+            {
+                accuracy.SetText("Accuracy:"+ Math.Round(Stats.ballscore / Stats.leftmouseclicks * 100.0f,2));
+            }
+                            if (Stats.spawned == true)
                             {
                             time = time + 1;
                             }
@@ -128,6 +135,20 @@ namespace Aimlabs.App
             ballscorex.SetScale(18);
             ballscorex.SetFont(FontFace.NovaMono);
             AddHUDObject(ballscorex);
+
+            clicks = new HUDObjectText("Clicks:" + Stats.leftmouseclicks);
+            clicks.SetPosition(1000f, 166f);
+            clicks.Name = "clicks";
+            clicks.SetScale(18);
+            clicks.SetFont(FontFace.NovaMono);
+            AddHUDObject(clicks);
+
+            accuracy = new HUDObjectText("Accuracy:" + Stats.accuracy);
+            accuracy.SetPosition(1000f, 100f);
+            accuracy.Name = "accuracy";
+            accuracy.SetScale(18);
+            accuracy.SetFont(FontFace.NovaMono);
+            AddHUDObject(accuracy);
 
 
             SetColorAmbient(0.8f, 0.8f, 0.8f);
