@@ -10,7 +10,7 @@ namespace Aimlabs.App
     {
         public override void Act()
         {
-            Window.SetWorld(new GameWorld01());
+            Window.SetWorld(new StartingWorld());
         }
 
         public override void Prepare()

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Aimlabs.App
 {
-    public class GameWorld01 : World
+    public class StartingWorld : World
     {
         private const float ESC_COOLDOWN = 1f;
         private float _esc_timestamp = 0f;
@@ -66,6 +66,10 @@ namespace Aimlabs.App
                
                 RemoveHUDObject(CrosshairHit);
             }*/
+            if(realtime == 10)//eiglt 60 sec
+            {
+                Window.SetWorld(new Scoreboard());
+            }
             ingametime.SetText("Time:"+realtime);
             ballscorex.SetText("Ballscore:" + Stats.ballscore);
             botscorex.SetText("Botscore:" + Stats.botscore);
@@ -74,7 +78,7 @@ namespace Aimlabs.App
             {
                 accuracy.SetText("Accuracy:"+ Math.Round(Stats.ballscore / Stats.leftmouseclicks * 100.0f,2)+"%");
             }
-                            if (Stats.spawned == true)
+                            if (Stats.ballsspawned == true)
                             {
                             time = time + 1;
                             }
@@ -83,7 +87,7 @@ namespace Aimlabs.App
                             realtime = realtime + 1;
                             time = 0;
                             }
-            if (Stats.start == true && Stats.spawned == false)
+            if (Stats.start == true && Stats.ballsspawned == false)
             {
                 Targetball s1 = new Targetball();
                 s1.Name = "Sphere1";
@@ -101,7 +105,7 @@ namespace Aimlabs.App
                 s2.IsCollisionObject = true;
                 AddGameObject(s2);
 
-                Stats.spawned = true;
+                Stats.ballsspawned = true;
             }
         }
 

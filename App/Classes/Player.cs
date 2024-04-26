@@ -14,7 +14,7 @@ namespace Aimlabs.App.Classes
 
         public override void Act()
         {
-            if(Mouse.IsButtonPressed(MouseButton.Left) && Stats.spawned == true)
+            if(Mouse.IsButtonPressed(MouseButton.Left) && Stats.ballsspawned == true)
             {
                 Stats.leftmouseclicks = Stats.leftmouseclicks + 1;
             }
