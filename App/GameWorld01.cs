@@ -69,7 +69,7 @@ namespace Aimlabs.App
             clicks.SetText("Clicks:" + Stats.leftmouseclicks);
             if (Stats.leftmouseclicks > 0)
             {
-                accuracy.SetText("Accuracy:"+ Math.Round(Stats.ballscore / Stats.leftmouseclicks * 100.0f,2));
+                accuracy.SetText("Accuracy:"+ Math.Round(Stats.ballscore / Stats.leftmouseclicks * 100.0f,2)+"%");
             }
                             if (Stats.spawned == true)
                             {
