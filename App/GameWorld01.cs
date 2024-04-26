@@ -1,8 +1,11 @@
-﻿    using KWEngine3;
+﻿using KWEngine3;
 using KWEngine3.GameObjects;
 using Aimlabs.App.Classes;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using KWEngine3.Helper;
+using System;
+using System.Collections.Generic;
 
 namespace Aimlabs.App
 {
@@ -104,6 +107,10 @@ namespace Aimlabs.App
 
         public override void Prepare()
         {
+            foreach (string bonename in KWEngine.GetModelBoneNames("Bot"))
+            {
+                Console.WriteLine(bonename);
+            }
             KWEngine.LoadModel("Bot", "./App/Models/bot.gltf");
             KWEngine.LoadModel("Gun", "./App/Models/BrowningHP.gltf");
 
@@ -248,14 +255,33 @@ namespace Aimlabs.App
             KWEngine.MouseSensitivity = 0.1f;
 
             // KAR: Test
-            /*Target t1 = new Target();
+            Target t1 = new Target();
             t1.SetModel("Bot");
             t1.SetRotation(0, 90, 0);
             t1.SetHitboxScale(0.4f, 1f, 1f);
             t1.SetScale(0.75f);
             t1.IsShadowCaster = true;
             t1.Name = "Enemy Bot";
-            AddGameObject(t1);*/
+            AddGameObject(t1);
+
+            BotAttachment headattachment = new BotAttachment();
+            headattachment.IsCollisionObject = true;
+            headattachment.SetOpacity(0.5f);
+            headattachment.SetColor(0f, 1f, 0f);
+            AddGameObject(headattachment);
+            t1.AttachGameObjectToBone(headattachment, "mixamorig:Head");
+            HelperGameObjectAttachment.SetScaleForAttachment(headattachment, 25, 50, 25);
+            HelperGameObjectAttachment.SetRotationForAttachment(headattachment, 0f, 0f, 0f);
+
+            BotAttachment bodyattachment = new BotAttachment();
+            bodyattachment.IsCollisionObject = true;
+            bodyattachment.SetOpacity(0.5f);
+            bodyattachment.SetColor(0f, 1f, 0f);
+            AddGameObject(bodyattachment);
+            t1.AttachGameObjectToBone(bodyattachment, "mixamorig:Hips");
+            HelperGameObjectAttachment.SetScaleForAttachment(bodyattachment, 66, 125, 66);
+            HelperGameObjectAttachment.SetRotationForAttachment(bodyattachment, 0f, 0f, 0f);
+            HelperGameObjectAttachment.SetPositionOffsetForAttachment(bodyattachment, 0f, -0.25f, 0f);
         }
     }
 }
