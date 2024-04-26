@@ -105,6 +105,14 @@ namespace Aimlabs.App
                 s2.IsCollisionObject = true;
                 AddGameObject(s2);
 
+                Targetball s3 = new Targetball();
+                s3.Name = "Sphere1";
+                s3.SetModel("KWSphere");
+                s3.SetScale(0.3f, 0.3f, 0.3f);
+                s3.SetPosition(-1, 2, 0);
+                s3.IsCollisionObject = true;
+                AddGameObject(s3);
+
                 Stats.ballsspawned = true;
             }
         }

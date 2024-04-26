@@ -42,7 +42,7 @@ namespace Aimlabs.App.Classes
                     }
                     
                     GameObject firstObjectHitbyRay = rayObjects[0].Object;
-                    Console.WriteLine(firstObjectHitbyRay);
+                    //Console.WriteLine(firstObjectHitbyRay);
                     if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
                     {
                         Console.WriteLine("ich bin drin");
