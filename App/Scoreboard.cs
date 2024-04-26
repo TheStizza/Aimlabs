@@ -12,7 +12,6 @@ namespace Aimlabs.App
 {
     public class Scoreboard : World
     {
-        private HUDObjectText ingametime;
         private HUDObjectText botscorex;
         private HUDObjectText ballscorex;
         private HUDObjectText clicks;
@@ -40,12 +39,6 @@ namespace Aimlabs.App
             playagain.Name = "name";
             playagain.SetScale(300);
             AddHUDObject(playagain);
-            ingametime = new HUDObjectText("Time:" + WorldTime);
-            ingametime.SetPosition(100f, 34f);
-            ingametime.Name = "time";
-            ingametime.SetScale(18);
-            ingametime.SetFont(FontFace.NovaMono);
-            AddHUDObject(ingametime);
 
             botscorex = new HUDObjectText("Botscore:" + Stats.botscore);
             botscorex.SetPosition(100f, 100f);
