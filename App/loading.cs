@@ -3,9 +3,8 @@ using OpenTK.Graphics.OpenGL;
 using KWEngine3.GameObjects;
 using KWEngine3;
 using System;
-using Aimlabs.App;
 
-namespace GruppeC.App
+namespace Aimlabs.App
 {
     public class loading : World
     {
