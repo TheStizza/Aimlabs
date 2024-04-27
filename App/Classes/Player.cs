@@ -5,6 +5,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using KWEngine3.Audio;
 
 namespace Aimlabs.App.Classes
 {
@@ -47,6 +48,7 @@ namespace Aimlabs.App.Classes
                     {
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
                         Stats.ballscore = Stats.ballscore + 1;
                         Targetball.spawnnewTargetball();
                         Stats.hit = true;
@@ -55,6 +57,7 @@ namespace Aimlabs.App.Classes
                     {
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
                         Stats.botscore = Stats.botscore + 1;
                     }
                     else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left))

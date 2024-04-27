@@ -118,9 +118,6 @@ namespace Aimlabs.App
                 s3.IsCollisionObject = true;
                 AddGameObject(s3);
                 Stats.ballsspawned = true;
-
-
-
             }
         }
 
