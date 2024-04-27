@@ -30,6 +30,7 @@
     <None Remove="App\Textures\BrowningHP_Roughness.png" />
     <None Remove="App\Textures\hudaimlabs.png" />
     <None Remove="App\Textures\loading.png" />
+    <None Remove="App\Textures\SkyWater.dds" />
     <None Remove="App\Textures\start.jpg" />
     <None Remove="App\Textures\startbutton.png" />
     <None Remove="App\Textures\startbutton2.png" />
@@ -51,6 +52,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\Black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App\Textures\SkyWater.dds">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\tiles.png">

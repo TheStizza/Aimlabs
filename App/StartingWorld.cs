@@ -181,8 +181,8 @@ namespace Aimlabs.App
             AddHUDObject(accuracy);
 
 
-            SetColorAmbient(0.8f, 0.8f, 0.8f);
-            SetBackgroundSkybox("./App/Textures/equirectangular_example.dds", 0f, SkyboxType.Equirectangular);
+            SetColorAmbient(1, 1, 1);
+            SetBackgroundSkybox("./App/Textures/SkyWater.dds", 0f, SkyboxType.CubeMap);
             SetBackgroundBrightnessMultiplier(1.2f);
 
             Floor f1 = new Floor();
@@ -247,7 +247,7 @@ namespace Aimlabs.App
 
             AddGameObject(new Walls("w5",7.5f,0,0, "./App/Textures/Black.png", 20,0.5f,0.01f,0,90,0,3,3));
 
-            AddGameObject(new Walls("w6", 0.05f, 4, 0.15f, "./App/Textures/wandtextur.jpg", 21, 20, 0.5f, 90, 0, 0,3,3));
+            AddGameObject(new Walls("w6", -2.60f, 4, 0, "./App/Textures/wandtextur.jpg", 15, 20.5f, 0.5f, 90, 0, 0,3,3));
 
 
 
