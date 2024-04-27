@@ -6,6 +6,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using KWEngine3.Helper;
 using System;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace Aimlabs.App
 {
@@ -95,6 +96,7 @@ namespace Aimlabs.App
                 s1.SetModel("KWSphere");
                 s1.SetScale(0.3f, 0.3f, 0.3f);
                 s1.SetPosition(0, 2, 0);
+                s1.SetColor(0, 1, 0.87f);
                 s1.IsCollisionObject = true;
                 AddGameObject(s1);
 
@@ -103,6 +105,7 @@ namespace Aimlabs.App
                 s2.SetModel("KWSphere");
                 s2.SetScale(0.3f, 0.3f, 0.3f);
                 s2.SetPosition(1, 2, 0);
+                s2.SetColor(0, 1, 0.87f);
                 s2.IsCollisionObject = true;
                 AddGameObject(s2);
 
@@ -111,10 +114,13 @@ namespace Aimlabs.App
                 s3.SetModel("KWSphere");
                 s3.SetScale(0.3f, 0.3f, 0.3f);
                 s3.SetPosition(-1, 2, 0);
+                s3.SetColor(0, 1, 0.87f);
                 s3.IsCollisionObject = true;
                 AddGameObject(s3);
-
                 Stats.ballsspawned = true;
+
+
+
             }
         }
 
@@ -184,10 +190,7 @@ namespace Aimlabs.App
             f1.SetModel("KWCube");
             f1.SetScale(20f, 0.1f, 20f);
             f1.SetPosition(0.0f, -0.05f, 0.0f);
-            f1.SetTexture("./App/Textures/iron_panel_albedo.dds", TextureType.Albedo);
-            f1.SetTexture("./App/Textures/iron_panel_normal.dds", TextureType.Normal);
-            f1.SetTexture("./App/Textures/iron_panel_metal.dds", TextureType.Metallic);
-            f1.SetTexture("./App/Textures/iron_panel_roughness.dds", TextureType.Roughness);
+            f1.SetTexture("./App/Textures/tiles.png", TextureType.Albedo);
             f1.SetTextureRepeat(10, 10);
             f1.IsCollisionObject = true;
             f1.IsShadowCaster = true;
@@ -234,17 +237,17 @@ namespace Aimlabs.App
             huen.Name = "Starts";
             AddGameObject(huen);
 
-            AddGameObject(new Walls("w1",0,0,10,"./App/Textures/wandtextur.jpg",20,8,0.5f,0,0,0));
+            AddGameObject(new Walls("w1",0,0,10,"./App/Textures/wandtextur.jpg",20,8,0.5f,0,0,0,3,3));
 
-            AddGameObject(new Walls("w2",0,0,-10, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,0,0));
+            AddGameObject(new Walls("w2",0,0,-10, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,0,0,3,3));
 
-            AddGameObject(new Walls("w3",10,0,0, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,90,0));
+            AddGameObject(new Walls("w3",10,0,0, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,90,0,3,3));
 
-            AddGameObject(new Walls("w4",-10,0,0, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,90,0));
+            AddGameObject(new Walls("w4",-10,0,0, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,90,0,3,3));
 
-            AddGameObject(new Walls("w5",7.5f,0,0, "./App/Textures/Black.png", 20,0.5f,0.01f,0,90,0));
+            AddGameObject(new Walls("w5",7.5f,0,0, "./App/Textures/Black.png", 20,0.5f,0.01f,0,90,0,3,3));
 
-            AddGameObject(new Walls("w6", 0.05f, 4, 0.15f, "./App/Textures/wandtextur.jpg", 21, 20, 0.5f, 90, 0, 0));
+            AddGameObject(new Walls("w6", 0.05f, 4, 0.15f, "./App/Textures/wandtextur.jpg", 21, 20, 0.5f, 90, 0, 0,3,3));
 
 
 

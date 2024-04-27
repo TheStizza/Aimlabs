@@ -33,6 +33,7 @@
     <None Remove="App\Textures\start.jpg" />
     <None Remove="App\Textures\startbutton.png" />
     <None Remove="App\Textures\startbutton2.png" />
+    <None Remove="App\Textures\tiles.png" />
     <None Remove="App\Textures\wandtextur.jpg" />
   </ItemGroup>
 
@@ -50,6 +51,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\Black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App\Textures\tiles.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\hudaimlabs.png">
