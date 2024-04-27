@@ -229,12 +229,14 @@ namespace Aimlabs.App
             AddGameObject(s2);*/
 
             Startbutton huen = new Startbutton();
-            huen.Name = "Sphere1";
-            huen.SetScale(1, 2, 1);
-            huen.SetPosition(1, 2, 0);
-            huen.IsCollisionObject = true;
-            huen.SetTexture("./App/Textures/start.jpg");
             huen.Name = "Starts";
+            huen.SetModel("KWQuad2D");
+            huen.SetScale(1, 2, 1);
+            huen.SetPosition(1, 1, 0);
+            huen.SetRotation(0, 90, 0);
+            huen.IsCollisionObject = true;
+            huen.SetTexture("./App/Textures/startobject.png");
+            huen.HasTransparencyTexture = true;
             AddGameObject(huen);
 
             AddGameObject(new Walls("w1",0,0,10,"./App/Textures/wandtextur.jpg",20,8,0.5f,0,0,0,3,3));
