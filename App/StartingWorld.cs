@@ -15,6 +15,7 @@ namespace Aimlabs.App
         private float _esc_timestamp = 0f;
         private HUDObjectImage crosshair = new HUDObjectImage();
         private HUDObjectImage CrosshairHit = new HUDObjectImage();
+        private HUDObjectImage HUDOverlay = new HUDObjectImage();
         private HUDObjectText ingametime;
         private HUDObjectText botscorex;
         private HUDObjectText ballscorex;
@@ -126,6 +127,10 @@ namespace Aimlabs.App
             KWEngine.LoadModel("Bot", "./App/Models/bot.gltf");
             KWEngine.LoadModel("Gun", "./App/Models/BrowningHP.gltf");
 
+            HUDOverlay.SetPosition(720f, 50f);
+            HUDOverlay.SetTexture("./App/Textures/hudaimlabs.png");
+            AddHUDObject(HUDOverlay);
+
             crosshair. SetPosition(Window.Width / 2, Window.Height / 2);
             crosshair.SetTexture("./app/Textures/Crosshair.png");
             CrosshairHit.SetPosition(Window.Width / 2, Window.Height / 2);
@@ -135,7 +140,7 @@ namespace Aimlabs.App
             SetCameraFOV(100);
 
             ingametime = new HUDObjectText("Time:" + WorldTime);
-            ingametime.SetPosition(100f, 34f);
+            ingametime.SetPosition(670f, 22f);
             ingametime.Name = "time";
             ingametime.SetScale(18);
             ingametime.SetFont(FontFace.NovaMono);
@@ -149,21 +154,21 @@ namespace Aimlabs.App
             AddHUDObject(botscorex);
 
             ballscorex = new HUDObjectText("Ballscore:" + Stats.ballscore);
-            ballscorex.SetPosition(100f, 166f);
+            ballscorex.SetPosition(285f, 22f);
             ballscorex.Name = "Botscore";
             ballscorex.SetScale(18);
             ballscorex.SetFont(FontFace.NovaMono);
             AddHUDObject(ballscorex);
 
             clicks = new HUDObjectText("Clicks:" + Stats.leftmouseclicks);
-            clicks.SetPosition(1000f, 166f);
+            clicks.SetPosition(100f, 166f);
             clicks.Name = "clicks";
             clicks.SetScale(18);
             clicks.SetFont(FontFace.NovaMono);
             AddHUDObject(clicks);
 
             accuracy = new HUDObjectText("Accuracy:" + Stats.accuracy);
-            accuracy.SetPosition(1000f, 100f);
+            accuracy.SetPosition(950f, 22f);
             accuracy.Name = "accuracy";
             accuracy.SetScale(18);
             accuracy.SetFont(FontFace.NovaMono);
