@@ -4216,6 +4216,42 @@
             <param name="position">Positionsangabe in 3D</param>
             <returns>Normalisierte 2D-Bildschirmkoordinaten als Vector2-Instanz</returns>
         </member>
+        <member name="M:KWEngine3.Helper.HelperVector.SmoothStep(System.Single,System.Single,System.Single)">
+            <summary>
+            Erzeugt einen weichen Übergang des Wertes wenn er innerhalb der Unter-/Obergrenze liegt
+            </summary>
+            <param name="lowerBound">Wertuntergrenze</param>
+            <param name="upperBound">Wertobergrenze</param>
+            <param name="value">Zu überblendender Wert</param>
+            <returns>Weichgezeichneter Wert</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.SmootherStep(System.Single,System.Single,System.Single)">
+            <summary>
+            Erzeugt einen noch weicheren Übergang des Wertes wenn er innerhalb der Unter-/Obergrenze liegt
+            </summary>
+            <param name="lowerBound">Wertuntergrenze</param>
+            <param name="upperBound">Wertobergrenze</param>
+            <param name="value">Zu überblendender Wert</param>
+            <returns>Weichgezeichneter Wert</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.SmoothStep(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,System.Single)">
+            <summary>
+            Erzeugt einen weichen Übergang des Wertes wenn er innerhalb der Unter-/Obergrenze liegt
+            </summary>
+            <param name="lowerBound">Wertuntergrenze</param>
+            <param name="upperBound">Wertobergrenze</param>
+            <param name="value">Zu überblendender Wert</param>
+            <returns>Weichgezeichneter Wert</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.SmootherStep(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,System.Single)">
+            <summary>
+            Erzeugt einen noch weicheren Übergang des Wertes wenn er innerhalb der Unter-/Obergrenze liegt
+            </summary>
+            <param name="lowerBound">Wertuntergrenze</param>
+            <param name="upperBound">Wertobergrenze</param>
+            <param name="value">Zu überblendender Wert</param>
+            <returns>Weichgezeichneter Wert</returns>
+        </member>
         <member name="T:KWEngine3.Helper.RayIntersection">
             <summary>
             Wrapper-Klasse, die die Entfernung des vom Strahl getroffenen Objekts und einen Verweis auf das getroffene Objekt selbst beinhaltet
@@ -4929,6 +4965,13 @@
             Löscht das angegebene Objekt aus der Welt
             </summary>
             <param name="g">Objekt</param>
+        </member>
+        <member name="M:KWEngine3.World.RemoveGameObjectsOfType``1(System.Boolean)">
+            <summary>
+            Löscht alle aktuell in der Welt befindlichen GameObject-Instanzen des angegebenen Typs
+            </summary>
+            <typeparam name="T">Zu suchender Datentyp (Klasse)</typeparam>
+            <param name="includeSubtypes">wenn true, werden auch Unterklassen des angegebenen Typs berücksichtigt</param>
         </member>
         <member name="M:KWEngine3.World.AddRenderObject(KWEngine3.GameObjects.RenderObject)">
             <summary>
