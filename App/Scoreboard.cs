@@ -61,7 +61,7 @@ namespace Aimlabs.App
             clicks.SetFont(FontFace.NovaMono);
             AddHUDObject(clicks);
 
-            accuracy = new HUDObjectText("Accuracy:" + Stats.accuracy);
+            accuracy = new HUDObjectText("Accuracy:" + Stats.accuracy+"%");
             accuracy.SetPosition(1000f, 100f);
             accuracy.Name = "accuracy";
             accuracy.SetScale(18);

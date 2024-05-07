@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Aimlabs.App.Classes
 
 {
-    public class Stats
+    public static class Stats
     {
         public static float ballscore = 0 ;
         public static float botscore = 0;

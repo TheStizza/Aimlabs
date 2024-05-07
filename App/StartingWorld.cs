@@ -82,17 +82,18 @@ namespace Aimlabs.App
             }
             if (Stats.leftmouseclicks > 0)
             {
-                accuracy.SetText("Accuracy:"+ Math.Round(Stats.ballscore / Stats.leftmouseclicks * 100.0f,2)+"%");
+                Stats.accuracy = Math.Round(Stats.ballscore / Stats.leftmouseclicks * 100.0f, 2);
+                accuracy.SetText("Accuracy:" + Stats.accuracy + "%");
             }
-                            if (Stats.ballsspawned == true)
-                            {
-                            time = time + 1;
-                            }
-                            if (time == 240)
-                            {
-                            realtime = realtime + 1;
-                            time = 0;
-                            }
+            if (Stats.ballsspawned == true)
+            {
+                time = time + 1;
+            }
+            if (time == 240)
+            {
+                realtime = realtime + 1;
+                time = 0;
+            }
             if (Stats.start == true && Stats.ballsspawned == false)
             {
                 Targetball s1 = new Targetball();
@@ -127,6 +128,7 @@ namespace Aimlabs.App
 
         public override void Prepare()
         {
+            Stats.accuracy = 100.0f;
             foreach (string bonename in KWEngine.GetModelBoneNames("Bot"))
             {
                 Console.WriteLine(bonename);
