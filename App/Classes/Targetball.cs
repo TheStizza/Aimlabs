@@ -24,6 +24,7 @@ namespace Aimlabs.App.Classes
             Sphereball.Name = "Sphereball";
             Sphereball.SetModel("KWSphere");
             Sphereball.SetPosition(HelperRandom.GetRandomNumber(-2, 2), HelperRandom.GetRandomNumber(1, 2), HelperRandom.GetRandomNumber(-2, 2));
+            Sphereball.SetColor(0, 1, 0.87f);
             Sphereball.SetScale(0.3f, 0.3f, 0.3f);
             Sphereball.IsCollisionObject = true;
             CurrentWorld.AddGameObject(Sphereball);

@@ -28,10 +28,13 @@
     <None Remove="App\Textures\BrowningHP_Metallic.png" />
     <None Remove="App\Textures\BrowningHP_Normal.png" />
     <None Remove="App\Textures\BrowningHP_Roughness.png" />
+    <None Remove="App\Textures\hudaimlabs.png" />
     <None Remove="App\Textures\loading.png" />
+    <None Remove="App\Textures\SkyWater.dds" />
     <None Remove="App\Textures\start.jpg" />
     <None Remove="App\Textures\startbutton.png" />
     <None Remove="App\Textures\startbutton2.png" />
+    <None Remove="App\Textures\tiles.png" />
     <None Remove="App\Textures\wandtextur.jpg" />
   </ItemGroup>
 
@@ -49,6 +52,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\Black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App\Textures\SkyWater.dds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App\Textures\tiles.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App\Textures\hudaimlabs.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\Textures\loading.png">
@@ -156,6 +168,9 @@
     <None Update="App\Models\BrowningHP_Normal.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="App\Sounds\targethit.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="App\Textures\Corsshair hit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -184,6 +199,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="App\Textures\neusettings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App\Textures\startobject.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="assimp.dll">

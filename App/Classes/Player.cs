@@ -5,6 +5,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
+using KWEngine3.Audio;
 
 namespace Aimlabs.App.Classes
 {
@@ -14,7 +15,7 @@ namespace Aimlabs.App.Classes
 
         public override void Act()
         {
-            if(Mouse.IsButtonPressed(MouseButton.Left) && Stats.spawned == true)
+            if(Mouse.IsButtonPressed(MouseButton.Left) && Stats.ballsspawned == true)
             {
                 Stats.leftmouseclicks = Stats.leftmouseclicks + 1;
             }
@@ -42,11 +43,12 @@ namespace Aimlabs.App.Classes
                     }
                     
                     GameObject firstObjectHitbyRay = rayObjects[0].Object;
-                    Console.WriteLine(firstObjectHitbyRay);
+                    //Console.WriteLine(firstObjectHitbyRay);
                     if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
                     {
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
                         Stats.ballscore = Stats.ballscore + 1;
                         Targetball.spawnnewTargetball();
                         Stats.hit = true;
@@ -55,6 +57,7 @@ namespace Aimlabs.App.Classes
                     {
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
                         Stats.botscore = Stats.botscore + 1;
                     }
                     else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left))

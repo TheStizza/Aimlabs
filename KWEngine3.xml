@@ -166,22 +166,24 @@
             Frees all graphics resources used by the renderer.
             </summary>
         </member>
-        <member name="T:KWEngine3.SingleRayMode">
+        <member name="T:KWEngine3.IntersectionTestMode">
             <summary>
-            Bestimmt, in welche Richtung der Teststrahl geschossen wird (Standard: Y)
-            </summary>
-            <remarks>
-            Für 2D-Spiele aus der Vogelperspektive sollte i.d.R. Z verwendet werden
-            </remarks>
-        </member>
-        <member name="F:KWEngine3.SingleRayMode.Y">
-            <summary>
-            Schießt einen Strahl entlang der negativen lokalen Y-Achse der Instanz
+            Gibt an, welche Arten von Hitboxen für die Kollisionsmessung berücksichtigt werden sollen
             </summary>
         </member>
-        <member name="F:KWEngine3.SingleRayMode.Z">
+        <member name="F:KWEngine3.IntersectionTestMode.CheckAllHitboxTypes">
             <summary>
-            Schießt einen Strahl entlang der negativen lokalen Z-Achse der Instanz (für 2D-Games aus der Vogelperspektive)
+            Misst beide Arten: ConvexHull und Plane
+            </summary>
+        </member>
+        <member name="F:KWEngine3.IntersectionTestMode.CheckConvexHullsOnly">
+            <summary>
+            Limitiert die Messung auf konvexe Hüllen (Convex Hull)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.IntersectionTestMode.CheckPlanesOnly">
+            <summary>
+            Limitiert die Messung auf Ebenen (Planes)
             </summary>
         </member>
         <member name="T:KWEngine3.RayMode">
@@ -224,17 +226,12 @@
             Art des Kollisionstyps
             </summary>
         </member>
-        <member name="F:KWEngine3.ColliderType.None">
-            <summary>
-            Ist kein Kollisionsobjekt
-            </summary>
-        </member>
         <member name="F:KWEngine3.ColliderType.ConvexHull">
             <summary>
             Hat eine konvexe Hülle (Standardtyp)
             </summary>
         </member>
-        <member name="F:KWEngine3.ColliderType.RayCollider">
+        <member name="F:KWEngine3.ColliderType.PlaneCollider">
             <summary>
             Eignet sich ausschließlich für raytraced Kollisionen
             </summary>
@@ -372,6 +369,21 @@
         <member name="F:KWEngine3.ExplosionAnimation.WhirlwindUp">
             <summary>
             Partikel wirbeln entlang der positiven y-Achse nach oben
+            </summary>
+        </member>
+        <member name="T:KWEngine3.CapsuleHitboxType">
+            <summary>
+            Form der Kapsel-Hitbox
+            </summary>
+        </member>
+        <member name="F:KWEngine3.CapsuleHitboxType.Default">
+            <summary>
+            Standardmodus
+            </summary>
+        </member>
+        <member name="F:KWEngine3.CapsuleHitboxType.Sloped">
+            <summary>
+            Kapsel ist in der unteren Hälfte stärker abgerundet 
             </summary>
         </member>
         <member name="T:KWEngine3.CapsuleHitboxMode">
@@ -1646,11 +1658,16 @@
             Gibt an, ob das Objekt ein Kollisionen erzeugen und überprüfen kann
             </summary>
         </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.SetColliderType(KWEngine3.ColliderType)">
+        <member name="M:KWEngine3.GameObjects.GameObject.ResetColliderModel">
             <summary>
-            Setzt die Art wie bei diesem Objekt nach Kollisionen geprüft wird
+            Löscht ein ggf. verwendetes benutzerdefiniertes Collider-Modell für die aktuelle Instanz
             </summary>
-            <param name="ct">Kollisionstyp (Standard: ConvexHull)</param>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.SetColliderModel(System.String)">
+            <summary>
+            Setzt ein benutzerdefiniertes Collider-Modell für die GameObject-Instanz (muss zuvor via KWEngine.LoadModelCollider() importiert worden sein)
+            </summary>
+            <param name="colliderModelName">Name des Collider-Modells</param>
         </member>
         <member name="P:KWEngine3.GameObjects.GameObject.UpdateLast">
             <summary>
@@ -1667,6 +1684,18 @@
             Konstruktormethode, der der 3D-Modellname mitgegeben werden kann
             </summary>
             <param name="modelname">Name des zu verwendenden 3D-Modells</param>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.GetOBBBottom">
+            <summary>
+            Erfragt die gemittelte Bodenposition der (ggf. rotierten) Objekt-Hitbox
+            </summary>
+            <returns>Bodenposition (Mittelwert)</returns>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.GetOBBTop">
+            <summary>
+            Erfragt die gemittelte Kopfposition der (ggf. rotierten) Objekt-Hitbox
+            </summary>
+            <returns>Kopfposition (Mittelwert)</returns>
         </member>
         <member name="M:KWEngine3.GameObjects.GameObject.SetPosition(System.Single,System.Single,System.Single,KWEngine3.PositionMode)">
             <summary>
@@ -1691,36 +1720,67 @@
             <param name="y">Position auf y-Achse</param>
             <param name="mode">Bestimmt, auf welchen Fixpunkt des Objekts sich die Positionsangaben beziehen sollen</param>
         </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersectionWithTerrain">
+        <member name="M:KWEngine3.GameObjects.GameObject.RaytraceTerrainBelowPosition(OpenTK.Mathematics.Vector3)">
             <summary>
-            Prüft auf eine Kollision mit einem Terrain-Objekt
+            Prüft auf eine Strahlenkollision mit einem Terrain-Objekt direkt unterhalb der angegebenen Position
             </summary>
-            <returns>Kollisionsobjekt mit weiteren Details</returns>
+            <param name="position">Startposition des nach unten gerichteten Teststrahls</param>
+            <returns>Ergebnis der Strahlenkollisionsmessung</returns>
         </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersection">
+        <member name="M:KWEngine3.GameObjects.GameObject.RaytraceTerrainBelowPositionExt(OpenTK.Mathematics.Vector3,KWEngine3.RayMode,System.Single)">
+            <summary>
+            Prüft auf eine Strahlenkollision mit einem Terrain-Objekt direkt unterhalb der angegebenen Position
+            </summary>
+            <param name="position">Startposition des nach unten gerichteten Teststrahls</param>
+            <param name="rayMode">Art der Messung (Standard: SingleY)</param>
+            <param name="sizeFactor">Skalierungsfaktor der Strahlen (falls mehrere Strahlen verwendet werden)</param>
+            <returns>Ergebnis der Strahlenkollisionsmessung</returns>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersection(KWEngine3.IntersectionTestMode)">
             <summary>
             Prüft, ob das Objekt gerade mit anderen Objekten kollidiert und gibt die erstbeste Kollision zurück
             </summary>
-            <returns>zuerst gefundene Kollision</returns>
+            <param name="mode">Gibt an, ob die Kollisionsmessung auf einen bestimmten Hitboxtyp eingegrenzt werden soll (Standard: CheckAllHitboxTypes)</param>
+            <returns>zuerst gefundene Kollision (kann null sein)</returns>
         </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersection``1">
+        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersection``1(KWEngine3.IntersectionTestMode)">
             <summary>
             Prüft, ob das Objekt gerade mit anderen Objekten eines bestimmten Typs kollidiert und gibt die erstbeste Kollision zurück
             </summary>
-            <typeparam name="T">Objekttyp</typeparam>
-            <returns>zuerst gefundene Kollision</returns>
+            <typeparam name="T">(Basis-)Klasse der zu untersuchenden Objekte</typeparam>
+            <param name="mode">Gibt an, ob die Kollisionsmessung auf einen bestimmten Hitboxtyp eingegrenzt werden soll (Standard: CheckAllHitboxTypes)</param>
+            <returns>zuerst gefundene Kollision (kann null sein)</returns>
         </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersections">
+        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersections(KWEngine3.IntersectionTestMode)">
             <summary>
-            Prüft ob Kollisionen mit umgebenden GameObject-Instanzen
+            Prüft auf Kollisionen mit umgebenden GameObject-Instanzen
             </summary>
-            <returns>Liste mit allen gefundenen Kollisionen</returns>
+            <param name="mode">Gibt an, ob die Kollisionsmessung auf einen bestimmten Hitboxtyp eingegrenzt werden soll (Standard: CheckAllHitboxTypes)</param>
+            <returns>Liste mit gefundenen Kollisionen</returns>
         </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersections``1">
+        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersections(OpenTK.Mathematics.Vector3,KWEngine3.IntersectionTestMode)">
             <summary>
-            Prüft ob Kollisionen mit umgebenden GameObject-Instanzen eines bestimmten Typs
+            Prüft auf Kollisionen mit umgebenden GameObject-Instanzen
             </summary>
-            <typeparam name="T">Klasse der zu prüfenden Instanzen</typeparam>
+            <param name="offset">Optionale Verschiebung der Hitbox</param>
+            <param name="mode">Gibt an, ob die Kollisionsmessung auf einen bestimmten Hitboxtyp eingegrenzt werden soll (Standard: CheckAllHitboxTypes)</param>
+            <returns>Liste mit gefundenen Kollisionen</returns>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersections``1(KWEngine3.IntersectionTestMode)">
+            <summary>
+            Prüft auf Kollisionen mit umgebenden GameObject-Instanzen eines bestimmten Typs
+            </summary>
+            <typeparam name="T">(Basis-)Klasse der zu prüfenden Instanzen</typeparam>
+            <param name="mode">Gibt an, ob die Kollisionsmessung auf einen bestimmten Hitboxtyp eingegrenzt werden soll (Standard: CheckAllHitboxTypes)</param>
+            <returns>Liste mit gefundenen Kollisionen</returns>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.GetIntersections``1(OpenTK.Mathematics.Vector3,KWEngine3.IntersectionTestMode)">
+            <summary>
+            Prüft auf Kollisionen mit umgebenden GameObject-Instanzen eines bestimmten Typs
+            </summary>
+            <param name="offset">Optionale Verschiebung der Hitbox</param>
+            <param name="mode">Gibt an, ob die Kollisionsmessung auf einen bestimmten Hitboxtyp eingegrenzt werden soll (Standard: CheckAllHitboxTypes)</param>
+            <typeparam name="T">(Basis-)Klasse der zu prüfenden Instanzen</typeparam>
             <returns>Liste mit gefundenen Kollisionen</returns>
         </member>
         <member name="M:KWEngine3.GameObjects.GameObject.IsMouseCursorInsideMyHitbox">
@@ -1734,7 +1794,7 @@
             Misst die Distanz zu einem Punkt
             </summary>
             <param name="position">Zielpunkt</param>
-            <param name="absolute">wenn true, wird die Position statt des Hitbox-Mittelpunkts zur Berechnung verwendet</param>
+            <param name="absolute">wenn true, wird die Position-Eigenschaft verwendet, andernfalls die Hitbox-Mitte</param>
             <returns>Distanz</returns>
         </member>
         <member name="M:KWEngine3.GameObjects.GameObject.GetDistanceTo(KWEngine3.GameObjects.GameObject,System.Boolean)">
@@ -1742,7 +1802,7 @@
             Misst die Distanz zu einem GameObject
             </summary>
             <param name="g">GameObject-Instanz</param>
-            <param name="absolute">wenn true, wird die Position statt des Hitbox-Mittelpunkts zur Berechnung verwendet</param>
+            <param name="absolute">wenn true, wird die Position-Eigenschaft verwendet, andernfalls die Hitbox-Mitte</param>
             <returns>Distanz</returns>
         </member>
         <member name="P:KWEngine3.GameObjects.GameObject.Keyboard">
@@ -1859,12 +1919,22 @@
             <param name="other">anderes GameObjekt</param>
             <returns>1, wenn das aufrufende Objekt näher an der Kamera ist, sonst -1</returns>
         </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.SetHitboxToCapsuleForMesh(System.Int32,KWEngine3.CapsuleHitboxMode)">
+        <member name="M:KWEngine3.GameObjects.GameObject.SetHitboxToCapsule(System.Boolean,KWEngine3.CapsuleHitboxType)">
             <summary>
             Ersetzt die eigentliche Hitbox-Form mit der für Spielfiguren gängigen Kapselform
             </summary>
-            <param name="meshIndex">Index des 3D-Mesh, für das die Hitbox getauscht werden soll</param>
-            <param name="mode">Modus zur Bestimmung der richtigen Hitbox-Orientierung</param>
+            <param name="adjustFootLevelToZero">Legt die Höhe der Unterkante stets auf Y=0 fest (wenn true)</param>
+            <param name="type">Variation der Kapsel</param>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.SetHitboxToCapsule(System.Single,System.Single,System.Single,OpenTK.Mathematics.Vector3,KWEngine3.CapsuleHitboxType)">
+            <summary>
+            Ersetzt die eigentliche Hitbox-Form mit der für Spielfiguren gängigen Kapselform
+            </summary>
+            <param name="width">Breite der Kapsel (X-Achse)</param>
+            <param name="height">Höhe der Kapsel (Y-Achse)</param>
+            <param name="depth">Tiefe der Kapsel (Z-Achse)</param>
+            <param name="offset">Verschiebung der Kapsel</param>
+            <param name="type">Variation der Kapsel</param>
         </member>
         <member name="P:KWEngine3.GameObjects.GameObject.AnimationPercentage">
             <summary>
@@ -1987,12 +2057,11 @@
             <param name="rayDirectionNormalized">Normalisierter Richtungsvektor des Strahls (z.B. -Vector3.UnitY für einen Strahl nach unten)</param>
             <returns>Nach Entfernung aufsteigend sortierte Liste der Messergebnisse</returns>
         </member>
-        <member name="M:KWEngine3.GameObjects.GameObject.RaytraceTerrainBelowPosition(OpenTK.Mathematics.Vector3)">
+        <member name="M:KWEngine3.GameObjects.GameObject.RemoveHitbox(System.Int32)">
             <summary>
-            Prüft auf eine Strahlenkollision mit einem Terrain-Objekt direkt unterhalb der angegebenen Position
+            Löscht eine Hitbox mit dem gegebenen Index für die aktuelle Instanz
             </summary>
-            <param name="position">Startposition des nach unten gerichteten Teststrahls</param>
-            <returns>Ergebnis der Strahlenkollisionsmessung</returns>
+            <param name="hitboxIndex">Index der Hitbox</param>
         </member>
         <member name="M:KWEngine3.GameObjects.GameObject.SetModel(System.String)">
             <summary>
@@ -2221,6 +2290,11 @@
             Der Name der Hitbox, mit der kollidiert wurde
             </summary>
         </member>
+        <member name="P:KWEngine3.GameObjects.Intersection.Type">
+            <summary>
+            Art der getroffenen Hitbox
+            </summary>
+        </member>
         <member name="P:KWEngine3.GameObjects.Intersection.MTV">
             <summary>
             Minimal-Translation-Vector (für Kollisionskorrektur)
@@ -2241,60 +2315,14 @@
             Gibt den Ebenenvektor der Oberfläche des Objekts an, mit dem die Kollision stattfand
             </summary>
         </member>
-        <member name="M:KWEngine3.GameObjects.Intersection.#ctor(KWEngine3.GameObjects.GameObject,KWEngine3.GameObjects.GameObjectHitbox,KWEngine3.GameObjects.GameObjectHitbox,OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,System.String,OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3)">
-            <summary>
-            Konstruktormethode
-            </summary>
-            <param name="collider">Kollisionsobjekt</param>
-            <param name="hbCaller">Hitbox-Instanz des abfragenden Objekts</param>
-            <param name="hbCollider">Hitbox-Instanz des Kollisionsobjekts</param>
-            <param name="mtv">Korrektur-MTV</param>
-            <param name="mtvUp">Korrektur-MTV nach oben</param>
-            <param name="mName">Mesh-Name</param>
-            <param name="surfaceNormal">Ebenenvektor der Kollisionsoberfläche</param>
-            <param name="mtvUpTop">Korrektur-MTV (Y-Achse auf Oberfläche des Kollisionsobjekts; UNGÜLTIG FÜR KUGELN))</param>
-        </member>
         <member name="M:KWEngine3.GameObjects.Intersection.CalculateVolume">
             <summary>
             Berechnet das Volumen der Kollision (wie viel von Objekt B schneidet sich mit Objekt A?)
             </summary>
+            <remarks>
+            Funktioniert lediglich, wenn beide Hitboxen vom Typ ConvexHull sind
+            </remarks>
             <returns>IntersectionVolume-Instanz mit genaueren Angaben zum Volumen</returns>
-        </member>
-        <member name="T:KWEngine3.GameObjects.IntersectionTerrain">
-            <summary>
-            Kollisionsklasse für Terrain
-            </summary>
-        </member>
-        <member name="P:KWEngine3.GameObjects.IntersectionTerrain.Object">
-            <summary>
-            Das Objekt, mit dem kollidiert wurde
-            </summary>
-        </member>
-        <member name="P:KWEngine3.GameObjects.IntersectionTerrain.MTV">
-            <summary>
-            Minimal-Translation-Vector (für Kollisionskorrektur)
-            </summary>
-        </member>
-        <member name="P:KWEngine3.GameObjects.IntersectionTerrain.MTVUp">
-            <summary>
-            Minimal-Translation-Vector für die Y-Achse
-            </summary>
-        </member>
-        <member name="P:KWEngine3.GameObjects.IntersectionTerrain.ColliderSurfaceNormal">
-            <summary>
-            Gibt den Ebenenvektor der Oberfläche des Objekts an, mit dem die Kollision stattfand
-            </summary>
-        </member>
-        <member name="M:KWEngine3.GameObjects.IntersectionTerrain.#ctor(KWEngine3.GameObjects.TerrainObject,KWEngine3.GameObjects.GameObjectHitbox,OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,System.String,OpenTK.Mathematics.Vector3)">
-            <summary>
-            Konstruktormethode
-            </summary>
-            <param name="collider">Kollisionsobjekt</param>
-            <param name="hbCaller">Hitbox-Instanz des abfragenden Objekts</param>
-            <param name="mtv">Korrektur-MTV</param>
-            <param name="mtvUp">TerrainHöhe</param>
-            <param name="mName">Mesh-Name</param>
-            <param name="surfaceNormal">Ebenenvektor der Kollisionsoberfläche</param>
         </member>
         <member name="T:KWEngine3.GameObjects.IntersectionVolume">
             <summary>
@@ -3558,26 +3586,24 @@
             <param name="planeHeight">Gibt die Höhe der Fläche an, auf die die Bildschirmkoordinate projeziert wird</param>
             <returns>Schnittpunkt in 3D-Weltkoordinaten</returns>
         </member>
-        <member name="M:KWEngine3.Helper.HelperIntersection.IsAnyObjectBelowPositionFast(OpenTK.Mathematics.Vector3,System.Single,KWEngine3.Helper.RayIntersection@,System.Type[])">
+        <member name="M:KWEngine3.Helper.HelperIntersection.IsAnyObjectBelowPositionFast(OpenTK.Mathematics.Vector3,System.Single,System.Type[])">
             <summary>
             Schießt einen Strahl von der angegebene Position nach unten und prüft, ob die quaderförmige Hitbox eines Objekts des angegebenen Typs geschnitten wird
             </summary>
             <remarks>Diese Variante prüft nur grobe Hitbox-Werte und eignet sich, wenn ein ungenaues Ergebnis ausreicht oder die zu prüfenden Objekte allesamt achsenparallel ausgerichtet sind</remarks>
             <param name="position">Startposition des Strahls</param>
             <param name="rayLength">Positive Maximallänge des Teststrahls (0 = unendlich)</param>
-            <param name="rayIntersection">Falls ein Objekt gefunden wurde, enthält dieser Parameter die Distanz zwischen Startposition und diesem Objekt</param>
             <param name="typelist">Typen für die getestet werden soll [z.B. typeof(GameObject) oder typeof(Floor)]</param>
-            <returns>true, wenn der Strahl ein Objekt des angegebenen Typs getroffenen hat</returns>
+            <returns>Ergebnis der Strahlenprüfung</returns>
         </member>
-        <member name="M:KWEngine3.Helper.HelperIntersection.IsAnyObjectBelowPosition(OpenTK.Mathematics.Vector3,System.Single,KWEngine3.Helper.RayIntersectionExt@,System.Type[])">
+        <member name="M:KWEngine3.Helper.HelperIntersection.IsAnyObjectBelowPosition(OpenTK.Mathematics.Vector3,System.Single,System.Type[])">
             <summary>
-            Schießt einen Strahl von der angegebene Position nach unten und prüft, ob ein Objekt des angegebenen Typs geschnitten wird
+            Schießt einen Strahl von der angegebene Position nach unten und prüft, ob irgendein anderes Objekt der Welt davon getroffen wird
             </summary>
             <param name="position">Startposition des Strahls</param>
             <param name="rayLength">Positive Maximallänge des Teststrahls (0 = unendlich)</param>
-            <param name="rayIntersection">Falls ein Objekt gefunden wurde, enthält dieser Parameter die Distanz zwischen Startposition und diesem Objekt</param>
             <param name="typelist">Typen für die getestet werden soll [z.B. typeof(GameObject) oder typeof(Floor)]</param>
-            <returns>true, wenn der Strahl ein Objekt des angegebenen Typs getroffenen hat</returns>
+            <returns>Ergebnis des Raytracings</returns>
         </member>
         <member name="M:KWEngine3.Helper.HelperIntersection.GetIntersectionsForObjectWithOffset(KWEngine3.GameObjects.GameObject,System.Single,System.Single,System.Single)">
             <summary>
@@ -3834,13 +3860,6 @@
             <param name="g">Zu untersuchendes GameObject</param>
             <param name="includeNonCollisionObjects">Sollen das Objekt auch dann untersucht werden, wenn es kein Kollisionsobjekt ist?</param>
             <returns>true, wenn der Mauszeiger auf dem Objekt liegt</returns>
-        </member>
-        <member name="M:KWEngine3.Helper.HelperIntersection.RaytraceTerrainBelowPosition(OpenTK.Mathematics.Vector3)">
-            <summary>
-            Prüft auf eine Strahlenkollision mit einem Terrain-Objekt direkt unterhalb der angegebenen Position
-            </summary>
-            <param name="position">Startposition des nach unten gerichteten Teststrahls</param>
-            <returns>Ergebnis der Strahlenkollisionsmessung</returns>
         </member>
         <member name="T:KWEngine3.Helper.HelperRandom">
             <summary>
@@ -4197,6 +4216,42 @@
             <param name="position">Positionsangabe in 3D</param>
             <returns>Normalisierte 2D-Bildschirmkoordinaten als Vector2-Instanz</returns>
         </member>
+        <member name="M:KWEngine3.Helper.HelperVector.SmoothStep(System.Single,System.Single,System.Single)">
+            <summary>
+            Erzeugt einen weichen Übergang des Wertes wenn er innerhalb der Unter-/Obergrenze liegt
+            </summary>
+            <param name="lowerBound">Wertuntergrenze</param>
+            <param name="upperBound">Wertobergrenze</param>
+            <param name="value">Zu überblendender Wert</param>
+            <returns>Weichgezeichneter Wert</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.SmootherStep(System.Single,System.Single,System.Single)">
+            <summary>
+            Erzeugt einen noch weicheren Übergang des Wertes wenn er innerhalb der Unter-/Obergrenze liegt
+            </summary>
+            <param name="lowerBound">Wertuntergrenze</param>
+            <param name="upperBound">Wertobergrenze</param>
+            <param name="value">Zu überblendender Wert</param>
+            <returns>Weichgezeichneter Wert</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.SmoothStep(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,System.Single)">
+            <summary>
+            Erzeugt einen weichen Übergang des Wertes wenn er innerhalb der Unter-/Obergrenze liegt
+            </summary>
+            <param name="lowerBound">Wertuntergrenze</param>
+            <param name="upperBound">Wertobergrenze</param>
+            <param name="value">Zu überblendender Wert</param>
+            <returns>Weichgezeichneter Wert</returns>
+        </member>
+        <member name="M:KWEngine3.Helper.HelperVector.SmootherStep(OpenTK.Mathematics.Vector3,OpenTK.Mathematics.Vector3,System.Single)">
+            <summary>
+            Erzeugt einen noch weicheren Übergang des Wertes wenn er innerhalb der Unter-/Obergrenze liegt
+            </summary>
+            <param name="lowerBound">Wertuntergrenze</param>
+            <param name="upperBound">Wertobergrenze</param>
+            <param name="value">Zu überblendender Wert</param>
+            <returns>Weichgezeichneter Wert</returns>
+        </member>
         <member name="T:KWEngine3.Helper.RayIntersection">
             <summary>
             Wrapper-Klasse, die die Entfernung des vom Strahl getroffenen Objekts und einen Verweis auf das getroffene Objekt selbst beinhaltet
@@ -4386,6 +4441,66 @@
             Gibt an, ob die Messung gültig und somit verwendbar ist
             </summary>
         </member>
+        <member name="T:KWEngine3.Helper.RayTerrainIntersectionSet">
+            <summary>
+            Wrapper-Klasse, die die Entfernung der von mehreren Strahlen getroffenen Objekte und Verweise auf diese beinhaltet
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.Objects">
+            <summary>
+            Liste der getroffenen Objekte
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.DistanceMin">
+            <summary>
+            Die kleinste Distanz vom Aufrufer zum getroffenen Objekt
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.DistanceAvg">
+            <summary>
+            Die durchschnittliche Distanz vom Aufrufer zum getroffenen Objekt
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.IntersectionPoints">
+            <summary>
+            Punkte, an dem die Strahlen auf Objekte trafen
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.SurfaceNormals">
+            <summary>
+            Ebenenvektoren der getroffenen Objekte
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.IntersectionPointNearest">
+            <summary>
+            Enthält den Schnittpunkt, der von allen Strahlen am nächsten am Strahlursprung war
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.IntersectionPointAvg">
+            <summary>
+            Enthält den Durchschnittswert aller ermittelten Schnittpunkte
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.SurfaceNormalNearest">
+            <summary>
+            Enthält den Vektor der Oberfläche des am nächsten liegenden Schnittpunkts
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.SurfaceNormalAvg">
+            <summary>
+            Enthält den durchschnittlichen Oberflächenvektor aller ermittelten Schnittpunktflächen
+            </summary>
+        </member>
+        <member name="M:KWEngine3.Helper.RayTerrainIntersectionSet.#ctor">
+            <summary>
+            Standardkonstruktor für die Instanz
+            </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayTerrainIntersectionSet.IsValid">
+            <summary>
+            Gibt an, ob die Messung gültig und somit verwendbar ist
+            </summary>
+        </member>
         <member name="T:KWEngine3.Helper.TimeBasedObject">
             <summary>
             Basisklasse für Explosions und Partikeleffekte
@@ -4442,14 +4557,6 @@
             </summary>
             <param name="modelname">Modellname</param>
             <returns>Liste der Hitboxnamen</returns>
-        </member>
-        <member name="M:KWEngine3.KWEngine.SetHitboxEnabledForModel(System.String,System.String,System.Boolean)">
-            <summary>
-            Setzt die benannte Hitbox des Modells aktiv oder inaktiv
-            </summary>
-            <param name="modelname">Name des importierten 3D-Modells</param>
-            <param name="hitboxname">Name der zu ändernden Hitbox</param>
-            <param name="state">Status (true = aktiv, false = inaktiv)</param>
         </member>
         <member name="P:KWEngine3.KWEngine.EditModeActive">
             <summary>
@@ -4549,6 +4656,14 @@
             </summary>
             <param name="modelname">Name des bereits importierten Modells</param>
             <param name="filename">Dateiname der zu importierenden Datei</param>
+        </member>
+        <member name="M:KWEngine3.KWEngine.LoadCollider(System.String,System.String,KWEngine3.ColliderType)">
+            <summary>
+            Importiert ein 3D-Collider-Modell unter dem angegebenen Namen
+            </summary>
+            <param name="name">Name, unter dem das Collider-Modell gespeichert werden soll</param>
+            <param name="filename">Dateiname des Collider-Modells</param>
+            <param name="colliderType">Art des Collider-Modells</param>
         </member>
         <member name="M:KWEngine3.KWEngine.LoadModel(System.String,System.String)">
             <summary>
@@ -4850,6 +4965,13 @@
             Löscht das angegebene Objekt aus der Welt
             </summary>
             <param name="g">Objekt</param>
+        </member>
+        <member name="M:KWEngine3.World.RemoveGameObjectsOfType``1(System.Boolean)">
+            <summary>
+            Löscht alle aktuell in der Welt befindlichen GameObject-Instanzen des angegebenen Typs
+            </summary>
+            <typeparam name="T">Zu suchender Datentyp (Klasse)</typeparam>
+            <param name="includeSubtypes">wenn true, werden auch Unterklassen des angegebenen Typs berücksichtigt</param>
         </member>
         <member name="M:KWEngine3.World.AddRenderObject(KWEngine3.GameObjects.RenderObject)">
             <summary>
@@ -5160,12 +5282,11 @@
             </summary>
             <returns>Liste</returns>
         </member>
-        <member name="M:KWEngine3.World.LoadJSON(System.String,System.String)">
+        <member name="M:KWEngine3.World.LoadJSON(System.String)">
             <summary>
             Lade eine Weltkonfiguation aus der angegebenen JSON-Datei
             </summary>
             <param name="filename">Dateiname (inkl. relativem Pfad)</param>
-            <param name="callerName">(nicht verwenden!)</param>
         </member>
         <member name="M:KWEngine3.World.Prepare">
             <summary>
