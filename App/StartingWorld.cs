@@ -297,6 +297,8 @@ namespace Aimlabs.App
             t1.AttachGameObjectToBone(headattachment, "mixamorig:Head");
             HelperGameObjectAttachment.SetScaleForAttachment(headattachment, 25, 50, 25);
             HelperGameObjectAttachment.SetRotationForAttachment(headattachment, 0f, 0f, 0f);
+            HelperGameObjectAttachment.SetPositionOffsetForAttachment(headattachment, 0.01f, 1.26f, 0);
+            headattachment.Name = "head";
 
             BotAttachment bodyattachment = new BotAttachment();
             bodyattachment.IsCollisionObject = true;
@@ -304,9 +306,10 @@ namespace Aimlabs.App
             bodyattachment.SetColor(0f, 1f, 0f);
             AddGameObject(bodyattachment);
             t1.AttachGameObjectToBone(bodyattachment, "mixamorig:Hips");
-            HelperGameObjectAttachment.SetScaleForAttachment(bodyattachment, 66, 125, 66);
+            HelperGameObjectAttachment.SetScaleForAttachment(bodyattachment, 0.23f, 1.3f, 0.27f);
             HelperGameObjectAttachment.SetRotationForAttachment(bodyattachment, 0f, 0f, 0f);
-            HelperGameObjectAttachment.SetPositionOffsetForAttachment(bodyattachment, 0f, -0.25f, 0f);
+            HelperGameObjectAttachment.SetPositionOffsetForAttachment(bodyattachment, 0.01f, 0.5f, 0f);
+            bodyattachment.Name = "body";
 
             BotAttachment leftarmattachment = new BotAttachment();
             leftarmattachment.IsCollisionObject = true;
@@ -317,6 +320,7 @@ namespace Aimlabs.App
             HelperGameObjectAttachment.SetScaleForAttachment(leftarmattachment, 015, 008, 064);
             HelperGameObjectAttachment.SetRotationForAttachment(leftarmattachment, 0f, 0f, 0f);
             HelperGameObjectAttachment.SetPositionOffsetForAttachment(leftarmattachment, -0.05f, 1.08f, 0.40f);
+            
 
             BotAttachment rightarmattachment = new BotAttachment();
             rightarmattachment.IsCollisionObject = true;
