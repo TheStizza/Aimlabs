@@ -24,7 +24,6 @@ namespace Aimlabs.App
         private HUDObjectText accuracy;
         private double time = 0;
         private double realtime = 0;
-        private object bots;
 
         public override void Act()
         {
@@ -97,11 +96,12 @@ namespace Aimlabs.App
             }
             if (Stats.botstart == true && Stats.botspawned == false)
             {
+                KWEngine.CurrentWorld.RemoveGameObjectsOfType<StartButton>();
                 Stats.botspawned = true;
             }
             if (Stats.ballstart == true && Stats.ballsspawned == false)
             {
-                RemoveGameObject((Startbutton)bots);
+                KWEngine.CurrentWorld.RemoveGameObjectsOfType<StartButton>();
                 Targetball s1 = new Targetball();
                 s1.Name = "Sphere1";
                 s1.SetModel("KWSphere");
