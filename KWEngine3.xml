@@ -216,9 +216,9 @@
             Verwendet vier Strahlen entlang der lokalen negativen Y-Achse der Instanz (für 3D-Platformer)
             </summary>
         </member>
-        <member name="F:KWEngine3.RayMode.EightRaysY">
+        <member name="F:KWEngine3.RayMode.FiveRaysY">
             <summary>
-            Verwendet acht Strahlen entlang der lokalen negativen Y-Achse der Instanz (für 3D-Platformer)
+            Verwendet fünf Strahlen entlang der lokalen negativen Y-Achse der Instanz (für 3D-Platformer)
             </summary>
         </member>
         <member name="T:KWEngine3.ColliderType">
@@ -4356,6 +4356,12 @@
             Die durchschnittliche Distanz vom Aufrufer zum getroffenen Objekt
             </summary>
         </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.DistanceToCenter">
+            <summary>
+            Gibt die Distanz vom Ursprung des mittleren Teststrahls zur Oberfläche an
+            </summary>
+            <remarks>Sollte kein Schnittpunkt gefunden worden sein, wird stattdessen die durchschnittliche Entfernung verwendet</remarks>
+        </member>
         <member name="P:KWEngine3.Helper.RayIntersectionExtSet.IntersectionPoints">
             <summary>
             Punkte, an dem die Strahlen auf Objekte trafen
@@ -4365,6 +4371,12 @@
             <summary>
             Ebenenvektoren der getroffenen Objekte
             </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.IntersectionPointCenter">
+            <summary>
+            Gibt den Schnittpunkt des mittleren Teststrahls mit der Oberfläche an
+            </summary>
+            <remarks>Sollte kein Schnittpunkt gefunden worden sein, wird stattdessen der durchschnittliche Schnittpunkt verwendet</remarks>
         </member>
         <member name="P:KWEngine3.Helper.RayIntersectionExtSet.IntersectionPointNearest">
             <summary>
@@ -4385,6 +4397,12 @@
             <summary>
             Enthält den durchschnittlichen Oberflächenvektor aller ermittelten Schnittpunktflächen
             </summary>
+        </member>
+        <member name="P:KWEngine3.Helper.RayIntersectionExtSet.SurfaceNormalCenter">
+            <summary>
+            Enthält den Oberflächenvektor der Oberfläche, die vom mittleren Teststrahl getroffen wurde
+            </summary>
+            <remarks>Sollte kein Schnittpunkt gefunden worden sein, wird stattdessen der durchschnittliche Ebenenvektor verwendet</remarks>
         </member>
         <member name="P:KWEngine3.Helper.RayIntersectionExtSet.ObjectNearest">
             <summary>
