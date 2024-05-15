@@ -96,12 +96,12 @@ namespace Aimlabs.App
             }
             if (Stats.botstart == true && Stats.botspawned == false)
             {
-                KWEngine.CurrentWorld.RemoveGameObjectsOfType<StartButton>();
+                KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
                 Stats.botspawned = true;
             }
             if (Stats.ballstart == true && Stats.ballsspawned == false)
             {
-                KWEngine.CurrentWorld.RemoveGameObjectsOfType<StartButton>();
+                KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
                 Targetball s1 = new Targetball();
                 s1.Name = "Sphere1";
                 s1.SetModel("KWSphere");
