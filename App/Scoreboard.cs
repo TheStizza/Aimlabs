@@ -23,7 +23,8 @@ namespace Aimlabs.App
             {
                 Stats.ballscore = 0;
                 Stats.botscore = 0;
-                Stats.start = false;
+                Stats.ballstart = false;
+                Stats.botstart = false;
                 Stats.ballsspawned = false;
                 Stats.hit = false;
                 Stats.leftmouseclicks = 0;

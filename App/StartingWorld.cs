@@ -14,9 +14,9 @@ namespace Aimlabs.App
     {
         private const float ESC_COOLDOWN = 1f;
         private float _esc_timestamp = 0f;
-        private HUDObjectImage crosshair = new HUDObjectImage();
-        private HUDObjectImage CrosshairHit = new HUDObjectImage();
-        private HUDObjectImage HUDOverlay = new HUDObjectImage();
+        private HUDObjectImage crosshair = new ();
+        private HUDObjectImage CrosshairHit = new ();
+        private HUDObjectImage HUDOverlay = new();
         private HUDObjectText ingametime;
         private HUDObjectText botscorex;
         private HUDObjectText ballscorex;
@@ -24,6 +24,7 @@ namespace Aimlabs.App
         private HUDObjectText accuracy;
         private double time = 0;
         private double realtime = 0;
+        private object bots;
 
         public override void Act()
         {
@@ -94,8 +95,13 @@ namespace Aimlabs.App
                 realtime = realtime + 1;
                 time = 0;
             }
-            if (Stats.start == true && Stats.ballsspawned == false)
+            if (Stats.botstart == true && Stats.botspawned == false)
             {
+                Stats.botspawned = true;
+            }
+            if (Stats.ballstart == true && Stats.ballsspawned == false)
+            {
+                RemoveGameObject((Startbutton)bots);
                 Targetball s1 = new Targetball();
                 s1.Name = "Sphere1";
                 s1.SetModel("KWSphere");
@@ -232,7 +238,7 @@ namespace Aimlabs.App
             AddGameObject(s2);*/
 
             Startbutton huen = new Startbutton();
-            huen.Name = "Starts";
+            huen.Name = "Ball";
             huen.SetModel("KWQuad2D");
             huen.SetScale(1, 2, 1);
             huen.SetPosition(1, 1, 0);
@@ -241,6 +247,17 @@ namespace Aimlabs.App
             huen.SetTexture("./App/Textures/startobject.png");
             huen.HasTransparencyTexture = true;
             AddGameObject(huen);
+
+            Startbutton bots = new Startbutton();
+            bots.Name = "Bot";
+            bots.SetModel("KWQuad2D");
+            bots.SetScale(1, 2, 1);
+            bots.SetPosition(1, 1, 2);
+            bots.SetRotation(0, 90, 0);
+            bots.IsCollisionObject = true;
+            bots.SetTexture("./App/Textures/startobject.png");
+            bots.HasTransparencyTexture = true;
+            AddGameObject(bots);
 
             AddGameObject(new Walls("w1",0,0,10,"./App/Textures/wandtextur.jpg",20,8,0.5f,0,0,0,3,3));
 

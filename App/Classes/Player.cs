@@ -17,7 +17,7 @@ namespace Aimlabs.App.Classes
         {
             if(Mouse.IsButtonPressed(MouseButton.Left) && Stats.ballsspawned == true)
             {
-                Stats.leftmouseclicks = Stats.leftmouseclicks + 1;
+                Stats.leftmouseclicks ++;
             }
             if(GlobalSettings.IsPaused == false)
             {
@@ -49,7 +49,7 @@ namespace Aimlabs.App.Classes
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
-                        Stats.ballscore = Stats.ballscore + 1;
+                        Stats.ballscore ++;
                         Targetball.spawnnewTargetball();
                         Stats.hit = true;
                     }
@@ -58,12 +58,17 @@ namespace Aimlabs.App.Classes
                         Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
-                        Stats.botscore = Stats.botscore + 1;
+                        Stats.botscore ++;
                     }
-                    else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left))
+                    else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "Ball")
                     {
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
-                        Stats.start = true;
+                        Stats.ballstart = true;
+                    }
+                    else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "Bot")
+                    {
+                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Stats.botstart = true;
                     }
                 }
             }
