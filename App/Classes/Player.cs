@@ -46,7 +46,7 @@ namespace Aimlabs.App.Classes
                     //Console.WriteLine(firstObjectHitbyRay);
                     if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
                     {
-                        Console.WriteLine("ich bin drin");
+                        //Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
                         Stats.ballscore ++;
