@@ -97,6 +97,59 @@ namespace Aimlabs.App
             if (Stats.botstart == true && Stats.botspawned == false)
             {
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
+
+                Target t1 = new Target();
+                t1.SetModel("Bot");
+                t1.SetRotation(0, 90, 0);
+                t1.SetHitboxScale(0.4f, 1f, 1f);
+                t1.SetScale(0.75f);
+                t1.IsShadowCaster = true;
+                t1.Name = "Enemy Bot";
+                AddGameObject(t1);
+
+                BotAttachment headattachment = new BotAttachment();
+                headattachment.IsCollisionObject = true;
+                headattachment.SetOpacity(0.5f);
+                headattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(headattachment);
+                t1.AttachGameObjectToBone(headattachment, "mixamorig:Head");
+                HelperGameObjectAttachment.SetScaleForAttachment(headattachment, 0.17f, 0.18f, 0.12f);
+                HelperGameObjectAttachment.SetRotationForAttachment(headattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(headattachment, 0.01f, 1.26f, 0);
+                headattachment.Name = "head";
+
+                BotAttachment bodyattachment = new BotAttachment();
+                bodyattachment.IsCollisionObject = true;
+                bodyattachment.SetOpacity(0.5f);
+                bodyattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(bodyattachment);
+                t1.AttachGameObjectToBone(bodyattachment, "mixamorig:Hips");
+                HelperGameObjectAttachment.SetScaleForAttachment(bodyattachment, 0.23f, 1.3f, 0.27f);
+                HelperGameObjectAttachment.SetRotationForAttachment(bodyattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(bodyattachment, 0.01f, 0.5f, 0f);
+                bodyattachment.Name = "body";
+
+                BotAttachment leftarmattachment = new BotAttachment();
+                leftarmattachment.IsCollisionObject = true;
+                leftarmattachment.SetOpacity(0.5f);
+                leftarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(leftarmattachment);
+                t1.AttachGameObjectToBone(leftarmattachment, "mixamorig:Leftarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(leftarmattachment, 015, 008, 064);
+                HelperGameObjectAttachment.SetRotationForAttachment(leftarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(leftarmattachment, -0.05f, 1.08f, 0.40f);
+
+
+                BotAttachment rightarmattachment = new BotAttachment();
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
                 Stats.botspawned = true;
             }
             if (Stats.ballstart == true && Stats.ballsspawned == false)
@@ -295,59 +348,6 @@ namespace Aimlabs.App
             MouseCursorGrab();
 
             KWEngine.MouseSensitivity = 0.1f;
-
-            // KAR: Test
-            Target t1 = new Target();
-            t1.SetModel("Bot");
-            t1.SetRotation(0, 90, 0);
-            t1.SetHitboxScale(0.4f, 1f, 1f);
-            t1.SetScale(0.75f);
-            t1.IsShadowCaster = true;
-            t1.Name = "Enemy Bot";
-            AddGameObject(t1);
-
-            BotAttachment headattachment = new BotAttachment();
-            headattachment.IsCollisionObject = true;
-            headattachment.SetOpacity(0.5f);
-            headattachment.SetColor(0f, 1f, 0f);
-            AddGameObject(headattachment);
-            t1.AttachGameObjectToBone(headattachment, "mixamorig:Head");
-            HelperGameObjectAttachment.SetScaleForAttachment(headattachment, 25, 50, 25);
-            HelperGameObjectAttachment.SetRotationForAttachment(headattachment, 0f, 0f, 0f);
-            HelperGameObjectAttachment.SetPositionOffsetForAttachment(headattachment, 0.01f, 1.26f, 0);
-            headattachment.Name = "head";
-
-            BotAttachment bodyattachment = new BotAttachment();
-            bodyattachment.IsCollisionObject = true;
-            bodyattachment.SetOpacity(0.5f);
-            bodyattachment.SetColor(0f, 1f, 0f);
-            AddGameObject(bodyattachment);
-            t1.AttachGameObjectToBone(bodyattachment, "mixamorig:Hips");
-            HelperGameObjectAttachment.SetScaleForAttachment(bodyattachment, 0.23f, 1.3f, 0.27f);
-            HelperGameObjectAttachment.SetRotationForAttachment(bodyattachment, 0f, 0f, 0f);
-            HelperGameObjectAttachment.SetPositionOffsetForAttachment(bodyattachment, 0.01f, 0.5f, 0f);
-            bodyattachment.Name = "body";
-
-            BotAttachment leftarmattachment = new BotAttachment();
-            leftarmattachment.IsCollisionObject = true;
-            leftarmattachment.SetOpacity(0.5f);
-            leftarmattachment.SetColor(0f, 1f, 0f);
-            AddGameObject(leftarmattachment);
-            t1.AttachGameObjectToBone(leftarmattachment, "mixamorig:Leftarm");
-            HelperGameObjectAttachment.SetScaleForAttachment(leftarmattachment, 015, 008, 064);
-            HelperGameObjectAttachment.SetRotationForAttachment(leftarmattachment, 0f, 0f, 0f);
-            HelperGameObjectAttachment.SetPositionOffsetForAttachment(leftarmattachment, -0.05f, 1.08f, 0.40f);
-            
-
-            BotAttachment rightarmattachment = new BotAttachment();
-            rightarmattachment.IsCollisionObject = true;
-            rightarmattachment.SetOpacity(0.5f);
-            rightarmattachment.SetColor(0f, 1f, 0f);
-            AddGameObject(rightarmattachment);
-            t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
-            HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
-            HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment , 0f, 0f, 0f);
-            HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f );
 
         }
     }
