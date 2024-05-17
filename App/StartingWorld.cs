@@ -107,6 +107,11 @@ namespace Aimlabs.App
                 t1.Name = "Enemy Bot";
                 AddGameObject(t1);
 
+                foreach (string bonename in KWEngine.GetModelBoneNames("Bot"))
+                {
+                    Console.WriteLine(bonename);
+                }
+
                 BotAttachment headattachment = new BotAttachment();
                 headattachment.IsCollisionObject = true;
                 headattachment.SetOpacity(0.5f);
@@ -134,18 +139,18 @@ namespace Aimlabs.App
                 leftarmattachment.SetOpacity(0.5f);
                 leftarmattachment.SetColor(0f, 1f, 0f);
                 AddGameObject(leftarmattachment);
-                t1.AttachGameObjectToBone(leftarmattachment, "mixamorig:Leftarm");
-                HelperGameObjectAttachment.SetScaleForAttachment(leftarmattachment, 015, 008, 064);
+                t1.AttachGameObjectToBone(leftarmattachment, "mixamorig:LeftArm");
+                HelperGameObjectAttachment.SetScaleForAttachment(leftarmattachment, 0.15f, 0.08f, 0.64f);
                 HelperGameObjectAttachment.SetRotationForAttachment(leftarmattachment, 0f, 0f, 0f);
-                HelperGameObjectAttachment.SetPositionOffsetForAttachment(leftarmattachment, -0.05f, 1.08f, 0.40f);
-
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(leftarmattachment, -0.05f, 0f, 0.40f);
+                
 
                 BotAttachment rightarmattachment = new BotAttachment();
                 rightarmattachment.IsCollisionObject = true;
                 rightarmattachment.SetOpacity(0.5f);
                 rightarmattachment.SetColor(0f, 1f, 0f);
                 AddGameObject(rightarmattachment);
-                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:RightArm");
                 HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
                 HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
                 HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
@@ -188,10 +193,6 @@ namespace Aimlabs.App
         public override void Prepare()
         {
             Stats.accuracy = 100.0f;
-            foreach (string bonename in KWEngine.GetModelBoneNames("Bot"))
-            {
-                Console.WriteLine(bonename);
-            }
             KWEngine.LoadModel("Bot", "./App/Models/bot.gltf");
             KWEngine.LoadModel("Gun", "./App/Models/BrowningHP.gltf");
 
