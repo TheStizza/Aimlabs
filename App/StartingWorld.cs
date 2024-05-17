@@ -129,26 +129,16 @@ namespace Aimlabs.App
                 HelperGameObjectAttachment.SetPositionOffsetForAttachment(bodyattachment, 0.01f, 0.5f, 0f);
                 bodyattachment.Name = "body";
 
-                BotAttachment leftarmattachment = new BotAttachment();
-                leftarmattachment.IsCollisionObject = true;
-                leftarmattachment.SetOpacity(0.5f);
-                leftarmattachment.SetColor(0f, 1f, 0f);
-                AddGameObject(leftarmattachment);
-                t1.AttachGameObjectToBone(leftarmattachment, "mixamorig:Leftarm");
-                HelperGameObjectAttachment.SetScaleForAttachment(leftarmattachment, 015, 008, 064);
-                HelperGameObjectAttachment.SetRotationForAttachment(leftarmattachment, 0f, 0f, 0f);
-                HelperGameObjectAttachment.SetPositionOffsetForAttachment(leftarmattachment, -0.05f, 1.08f, 0.40f);
-
-
-                BotAttachment rightarmattachment = new BotAttachment();
-                rightarmattachment.IsCollisionObject = true;
-                rightarmattachment.SetOpacity(0.5f);
-                rightarmattachment.SetColor(0f, 1f, 0f);
-                AddGameObject(rightarmattachment);
-                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
-                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
-                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
-                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+                BotAttachment legsattachment = new BotAttachment();
+                legsattachment.IsCollisionObject = true;
+                legsattachment.SetOpacity(0.5f);
+                legsattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(legsattachment);
+                t1.AttachGameObjectToBone(legsattachment, "mixamorig:Legs");
+                HelperGameObjectAttachment.SetScaleForAttachment(legsattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(legsattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(legsattachment, 0f, 0f, 0f);
+                legsattachment.Name = "legs";
 
                 Stats.botspawned = true;
             }
