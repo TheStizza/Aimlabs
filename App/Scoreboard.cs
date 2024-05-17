@@ -88,9 +88,11 @@ namespace Aimlabs.App
                 Console.WriteLine($"Name: {scoreInList.name} - Zeit: {scoreInList.timer}");
             }
 
-            Score score = new Score();
-            score.timer = Stats.botscore + Stats.ballscore;
-            if(Stats.ballscore > Stats.botscore)
+            Score score = new()
+            {
+                timer = Stats.botscore + Stats.ballscore + Stats.MovingBallscore
+            };
+            if (Stats.ballscore > Stats.botscore)
             {
                 Console.WriteLine($"Your Ballscore: {score.timer}");
             }

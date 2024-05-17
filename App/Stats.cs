@@ -12,10 +12,13 @@ namespace Aimlabs.App.Classes
     {
         public static float ballscore = 0 ;
         public static float botscore = 0;
+        public static float MovingBallscore = 0;
         public static bool ballstart = false;
         public static bool botstart = false;
+        public static bool MovingBallstart = false;
         public static bool ballsspawned = false;
         public static bool botspawned = false;
+        public static bool MovingBallspawned = false;
         public static bool hit = false;
         public static float leftmouseclicks = 0;
         public static double accuracy = 100;

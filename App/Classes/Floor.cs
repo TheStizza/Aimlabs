@@ -6,7 +6,7 @@ namespace Aimlabs.App.Classes
     {
         public override void Act()
         {
-            
+            IsCollisionObject = true;
         }
     }
 }

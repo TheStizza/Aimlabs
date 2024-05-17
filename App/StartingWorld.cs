@@ -67,23 +67,19 @@ namespace Aimlabs.App
                
                 RemoveHUDObject(CrosshairHit);
             }*/
-            if (realtime == 10)//eiglt 60 sec
+            if (realtime == 60)//10 für Test
             {
                 Window.SetWorld(new Scoreboard());
             }
             ingametime.SetText("Time:" + realtime);
             ballscorex.SetText("Ballscore:" + Stats.ballscore);
             botscorex.SetText("Botscore:" + Stats.botscore);
-            if (realtime >= 30)
-            {
-
-            }
             if (Stats.leftmouseclicks > 0)
             {
                 Stats.accuracy = Math.Round(Stats.ballscore / Stats.leftmouseclicks * 100.0f, 2);
                 accuracy.SetText("Accuracy:" + Stats.accuracy + "%");
             }
-            if (Stats.ballsspawned == true)
+            if (Stats.ballsspawned == true || Stats.botspawned == true || Stats.MovingBallspawned == true)
             {
                 time++;
             }
@@ -166,10 +162,46 @@ namespace Aimlabs.App
 
                 Stats.botspawned = true;
             }
+            if(Stats.MovingBallstart == true && Stats.MovingBallspawned == false)
+            {
+                KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
+                MovingTargetball s1 = new()
+                {
+                    Name = "Sphere1"
+                };
+                s1.SetModel("KWSphere");
+                s1.SetScale(0.3f, 0.3f, 0.3f);
+                s1.SetPosition(0, 2, 0);
+                s1.SetColor(0, 1, 0.87f);
+                s1.IsCollisionObject = true;
+                AddGameObject(s1);
+
+                MovingTargetball s2 = new()
+                {
+                    Name = "Sphere1"
+                };
+                s2.SetModel("KWSphere");
+                s2.SetScale(0.3f, 0.3f, 0.3f);
+                s2.SetPosition(1, 2, 0);
+                s2.SetColor(0, 1, 0.87f);
+                s2.IsCollisionObject = true;
+                AddGameObject(s2);
+
+                MovingTargetball s3 = new()
+                {
+                    Name = "Sphere1"
+                };
+                s3.SetModel("KWSphere");
+                s3.SetScale(0.3f, 0.3f, 0.3f);
+                s3.SetPosition(-1, 2, 0);
+                s3.SetColor(0, 1, 0.87f);
+                s3.IsCollisionObject = true;
+                AddGameObject(s3);
+                Stats.MovingBallspawned = true;
+            }
             if (Stats.ballstart == true && Stats.ballsspawned == false)
             {
                 AddHUDObject(ballscorex);
-
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
                 Targetball s1 = new()
                 {
@@ -334,6 +366,19 @@ namespace Aimlabs.App
             bots.SetTexture("./App/Textures/startobject.png");
             bots.HasTransparencyTexture = true;
             AddGameObject(bots);
+
+            Startbutton MovingBall = new()
+            {
+                Name = "MovingBall"
+            };
+            MovingBall.SetModel("KWQuad2D");
+            MovingBall.SetScale(1, 2, 1);
+            MovingBall.SetPosition(1, 1, -2);
+            MovingBall.SetRotation(0, 90, 0);
+            MovingBall.IsCollisionObject = true;
+            MovingBall.SetTexture("./App/Textures/startobject.png");
+            MovingBall.HasTransparencyTexture = true;
+            AddGameObject(MovingBall);
 
             AddGameObject(new Walls("w1", 0, 0, 10, "./App/Textures/wandtextur.jpg", 20, 8, 0.5f, 0, 0, 0, 3, 3));
 

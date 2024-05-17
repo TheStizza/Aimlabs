@@ -26,7 +26,6 @@ namespace Aimlabs.App.Classes
             Player p = CurrentWorld.GetGameObjectByName<Player>("Player #1");
             if (p != null)
             {
-                Vector3 myposition = this.Position;
                 List<RayIntersection> rayObjects = HelperIntersection.RayTraceObjectsForViewVectorFast(
                     CurrentWorld.CameraPosition,
                     CurrentWorld.CameraLookAtVector,
@@ -37,11 +36,6 @@ namespace Aimlabs.App.Classes
                     );
                 if (rayObjects.Count > 0)
                 {
-                    foreach (RayIntersection r in rayObjects)
-                    {
-                       
-                    }
-                    
                     GameObject firstObjectHitbyRay = rayObjects[0].Object;
                     //Console.WriteLine(firstObjectHitbyRay);
                     if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
@@ -55,10 +49,17 @@ namespace Aimlabs.App.Classes
                     }
                     else if (firstObjectHitbyRay is Target && Mouse.IsButtonPressed(MouseButton.Left))
                     {
-                        Console.WriteLine("ich bin drin");
+                        //Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
                         Stats.botscore ++;
+                    }
+                    else if (firstObjectHitbyRay is MovingTargetball && Mouse.IsButtonPressed(MouseButton.Left))
+                    {
+                        //Console.WriteLine("ich bin drin");
+                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
+                        Stats.MovingBallscore++;
                     }
                     else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "Ball")
                     {
@@ -69,6 +70,11 @@ namespace Aimlabs.App.Classes
                     {
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Stats.botstart = true;
+                    }
+                    else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "MovingBall")
+                    {
+                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        Stats.MovingBallstart = true;
                     }
                 }
             }
