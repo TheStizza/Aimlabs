@@ -37,17 +37,17 @@ namespace GruppeC.App
             _h.SetScale(500f,280f);
             AddHUDObject(_h);
 
-            _g = new HUDObjectImage("./App/Textures/neusettings.png");
-            _g.SetPosition(1350f, 50f);
+            _g = new HUDObjectImage("./App/Textures/settings.png");
+            _g.SetPosition(1373f, 65f);
             _g.Name = "settings";
             _g.SetScale(100f, 100f);
             AddHUDObject(_g);
 
-            _f = new HUDObjectImage("./App/Textures/highscore.png");
+            /*_f = new HUDObjectImage("./App/Textures/highscore.png");
             _f.SetPosition(100f, 50f);
             _f.Name = "highscore";
             _f.SetScale(170f, 100f);
-            AddHUDObject(_f);
+            AddHUDObject(_f);*/
 
             _e = new HUDObjectImage("./App/Textures/aimlabslogo.png");
             _e.SetPosition(740f, 100f);
