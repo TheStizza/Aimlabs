@@ -14,13 +14,12 @@ namespace Aimlabs.App
     {
         private const float ESC_COOLDOWN = 1f;
         private float _esc_timestamp = 0f;
-        private HUDObjectImage crosshair = new ();
-        private HUDObjectImage CrosshairHit = new ();
-        private HUDObjectImage HUDOverlay = new();
+        private readonly HUDObjectImage crosshair = new();
+        private readonly HUDObjectImage CrosshairHit = new();
+        private readonly HUDObjectImage HUDOverlay = new();
         private HUDObjectText ingametime;
         private HUDObjectText botscorex;
         private HUDObjectText ballscorex;
-        private HUDObjectText clicks;
         private HUDObjectText accuracy;
         private double time = 0;
         private double realtime = 0;
@@ -28,9 +27,9 @@ namespace Aimlabs.App
         public override void Act()
         {
 
-            if(Keyboard.IsKeyDown(Keys.Escape) && WorldTime - _esc_timestamp > ESC_COOLDOWN)
+            if (Keyboard.IsKeyDown(Keys.Escape) && WorldTime - _esc_timestamp > ESC_COOLDOWN)
             {
-                if(GlobalSettings.IsPaused == false)
+                if (GlobalSettings.IsPaused == false)
                 {
                     MouseCursorReset();
                     GlobalSettings.IsPaused = true;
@@ -42,7 +41,7 @@ namespace Aimlabs.App
                 }
                 _esc_timestamp = WorldTime;
             }
-            if(Stats.hit == true)
+            if (Stats.hit == true)
             {
                 crosshair.SetColor(0.3f, 0.1f, 0.1f);
                 crosshair.SetScale(30, 20);
@@ -68,14 +67,14 @@ namespace Aimlabs.App
                
                 RemoveHUDObject(CrosshairHit);
             }*/
-            if(realtime == 10)//eiglt 60 sec
+            if (realtime == 10)//eiglt 60 sec
             {
                 Window.SetWorld(new Scoreboard());
             }
-            ingametime.SetText("Time:"+realtime);
+            ingametime.SetText("Time:" + realtime);
             ballscorex.SetText("Ballscore:" + Stats.ballscore);
             botscorex.SetText("Botscore:" + Stats.botscore);
-            if(realtime >= 30)
+            if (realtime >= 30)
             {
 
             }
@@ -86,21 +85,21 @@ namespace Aimlabs.App
             }
             if (Stats.ballsspawned == true)
             {
-                time = time + 1;
+                time++;
             }
             if (time == 240)
             {
-                realtime = realtime + 1;
+                realtime++;
                 time = 0;
             }
             if (Stats.botstart == true && Stats.botspawned == false)
             {
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
 
-                
+
                 AddHUDObject(botscorex);
 
-                Target t1 = new Target();
+                Target t1 = new();
                 t1.SetModel("Bot");
                 t1.SetRotation(0, 90, 0);
                 t1.SetHitboxScale(0.4f, 1f, 1f);
@@ -114,8 +113,10 @@ namespace Aimlabs.App
                     Console.WriteLine(bonename);
                 }
 
-                BotAttachment headattachment = new BotAttachment();
-                headattachment.IsCollisionObject = true;
+                BotAttachment headattachment = new()
+                {
+                    IsCollisionObject = true
+                };
                 headattachment.SetOpacity(0.5f);
                 headattachment.SetColor(0f, 1f, 0f);
                 AddGameObject(headattachment);
@@ -125,8 +126,10 @@ namespace Aimlabs.App
                 HelperGameObjectAttachment.SetPositionOffsetForAttachment(headattachment, 0.01f, 1.26f, 0);
                 headattachment.Name = "head";
 
-                BotAttachment bodyattachment = new BotAttachment();
-                bodyattachment.IsCollisionObject = true;
+                BotAttachment bodyattachment = new()
+                {
+                    IsCollisionObject = true
+                };
                 bodyattachment.SetOpacity(0.5f);
                 bodyattachment.SetColor(0f, 1f, 0f);
                 AddGameObject(bodyattachment);
@@ -136,8 +139,10 @@ namespace Aimlabs.App
                 HelperGameObjectAttachment.SetPositionOffsetForAttachment(bodyattachment, 0.01f, 0.5f, 0f);
                 bodyattachment.Name = "body";
 
-                BotAttachment leftarmattachment = new BotAttachment();
-                leftarmattachment.IsCollisionObject = true;
+                BotAttachment leftarmattachment = new()
+                {
+                    IsCollisionObject = true
+                };
                 leftarmattachment.SetOpacity(0.5f);
                 leftarmattachment.SetColor(0f, 1f, 0f);
                 AddGameObject(leftarmattachment);
@@ -145,10 +150,12 @@ namespace Aimlabs.App
                 HelperGameObjectAttachment.SetScaleForAttachment(leftarmattachment, 0.15f, 0.08f, 0.64f);
                 HelperGameObjectAttachment.SetRotationForAttachment(leftarmattachment, 0f, 0f, 0f);
                 HelperGameObjectAttachment.SetPositionOffsetForAttachment(leftarmattachment, -0.05f, 0f, 0.40f);
-                
 
-                BotAttachment rightarmattachment = new BotAttachment();
-                rightarmattachment.IsCollisionObject = true;
+
+                BotAttachment rightarmattachment = new()
+                {
+                    IsCollisionObject = true
+                };
                 rightarmattachment.SetOpacity(0.5f);
                 rightarmattachment.SetColor(0f, 1f, 0f);
                 AddGameObject(rightarmattachment);
@@ -164,8 +171,10 @@ namespace Aimlabs.App
                 AddHUDObject(ballscorex);
 
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
-                Targetball s1 = new Targetball();
-                s1.Name = "Sphere1";
+                Targetball s1 = new()
+                {
+                    Name = "Sphere1"
+                };
                 s1.SetModel("KWSphere");
                 s1.SetScale(0.3f, 0.3f, 0.3f);
                 s1.SetPosition(0, 2, 0);
@@ -173,8 +182,10 @@ namespace Aimlabs.App
                 s1.IsCollisionObject = true;
                 AddGameObject(s1);
 
-                Targetball s2 = new Targetball();
-                s2.Name = "Sphere1";
+                Targetball s2 = new()
+                {
+                    Name = "Sphere1"
+                };
                 s2.SetModel("KWSphere");
                 s2.SetScale(0.3f, 0.3f, 0.3f);
                 s2.SetPosition(1, 2, 0);
@@ -182,8 +193,10 @@ namespace Aimlabs.App
                 s2.IsCollisionObject = true;
                 AddGameObject(s2);
 
-                Targetball s3 = new Targetball();
-                s3.Name = "Sphere1";
+                Targetball s3 = new()
+                {
+                    Name = "Sphere1"
+                };
                 s3.SetModel("KWSphere");
                 s3.SetScale(0.3f, 0.3f, 0.3f);
                 s3.SetPosition(-1, 2, 0);
@@ -204,7 +217,7 @@ namespace Aimlabs.App
             HUDOverlay.SetTexture("./App/Textures/hudaimlabs.png");
             AddHUDObject(HUDOverlay);
 
-            crosshair. SetPosition(Window.Width / 2, Window.Height / 2);
+            crosshair.SetPosition(Window.Width / 2, Window.Height / 2);
             crosshair.SetTexture("./app/Textures/Crosshair.png");
             CrosshairHit.SetPosition(Window.Width / 2, Window.Height / 2);
             CrosshairHit.SetTexture("./app/Textures/Corsshair hit.png");
@@ -249,8 +262,10 @@ namespace Aimlabs.App
             SetBackgroundSkybox("./App/Textures/SkyWater.dds", 0f, SkyboxType.CubeMap);
             SetBackgroundBrightnessMultiplier(1.2f);
 
-            Floor f1 = new Floor();
-            f1.Name = "Floor";
+            Floor f1 = new()
+            {
+                Name = "Floor"
+            };
             f1.SetModel("KWCube");
             f1.SetScale(20f, 0.1f, 20f);
             f1.SetPosition(0.0f, -0.05f, 0.0f);
@@ -260,14 +275,16 @@ namespace Aimlabs.App
             f1.IsShadowCaster = true;
             AddGameObject(f1);
 
-            Player p1 = new Player();
-            p1.Name = "Player #1";
+            Player p1 = new()
+            {
+                Name = "Player #1"
+            };
             p1.SetScale(1);
             p1.SetPosition(8, 0, 0);
             p1.SetRotation(0, 90, 0);
             p1.IsCollisionObject = true;
             p1.IsShadowCaster = false;
-            p1.SetOpacity(0); 
+            p1.SetOpacity(0);
             AddGameObject(p1);
             SetCameraToFirstPersonGameObject(p1, Player.CAM_OFFSET);
 
@@ -292,8 +309,10 @@ namespace Aimlabs.App
             s2.IsCollisionObject = true;
             AddGameObject(s2);*/
 
-            Startbutton huen = new Startbutton();
-            huen.Name = "Ball";
+            Startbutton huen = new()
+            {
+                Name = "Ball"
+            };
             huen.SetModel("KWQuad2D");
             huen.SetScale(1, 2, 1);
             huen.SetPosition(1, 1, 0);
@@ -303,8 +322,10 @@ namespace Aimlabs.App
             huen.HasTransparencyTexture = true;
             AddGameObject(huen);
 
-            Startbutton bots = new Startbutton();
-            bots.Name = "Bot";
+            Startbutton bots = new()
+            {
+                Name = "Bot"
+            };
             bots.SetModel("KWQuad2D");
             bots.SetScale(1, 2, 1);
             bots.SetPosition(1, 1, 2);
@@ -314,31 +335,33 @@ namespace Aimlabs.App
             bots.HasTransparencyTexture = true;
             AddGameObject(bots);
 
-            AddGameObject(new Walls("w1",0,0,10,"./App/Textures/wandtextur.jpg",20,8,0.5f,0,0,0,3,3));
+            AddGameObject(new Walls("w1", 0, 0, 10, "./App/Textures/wandtextur.jpg", 20, 8, 0.5f, 0, 0, 0, 3, 3));
 
-            AddGameObject(new Walls("w2",0,0,-10, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,0,0,3,3));
+            AddGameObject(new Walls("w2", 0, 0, -10, "./App/Textures/wandtextur.jpg", 20, 8, 0.5f, 0, 0, 0, 3, 3));
 
-            AddGameObject(new Walls("w3",10,0,0, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,90,0,3,3));
+            AddGameObject(new Walls("w3", 10, 0, 0, "./App/Textures/wandtextur.jpg", 20, 8, 0.5f, 0, 90, 0, 3, 3));
 
-            AddGameObject(new Walls("w4",-10,0,0, "./App/Textures/wandtextur.jpg", 20,8,0.5f,0,90,0,3,3));
+            AddGameObject(new Walls("w4", -10, 0, 0, "./App/Textures/wandtextur.jpg", 20, 8, 0.5f, 0, 90, 0, 3, 3));
 
-            AddGameObject(new Walls("w5",7.5f,0,0, "./App/Textures/Black.png", 20,0.5f,0.01f,0,90,0,3,3));
+            AddGameObject(new Walls("w5", 7.5f, 0, 0, "./App/Textures/Black.png", 20, 0.5f, 0.01f, 0, 90, 0, 3, 3));
 
-            AddGameObject(new Walls("w6", -2.60f, 4, 0, "./App/Textures/wandtextur.jpg", 15, 20.5f, 0.5f, 90, 0, 0,3,3));
-
-
+            AddGameObject(new Walls("w6", -2.60f, 4, 0, "./App/Textures/wandtextur.jpg", 15, 20.5f, 0.5f, 90, 0, 0, 3, 3));
 
 
 
-            Weapon fpw = new Weapon();
+
+
+            Weapon fpw = new();
             fpw.SetModel("Gun");
             fpw.SetOffset(0.1f, -0.2f, 0.3f);
-            fpw.SetScale(0.5f); 
+            fpw.SetScale(0.5f);
             SetViewSpaceGameObject(fpw);
-            
-            
-            LightObject sun = new LightObject(LightType.Sun, ShadowQuality.High);
-            sun.Name = "Sunlight";
+
+
+            LightObject sun = new(LightType.Sun, ShadowQuality.High)
+            {
+                Name = "Sunlight"
+            };
             sun.SetPosition(25f, 50f, 25f);
             sun.SetNearFar(40f, 125f);
             sun.SetFOV(65);
