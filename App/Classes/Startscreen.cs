@@ -72,9 +72,7 @@ namespace GruppeC.App
                 SetBackground2D("./App/Textures/backround.png");
                 isSettingsVisible = false;
             }
-
         }
-
         public override void Prepare()
         {
             _h = new HUDObjectImage("./App/Textures/startbutton.png");
