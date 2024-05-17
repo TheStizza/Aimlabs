@@ -1,13 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenTK.Windowing.GraphicsLibraryFramework;
+using OpenTK.Graphics.OpenGL;
+using KWEngine3.GameObjects;
+using KWEngine3;
+using System;
 
-namespace Aimlabs.App.Classes
+namespace Aimlabs.App
 {
-    internal class Settings
+    public class Settings : World
     {
+        public override void Act()
+        {
+            
+        }
 
+        public override void Prepare()
+        {
+            HUDObjectText settings = new HUDObjectText("Settings");
+            settings.SetPosition(Window.Width/2, 50);
+            settings.SetTextAlignment(TextAlignMode.Center);
+            settings.SetFont(FontFace.XanhMono);
+            settings.SetColor(1f, 1f, 1f);
+            settings.SetScale(50);
+            settings.Name = ("settingsfont");
+            AddHUDObject(settings);
+        }
     }
 }
