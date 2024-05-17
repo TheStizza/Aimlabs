@@ -75,7 +75,6 @@ namespace Aimlabs.App
             ingametime.SetText("Time:"+realtime);
             ballscorex.SetText("Ballscore:" + Stats.ballscore);
             botscorex.SetText("Botscore:" + Stats.botscore);
-            clicks.SetText("Clicks:" + Stats.leftmouseclicks);
             if(realtime >= 30)
             {
 
@@ -97,6 +96,9 @@ namespace Aimlabs.App
             if (Stats.botstart == true && Stats.botspawned == false)
             {
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
+
+                
+                AddHUDObject(botscorex);
 
                 Target t1 = new Target();
                 t1.SetModel("Bot");
@@ -159,6 +161,8 @@ namespace Aimlabs.App
             }
             if (Stats.ballstart == true && Stats.ballsspawned == false)
             {
+                AddHUDObject(ballscorex);
+
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
                 Targetball s1 = new Targetball();
                 s1.Name = "Sphere1";
@@ -215,26 +219,12 @@ namespace Aimlabs.App
             ingametime.SetFont(FontFace.NovaMono);
             AddHUDObject(ingametime);
 
-            botscorex = new HUDObjectText("Botscore:"+Stats.botscore);
-            botscorex.SetPosition(100f, 100f);
-            botscorex.Name = "Botscore";
-            botscorex.SetScale(18);
-            botscorex.SetFont(FontFace.NovaMono);
-            AddHUDObject(botscorex);
-
-            ballscorex = new HUDObjectText("Ballscore:" + Stats.ballscore);
-            ballscorex.SetPosition(285f, 22f);
-            ballscorex.Name = "Botscore";
-            ballscorex.SetScale(18);
-            ballscorex.SetFont(FontFace.NovaMono);
-            AddHUDObject(ballscorex);
-
-            clicks = new HUDObjectText("Clicks:" + Stats.leftmouseclicks);
+            /*clicks = new HUDObjectText("Clicks:" + Stats.leftmouseclicks);
             clicks.SetPosition(100f, 166f);
             clicks.Name = "clicks";
             clicks.SetScale(18);
             clicks.SetFont(FontFace.NovaMono);
-            AddHUDObject(clicks);
+            AddHUDObject(clicks);*/
 
             accuracy = new HUDObjectText("Accuracy:" + Stats.accuracy);
             accuracy.SetPosition(950f, 22f);
@@ -243,6 +233,17 @@ namespace Aimlabs.App
             accuracy.SetFont(FontFace.NovaMono);
             AddHUDObject(accuracy);
 
+            botscorex = new HUDObjectText("Botscore:" + Stats.botscore);
+            botscorex.SetPosition(285f, 22f);
+            botscorex.Name = "Botscore";
+            botscorex.SetScale(18);
+            botscorex.SetFont(FontFace.NovaMono);
+
+            ballscorex = new HUDObjectText("Ballscore:" + Stats.ballscore);
+            ballscorex.SetPosition(285f, 22f);
+            ballscorex.Name = "Botscore";
+            ballscorex.SetScale(18);
+            ballscorex.SetFont(FontFace.NovaMono);
 
             SetColorAmbient(1, 1, 1);
             SetBackgroundSkybox("./App/Textures/SkyWater.dds", 0f, SkyboxType.CubeMap);
