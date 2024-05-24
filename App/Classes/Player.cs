@@ -23,34 +23,47 @@ namespace Aimlabs.App.Classes
             {
                 UpdateMovementAndFirstPersonCamera();
             }
-            Player p = CurrentWorld.GetGameObjectByName<Player>("Player #1");
-            if (p != null)
+            List<RayIntersection> rayObjects = HelperIntersection.RayTraceObjectsForViewVectorFast(
+                CurrentWorld.CameraPosition,
+                CurrentWorld.CameraLookAtVector,
+                this,
+                0,
+                true,
+                typeof(Player), 
+                typeof(Walls), 
+                typeof(Obstacle), 
+                typeof(BotAttachment), // NEU: Statt Target wird nun auf BotAttachment geprüft (es erbt ja sonst nahezu alles von Target)
+                typeof(Targetball), 
+                typeof(Startbutton)
+                );
+            if (rayObjects.Count > 0)
             {
-                List<RayIntersection> rayObjects = HelperIntersection.RayTraceObjectsForViewVectorFast(
-                    CurrentWorld.CameraPosition,
-                    CurrentWorld.CameraLookAtVector,
-                    this,
-                    0,
-                    true,
-                    typeof(Player), typeof(Walls), typeof(Obstacle), typeof(Target), typeof(Targetball), typeof(Startbutton)
-                    );
-                if (rayObjects.Count > 0)
+                GameObject firstObjectHitbyRay = rayObjects[0].Object;
+                //Console.WriteLine(firstObjectHitbyRay);
+                if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
                 {
-                    GameObject firstObjectHitbyRay = rayObjects[0].Object;
-                    //Console.WriteLine(firstObjectHitbyRay);
-                    if (firstObjectHitbyRay is Targetball && Mouse.IsButtonPressed(MouseButton.Left))
+                    //Console.WriteLine("ich bin drin");
+                    CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                    Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
+                    Stats.ballscore ++;
+                    Targetball.spawnnewTargetball();
+                    Stats.hit = true;
+                }
+                else if (firstObjectHitbyRay is BotAttachment && Mouse.IsButtonPressed(MouseButton.Left))
+                {
+                    //Console.WriteLine("ich bin drin");
+                    //NEU: Falls es ein BotAttachment ist, hole die Referenz auf das Objekt, an den das Attachment gekoppelt ist
+                    GameObject actualBot = firstObjectHitbyRay.GetGameObjectThatIAmAttachedTo();
+
+                    // Wenn es das Objekt gibt und es vom Typ Target ist (letztere Prüfung ist eigentlich unnötig)
+                    if(actualBot != null && actualBot is Target)
                     {
-                        //Console.WriteLine("ich bin drin");
-                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
-                        Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
-                        Stats.ballscore ++;
-                        Targetball.spawnnewTargetball();
-                        Stats.hit = true;
-                    }
-                    else if (firstObjectHitbyRay is Target && Mouse.IsButtonPressed(MouseButton.Left))
-                    {
-                        //Console.WriteLine("ich bin drin");
-                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                        // Lösche alle BotAttachment-Instanzen, die an dem Bot hängen
+                        (actualBot as Target).DeleteBotAttachments();
+
+                        // Lösche den eigentlichen Bot:
+                        CurrentWorld.RemoveGameObject(actualBot);
+
                         Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
                         Target.spawnnewTarget();
                         Stats.botscore ++;
