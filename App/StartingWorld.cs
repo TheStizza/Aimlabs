@@ -339,7 +339,7 @@ namespace Aimlabs.App
 
             AddGameObject(new Walls("w6", -2.60f, 4, 0, "./App/Textures/wandtextur.jpg", 15, 20.5f, 0.5f, 90, 0, 0, 3, 3));
 
-            AddGameObject(new Walls("w7", -9f, 2, 1, "./App/Textures/wandtextur.jpg", 15, 20.5f, 0.5f, 90, 0, 0, 3, 3));
+            //AddGameObject(new Walls("w7", -9f, 2, 1, "./App/Textures/wandtextur.jpg", 15, 20.5f, 0.5f, 90, 0, 0, 3, 3));
 
 
 
