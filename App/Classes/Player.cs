@@ -52,6 +52,7 @@ namespace Aimlabs.App.Classes
                         //Console.WriteLine("ich bin drin");
                         CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                         Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
+                        Target.spawnnewTarget();
                         Stats.botscore ++;
                     }
                     else if (firstObjectHitbyRay is MovingTargetball && Mouse.IsButtonPressed(MouseButton.Left))

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KWEngine3.GameObjects;
+using KWEngine3.Helper;
 
 namespace Aimlabs.App.Classes
 {
@@ -22,6 +23,17 @@ namespace Aimlabs.App.Classes
             {
               
             }
+        }
+        static public void spawnnewTarget()
+        {
+            Target Bot = new();
+            Bot.Name = "Bot";
+            Bot.SetModel("Bot");
+            Bot.SetPosition(HelperRandom.GetRandomNumber(-2, 2),0, HelperRandom.GetRandomNumber(-2, 2));
+            //Bot.SetColor(0, 1, 0.87f);
+            //Bot.SetScale(0.3f, 0.3f, 0.3f);
+            Bot.IsCollisionObject = true;
+            CurrentWorld.AddGameObject(Bot);
         }
     }
 }

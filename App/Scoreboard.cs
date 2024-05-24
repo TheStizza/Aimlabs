@@ -85,13 +85,15 @@ namespace Aimlabs.App
             }
             foreach (Score scoreInList in scoreBoardList)
             {
-                Console.WriteLine($"Name: {scoreInList.name} - Zeit: {scoreInList.timer}");
+                Console.WriteLine($"Name: {scoreInList.name} - Zeit: {scoreInList.timer} - Accuracy: {scoreInList.accuracy}");
             }
-
+            Console.WriteLine("" + Stats.accuracy);
             Score score = new()
             {
-                timer = Stats.botscore + Stats.ballscore + Stats.MovingBallscore
+                timer = Stats.botscore + Stats.ballscore + Stats.MovingBallscore,
+                accuracy = Stats.accuracy
             };
+
             if (Stats.ballscore > Stats.botscore)
             {
                 Console.WriteLine($"Your Ballscore: {score.timer}");
