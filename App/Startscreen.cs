@@ -20,6 +20,7 @@ namespace Aimlabs.App
         private HUDObjectImage back;
         private HUDObjectText settings;
         private bool isSettingsVisible = false;
+        private HUDObjectText ingametime;
 
         public override void Act()
         {
