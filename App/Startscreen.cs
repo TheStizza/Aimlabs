@@ -79,6 +79,13 @@ namespace Aimlabs.App
         }
         public override void Prepare()
         {
+            back = new HUDObjectImage("./App/Textures/backarrow.png");
+            back.SetPosition(120, 70);
+            back.SetColorEmissive(0, 1, 0);
+            back.SetColorEmissiveIntensity(0.3f);
+            back.SetScale(160);
+            back.Name = "back";
+
             _h = new HUDObjectImage("./App/Textures/startbutton.png");
             _h.SetPosition(740f, 390f);
             _h.Name = "start";
