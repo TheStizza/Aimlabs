@@ -7,6 +7,8 @@ using Aimlabs.App.Classes;
 using OpenTK.Mathematics;
 using KWEngine3.Helper;
 using System.Collections.Generic;
+using System.Text.Json;
+using GruppeC.App;
 
 namespace Aimlabs.App
 {
@@ -69,6 +71,46 @@ namespace Aimlabs.App
             accuracy.SetFont(FontFace.NovaMono);
             AddHUDObject(accuracy);
             SetBackground2D("");
+            Console.WriteLine($"Your Time:");
+            Console.Write("Name: ");
+
+            List<Score> scoreBoardList;
+            try
+            {
+                scoreBoardList = JsonSerializer.Deserialize<List<Score>>(File.ReadAllText("./scoreboard.json"));
+            }
+            catch
+            {
+                scoreBoardList = new List<Score>();
+            }
+            foreach (Score scoreInList in scoreBoardList)
+            {
+                Console.WriteLine($"Name: {scoreInList.name} - Zeit: {scoreInList.timer} - Accuracy: {scoreInList.accuracy}");
+            }
+            Console.WriteLine("" + Stats.accuracy);
+            Score score = new()
+            {
+                timer = Stats.botscore + Stats.ballscore + Stats.MovingBallscore,
+                accuracy = Stats.accuracy
+            };
+
+            if (Stats.ballscore > Stats.botscore)
+            {
+                Console.WriteLine($"Your Ballscore: {score.timer}");
+            }
+            else
+            {
+                Console.WriteLine($"Your Botscore: {score.timer}");
+            }
+            Console.Write("Name: ");
+            score.name = Console.ReadLine();
+
+            scoreBoardList.Add(score);
+            scoreBoardList.Sort((scoreA, scoreB) =>
+            {
+                return scoreA.timer > scoreB.timer ? 1 : -1;
+            });
+            File.WriteAllText("./scoreboard.json", JsonSerializer.Serialize<List<Score>>(scoreBoardList));
         }
     }
 }

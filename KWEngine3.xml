@@ -1887,6 +1887,7 @@
             Entfernt die Bindung (Attachment) einer GameObject-Instanz 
             </summary>
             <param name="boneName">Name des Knochens</param>
+            <returns>Wenn der Vorgang erfolgreich ist, ist der Rückgabewert die abgekoppelte Instanz (andernfalls wird null zurückgegeben)</returns>
         </member>
         <member name="P:KWEngine3.GameObjects.GameObject.HasAttachedGameObjects">
             <summary>
@@ -2069,6 +2070,12 @@
             </summary>
             <param name="modelname">Name des 3D-Modells</param>
             <returns>true, wenn das Modell gesetzt werden konnte</returns>
+        </member>
+        <member name="M:KWEngine3.GameObjects.GameObject.DetachAllBoneAttachments(System.Boolean)">
+            <summary>
+            Entfernt die Verbindung zu allen am Instanzmodell anhaftenden GameObject-Instanzen (Bone-Attachments)
+            </summary>
+            <param name="deleteAttachments">wenn true, werden die anhaftenden Instanzen nicht nur abgekoppelt sondern auch aus der Welt gelöscht (Standard: false)</param>
         </member>
         <member name="T:KWEngine3.GameObjects.HUDObject">
             <summary>
@@ -4989,7 +4996,7 @@
             Löscht alle aktuell in der Welt befindlichen GameObject-Instanzen des angegebenen Typs
             </summary>
             <typeparam name="T">Zu suchender Datentyp (Klasse)</typeparam>
-            <param name="includeSubtypes">wenn true, werden auch Unterklassen des angegebenen Typs berücksichtigt</param>
+            <param name="includeSubtypes">wenn true, werden auch Unterklassen des angegebenen Typs berücksichtigt (Standard: true)</param>
         </member>
         <member name="M:KWEngine3.World.AddRenderObject(KWEngine3.GameObjects.RenderObject)">
             <summary>
