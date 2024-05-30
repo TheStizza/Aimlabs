@@ -141,6 +141,106 @@ namespace Aimlabs.App
                 s3.IsCollisionObject = true;
                 AddGameObject(s3);
                 Stats.MovingBallspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
+                rightarmattachment.IsCollisionObject = true;
+                rightarmattachment.SetOpacity(0.5f);
+                rightarmattachment.SetColor(0f, 1f, 0f);
+                AddGameObject(rightarmattachment);
+                t1.AttachGameObjectToBone(rightarmattachment, "mixamorig:Rightarm");
+                HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 0, 0, 0);
+                HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
+                HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0f, 0f);
+
+                Stats.botspawned = true;
             }
             if (Stats.ballstart == true && Stats.ballsspawned == false)
             {
