@@ -3,20 +3,24 @@ using OpenTK.Graphics.OpenGL;
 using KWEngine3.GameObjects;
 using KWEngine3;
 using System;
-using Aimlabs.App;
 using Aimlabs.App.Classes;
 using System.Transactions;
+using System.Xml.Linq;
 
-namespace GruppeC.App
+namespace Aimlabs.App
 {
     public class Startscreen : World
     {
         private HUDObjectImage _h;
         private HUDObjectImage _g;
         private HUDObjectImage _e;
+        private HUDObjectImage _f;
+        private HUDObjectImage _k;
+        private HUDObjectText _l;
         private HUDObjectImage back;
         private HUDObjectText settings;
         private bool isSettingsVisible = false;
+        private HUDObjectText ingametime;
 
         public override void Act()
         {
@@ -92,12 +96,26 @@ namespace GruppeC.App
             _e.SetScale(500f, 100f);
             AddHUDObject(_e);
 
-            back = new HUDObjectImage("./App/Textures/backarrow.png");
-            back.SetPosition(120, 70);
-            back.SetColorEmissive(0, 1, 0);
-            back.SetColorEmissiveIntensity(0.3f);
-            back.SetScale(160);
-            back.Name = "back";
+            _f = new HUDObjectImage("./App/Textures/backarrow.png");
+            _f.SetPosition(120, 70);
+            _f.SetColorEmissive(0, 1, 0);
+            _f.SetColorEmissiveIntensity(0.3f);
+            _f.SetScale(160);
+            _f.Name = "up";
+
+            _k = new HUDObjectImage("./App/Textures/backarrow.png");
+            _k.SetPosition(120, 70);
+            _k.SetColorEmissive(0, 1, 0);
+            _k.SetColorEmissiveIntensity(0.3f);
+            _k.SetScale(160);
+            _k.Name = "down";
+
+            ingametime = new HUDObjectText("Time:" + WorldTime);
+            ingametime.SetPosition(670f, 22f);
+            ingametime.Name = "time";
+            ingametime.SetScale(18);
+            ingametime.SetFont(FontFace.NovaMono);
+            AddHUDObject(ingametime);
 
             settings = new HUDObjectText("Settings");
             settings.SetPosition(Window.Width / 2, 50);
@@ -105,7 +123,7 @@ namespace GruppeC.App
             settings.SetFont(FontFace.XanhMono);
             settings.SetColor(1f, 1f, 1f);
             settings.SetScale(50);
-            settings.Name = ("settingsfont");
+            settings.Name = "settingsfont";
 
             SetBackground2D("./App/Textures/backround.png");
         }

@@ -9,7 +9,7 @@ namespace Aimlabs.App.Classes
 {
     public class Target : GameObject
     {
-        int Targethealth = 10;
+        int Targethealth = 160;
 
         public override void Act()
         {

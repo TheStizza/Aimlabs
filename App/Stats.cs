@@ -22,5 +22,6 @@ namespace Aimlabs.App.Classes
         public static bool hit = false;
         public static float leftmouseclicks = 0;
         public static double accuracy = 100;
+        public static float volume = 0.1f;
     }
 }
