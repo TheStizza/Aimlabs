@@ -21,7 +21,7 @@ namespace Aimlabs.App.Classes
         //    Da der Vektor dann eh normalisiert wird, hat er danach trotzdem wieder die Länge 1.)
 
         //private Vector3 movedirection = new Vector3(HelperRandom.GetRandomNumber(-2, 2), HelperRandom.GetRandomNumber(-2, 2), HelperRandom.GetRandomNumber(-2, 2));
-        private Vector3 movedirection = Vector3.Normalize(new Vector3(HelperRandom.GetRandomNumber(-2, 2), HelperRandom.GetRandomNumber(-2, 2), HelperRandom.GetRandomNumber(-2, 2)));
+        private Vector3 movedirection = Vector3.Normalize(new Vector3(HelperRandom.GetRandomNumber(-100, 100), HelperRandom.GetRandomNumber(-100, 100), HelperRandom.GetRandomNumber(-100, 100)));
 
 
         public override void Act()
