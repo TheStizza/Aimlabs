@@ -90,10 +90,9 @@ namespace Aimlabs.App
             Console.WriteLine("" + Stats.accuracy);
             Score score = new()
             {
-                timer = Stats.botscore + Stats.ballscore + Stats.MovingBallscore,
-                accuracy = Stats.accuracy
+                timer = Stats.botscore + Stats.ballscore + Stats.MovingBallscore
             };
-
+            score.accuracy = Stats.accuracy;
             if (Stats.ballscore > Stats.botscore)
             {
                 Console.WriteLine($"Your Ballscore: {score.timer}");

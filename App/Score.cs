@@ -10,7 +10,6 @@ namespace GruppeC.App
     {
         public string name { get; set; }
         public double timer { get; set; }
-
         public double accuracy { get; set; }
     }
 }

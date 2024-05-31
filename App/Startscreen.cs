@@ -16,11 +16,9 @@ namespace Aimlabs.App
         private HUDObjectImage _e;
         private HUDObjectImage _f;
         private HUDObjectImage _k;
-        private HUDObjectText _l;
         private HUDObjectImage back;
         private HUDObjectText settings;
         private bool isSettingsVisible = false;
-        private HUDObjectText ingametime;
 
         public override void Act()
         {
@@ -116,13 +114,6 @@ namespace Aimlabs.App
             _k.SetColorEmissiveIntensity(0.3f);
             _k.SetScale(160);
             _k.Name = "down";
-
-            ingametime = new HUDObjectText("Time:" + WorldTime);
-            ingametime.SetPosition(670f, 22f);
-            ingametime.Name = "time";
-            ingametime.SetScale(18);
-            ingametime.SetFont(FontFace.NovaMono);
-            AddHUDObject(ingametime);
 
             settings = new HUDObjectText("Settings");
             settings.SetPosition(Window.Width / 2, 50);
