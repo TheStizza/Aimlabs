@@ -67,29 +67,29 @@ namespace Aimlabs.App.Classes
                         Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
                         Target.spawnnewTarget();
                         Stats.botscore ++;
-                    }
-                    else if (firstObjectHitbyRay is MovingTargetball && Mouse.IsButtonPressed(MouseButton.Left))
-                    {
-                        //Console.WriteLine("ich bin drin");
-                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
-                        Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
-                        Stats.MovingBallscore++;
-                    }
-                    else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "Ball")
-                    {
-                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
-                        Stats.ballstart = true;
-                    }
-                    else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "Bot")
-                    {
-                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
-                        Stats.botstart = true;
-                    }
-                    else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "MovingBall")
-                    {
-                        CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
-                        Stats.MovingBallstart = true;
-                    }
+                    }                    
+                }
+                else if (firstObjectHitbyRay is MovingTargetball && Mouse.IsButtonPressed(MouseButton.Left))
+                {
+                    //Console.WriteLine("ich bin drin");
+                    CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                    Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
+                    Stats.MovingBallscore++;
+                }
+                else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "Ball")
+                {
+                    CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                    Stats.ballstart = true;
+                }
+                else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "Bot")
+                {
+                    CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                    Stats.botstart = true;
+                }
+                else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "MovingBall")
+                {
+                    CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
+                    Stats.MovingBallstart = true;
                 }
             }
         }

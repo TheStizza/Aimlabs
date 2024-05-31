@@ -10,7 +10,6 @@ namespace Aimlabs.App.Classes
     public class Target : GameObject
     {
         int Targethealth = 160;
-
         public override void Act()
         {
             if (HasAnimations)
@@ -18,10 +17,9 @@ namespace Aimlabs.App.Classes
                 SetAnimationID(0);
                 SetAnimationPercentageAdvance(0.001f);
             }
-
             if(Targethealth == 0)
             {
-              
+                
             }
         }
 
@@ -94,8 +92,6 @@ namespace Aimlabs.App.Classes
             Bot.Name = "Bot";
             Bot.SetModel("Bot");
             Bot.SetPosition(HelperRandom.GetRandomNumber(-2, 2),0, HelperRandom.GetRandomNumber(-2, 2));
-            //Bot.SetColor(0, 1, 0.87f);
-            //Bot.SetScale(0.3f, 0.3f, 0.3f);
             Bot.IsCollisionObject = true;
             CurrentWorld.AddGameObject(Bot);
         }
