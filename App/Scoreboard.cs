@@ -87,7 +87,6 @@ namespace Aimlabs.App
             {
                 Console.WriteLine($"Name: {scoreInList.name} - Zeit: {scoreInList.timer} - Accuracy: {scoreInList.accuracy}");
             }
-            Console.WriteLine("" + Stats.accuracy);
             Score score = new()
             {
                 timer = Stats.botscore + Stats.ballscore + Stats.MovingBallscore
