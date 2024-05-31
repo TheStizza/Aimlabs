@@ -113,6 +113,26 @@ namespace Aimlabs.App
                 AddGameObject(t1);
                 t1.CreateBotAttachments();
 
+                Target t2 = new();
+                t2.SetModel("Bot");
+                t2.SetRotation(0, 90, 0);
+                t2.SetHitboxScale(0.4f, 1f, 1f);
+                t2.SetScale(0.75f);
+                t2.IsShadowCaster = true;
+                t2.Name = "Enemy Bot";
+                AddGameObject(t2);
+                t2.CreateBotAttachments();
+
+                Target t3 = new();
+                t3.SetModel("Bot");
+                t3.SetRotation(0, 90, 0);
+                t3.SetHitboxScale(0.4f, 1f, 1f);
+                t3.SetScale(0.75f);
+                t3.IsShadowCaster = true;
+                t3.Name = "Enemy Bot";
+                AddGameObject(t3);
+                t3.CreateBotAttachments();
+
                 Stats.botspawned = true;
             }
             if(Stats.MovingBallstart == true && Stats.MovingBallspawned == false)

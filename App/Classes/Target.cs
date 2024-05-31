@@ -91,6 +91,7 @@ namespace Aimlabs.App.Classes
             Target Bot = new();
             Bot.Name = "Bot";
             Bot.SetModel("Bot");
+            Bot.SetRotation(0, 90, 0);
             Bot.SetPosition(HelperRandom.GetRandomNumber(-2, 2),0, HelperRandom.GetRandomNumber(-2, 2));
             Bot.IsCollisionObject = true;
             CurrentWorld.AddGameObject(Bot);
