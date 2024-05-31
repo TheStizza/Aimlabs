@@ -73,7 +73,15 @@ namespace Aimlabs.App
             }
             Console.WriteLine(Stats.leftmouseclicks);
             ingametime.SetText("Time:" + realtime);
-            ballscorex.SetText("Ballscore:" + Stats.ballscore + Stats.MovingBallscore);
+            if(Stats.ballscore >= Stats.MovingBallscore)
+            {
+                ballscorex.SetText("Ballscore:" + Stats.ballscore);
+            }
+            else
+            {
+                ballscorex.SetText("Ballscore:" + Stats.MovingBallscore);
+            }
+
             botscorex.SetText("Botscore:" + Stats.botscore);
             float allscore = Stats.botscore + Stats.ballscore + Stats.MovingBallscore;
             if (Stats.leftmouseclicks > 0)
