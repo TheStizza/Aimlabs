@@ -31,7 +31,12 @@ namespace Aimlabs.App
                 Stats.hit = false;
                 Stats.leftmouseclicks = 0;
                 Stats.accuracy = 100;
-                Window.SetWorld(new StartingWorld());
+                Stats.MovingBallscore = 0;
+                Stats.MovingBallstart = false;
+                Stats.botspawned = false;
+                Stats.MovingBallspawned = false;
+                Stats.volume = 0.1f;
+        Window.SetWorld(new StartingWorld());
             }
         }
 

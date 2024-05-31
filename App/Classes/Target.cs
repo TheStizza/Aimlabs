@@ -9,7 +9,7 @@ namespace Aimlabs.App.Classes
 {
     public class Target : GameObject
     {
-        int Targethealth = 160;
+        private int Targethealth = 160;
         public override void Act()
         {
             if (HasAnimations)
@@ -37,7 +37,7 @@ namespace Aimlabs.App.Classes
             HelperGameObjectAttachment.SetRotationForAttachment(headattachment, 0f, 0f, 0f);
             HelperGameObjectAttachment.SetPositionOffsetForAttachment(headattachment, 0.00f, 0.05f, 0.0f);
             headattachment.Name = "head";
-
+            /*
             // BODY
             BotAttachment bodyattachment = new()
             {
@@ -78,7 +78,7 @@ namespace Aimlabs.App.Classes
             this.AttachGameObjectToBone(rightarmattachment, "mixamorig:RightArm");
             HelperGameObjectAttachment.SetScaleForAttachment(rightarmattachment, 12.5f, 30.0f, 12.5f);
             HelperGameObjectAttachment.SetRotationForAttachment(rightarmattachment, 0f, 0f, 0f);
-            HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0.1f, 0f);            
+            HelperGameObjectAttachment.SetPositionOffsetForAttachment(rightarmattachment, 0f, 0.1f, 0f);*/            
         }
 
         public void DeleteBotAttachments()
@@ -94,6 +94,7 @@ namespace Aimlabs.App.Classes
             Bot.SetPosition(HelperRandom.GetRandomNumber(-2, 2),0, HelperRandom.GetRandomNumber(-2, 2));
             Bot.IsCollisionObject = true;
             CurrentWorld.AddGameObject(Bot);
+            Bot.CreateBotAttachments();
         }
     }
 }

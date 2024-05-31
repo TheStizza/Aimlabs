@@ -12,12 +12,14 @@ namespace Aimlabs.App.Classes
     public class Player : GameObject
     {
         public const float CAM_OFFSET = 0.4f;
-
         public override void Act()
         {
-            if(Mouse.IsButtonPressed(MouseButton.Left) && Stats.ballsspawned == true)
+            if(Mouse.IsButtonPressed(MouseButton.Left))
             {
-                Stats.leftmouseclicks ++;
+                if(Stats.ballsspawned == true || Stats.botspawned == true || Stats.MovingBallspawned == true)
+                {
+                    Stats.leftmouseclicks++;
+                }
             }
             if(GlobalSettings.IsPaused == false)
             {
@@ -32,9 +34,10 @@ namespace Aimlabs.App.Classes
                 typeof(Player), 
                 typeof(Walls), 
                 typeof(Obstacle), 
-                typeof(BotAttachment), // NEU: Statt Target wird nun auf BotAttachment geprüft (es erbt ja sonst nahezu alles von Target)
+                typeof(BotAttachment),
                 typeof(Targetball), 
-                typeof(Startbutton)
+                typeof(Startbutton),
+                typeof(MovingTargetBall)
                 );
             if (rayObjects.Count > 0)
             {
@@ -51,29 +54,23 @@ namespace Aimlabs.App.Classes
                 }
                 else if (firstObjectHitbyRay is BotAttachment && Mouse.IsButtonPressed(MouseButton.Left))
                 {
-                    //Console.WriteLine("ich bin drin");
-                    //NEU: Falls es ein BotAttachment ist, hole die Referenz auf das Objekt, an den das Attachment gekoppelt ist
                     GameObject actualBot = firstObjectHitbyRay.GetGameObjectThatIAmAttachedTo();
 
-                    // Wenn es das Objekt gibt und es vom Typ Target ist (letztere Prüfung ist eigentlich unnötig)
                     if(actualBot != null && actualBot is Target)
                     {
-                        // Lösche alle BotAttachment-Instanzen, die an dem Bot hängen
                         (actualBot as Target).DeleteBotAttachments();
-
-                        // Lösche den eigentlichen Bot:
                         CurrentWorld.RemoveGameObject(actualBot);
-
                         Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
                         Target.spawnnewTarget();
                         Stats.botscore ++;
                     }                    
                 }
-                else if (firstObjectHitbyRay is MovingTargetball && Mouse.IsButtonPressed(MouseButton.Left))
+                else if (firstObjectHitbyRay is MovingTargetBall && Mouse.IsButtonPressed(MouseButton.Left))
                 {
-                    //Console.WriteLine("ich bin drin");
+                    Console.WriteLine(firstObjectHitbyRay);
                     CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                     Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
+                    MovingTargetBall.SpawnnewMovingTargetball();
                     Stats.MovingBallscore++;
                 }
                 else if (firstObjectHitbyRay is Startbutton && Mouse.IsButtonPressed(MouseButton.Left) && firstObjectHitbyRay.Name == "Ball")

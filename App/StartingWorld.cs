@@ -54,7 +54,7 @@ namespace Aimlabs.App
                 crosshair.SetScale(30, 20);
                 RemoveHUDObject(CrosshairHit);
             }
-            /*if (Mouse.IsButtonDown(MouseButton.Left))
+            if (Mouse.IsButtonDown(MouseButton.Left))
             {
                 crosshair.SetColor(0.3f,0.1f,0.1f);
                 crosshair.SetScale(30,20);
@@ -66,17 +66,19 @@ namespace Aimlabs.App
                 crosshair.SetScale(30,20);
                
                 RemoveHUDObject(CrosshairHit);
-            }*/
+            }
             if (realtime == 10)//10 für Test
             {
                 Window.SetWorld(new Scoreboard());
             }
+            Console.WriteLine(Stats.leftmouseclicks);
             ingametime.SetText("Time:" + realtime);
-            ballscorex.SetText("Ballscore:" + Stats.ballscore);
+            ballscorex.SetText("Ballscore:" + Stats.ballscore + Stats.MovingBallscore);
             botscorex.SetText("Botscore:" + Stats.botscore);
+            float allscore = Stats.botscore + Stats.ballscore + Stats.MovingBallscore;
             if (Stats.leftmouseclicks > 0)
             {
-                Stats.accuracy = Math.Round(Stats.ballscore / Stats.leftmouseclicks * 100.0f, 2);
+                Stats.accuracy = Math.Round(allscore / Stats.leftmouseclicks * 100.0f, 2);
                 accuracy.SetText("Accuracy:" + Stats.accuracy + "%");
             }
             if (Stats.ballsspawned == true || Stats.botspawned == true || Stats.MovingBallspawned == true)
@@ -107,8 +109,9 @@ namespace Aimlabs.App
             }
             if(Stats.MovingBallstart == true && Stats.MovingBallspawned == false)
             {
+                AddHUDObject(ballscorex);
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
-                MovingTargetball s1 = new()
+                MovingTargetBall s1 = new()
                 {
                     Name = "Sphere1"
                 };
@@ -119,7 +122,7 @@ namespace Aimlabs.App
                 s1.IsCollisionObject = true;
                 AddGameObject(s1);
 
-                MovingTargetball s2 = new()
+                MovingTargetBall s2 = new()
                 {
                     Name = "Sphere1"
                 };
@@ -130,7 +133,7 @@ namespace Aimlabs.App
                 s2.IsCollisionObject = true;
                 AddGameObject(s2);
 
-                MovingTargetball s3 = new()
+                MovingTargetBall s3 = new()
                 {
                     Name = "Sphere1"
                 };
