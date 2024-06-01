@@ -2259,11 +2259,12 @@
             Erfragt den aktuell für das Objekt festgelegten Text
             </summary>
         </member>
-        <member name="M:KWEngine3.GameObjects.HUDObjectText.SetText(System.String)">
+        <member name="M:KWEngine3.GameObjects.HUDObjectText.SetText(System.String,System.Boolean)">
             <summary>
             Setzt den Text (maximal 256 Zeichen)
             </summary>
-            <param name="text">Text</param>
+            <param name="text">zu setzender Text</param>
+            <param name="trim">Leerzeichen zu Beginn und am Ende der Zeichenkette werden abgeschnitten (Standardwert: true)</param>
         </member>
         <member name="M:KWEngine3.GameObjects.HUDObjectText.SetCharacterDistanceFactor(System.Single)">
             <summary>
@@ -5184,6 +5185,13 @@
             <param name="name">Name des gesuchten Objekts</param>
             <returns>Gesuchtes Objekt oder null (falls nicht gefunden)</returns>
         </member>
+        <member name="M:KWEngine3.World.GetHUDObjectsByName(System.String)">
+            <summary>
+            Durchsucht die Liste der HUDObject-Instanzen nach Objekten, die die angegebene Zeichenkette enthalten
+            </summary>
+            <param name="name">Zu suchende Zeichenkette</param>
+            <returns>Liste der gefundenen Objekte</returns>
+        </member>
         <member name="M:KWEngine3.World.GetHUDObjectTextByName(System.String)">
             <summary>
             Durchsucht die Liste der HUDObject-Instanzen nach einem Textobjekt mit dem gegebenen Namen
@@ -5191,12 +5199,26 @@
             <param name="name">Name des gesuchten Objekts</param>
             <returns>Gesuchtes Objekt oder null (falls nicht gefunden)</returns>
         </member>
+        <member name="M:KWEngine3.World.GetHUDObjectTextsByName(System.String)">
+            <summary>
+            Durchsucht die Liste der HUDObject-Instanzen nach HUDObjectText-Objekten, die die angegebene Zeichenkette enthalten
+            </summary>
+            <param name="name">Zu suchende Zeichenkette</param>
+            <returns>Liste der gefundenen Objekte</returns>
+        </member>
         <member name="M:KWEngine3.World.GetHUDObjectImageByName(System.String)">
             <summary>
             Durchsucht die Liste der HUDObject-Instanzen nach einem Bildobjekt mit dem gegebenen Namen
             </summary>
             <param name="name">Name des gesuchten Objekts</param>
             <returns>Gesuchtes Objekt oder null (falls nicht gefunden)</returns>
+        </member>
+        <member name="M:KWEngine3.World.GetHUDObjectImagesByName(System.String)">
+            <summary>
+            Durchsucht die Liste der HUDObject-Instanzen nach HUDObjectImage-Objekten, die die angegebene Zeichenkette enthalten
+            </summary>
+            <param name="name">Zu suchende Zeichenkette</param>
+            <returns>Liste der gefundenen Objekte</returns>
         </member>
         <member name="P:KWEngine3.World.ApplicationTime">
             <summary>
