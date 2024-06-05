@@ -113,34 +113,34 @@ namespace Aimlabs.App
             back.Name = "back";
 
             start = new HUDObjectImage("./App/Textures/startbutton.png");
-            start.SetPosition(740f, 390f);
+            start.SetPosition(Window.Width/1.94f, Window.Height / 2);
             start.Name = "start";
             AddHUDObject(start);
 
             settings = new HUDObjectImage("./App/Textures/settings.png");
-            settings.SetPosition(1373f, 65f);
+            settings.SetPosition(Window.Width/1.05f, Window.Height/10);
             settings.Name = "settings";
             settings.SetScale(100f, 100f);
             AddHUDObject(settings);
 
             aimlabslogo = new HUDObjectImage("./App/Textures/aimlabslogo.png");
-            aimlabslogo.SetPosition(740f, 100f);
+            aimlabslogo.SetPosition(Window.Width/1.94f, Window.Height/4.5f);
             aimlabslogo.Name = "aimlabslogo";
-            aimlabslogo.SetScale(500f, 100f);
+            aimlabslogo.SetScale(600f, 100f);
             AddHUDObject(aimlabslogo);
 
             left = new HUDObjectImage("./App/Textures/arrowleft.png");
-            left.SetPosition(Window.Width/ 1.85f, Window.Height/ 4);
+            left.SetPosition(Window.Width/1.85f, Window.Height/4);
             left.SetScale(80, 80);
             left.Name = "arrowleft";
 
             right = new HUDObjectImage("./App/Textures/arrowright.png");
-            right.SetPosition(Window.Width / 1.60f, Window.Height / 4);
+            right.SetPosition(Window.Width/ 1.60f, Window.Height/4);
             right.SetScale(80, 80);
             right.Name = "arrowright";
 
             settingstext = new HUDObjectText("Settings");
-            settingstext.SetPosition(Window.Width / 2, 50);
+            settingstext.SetPosition(Window.Width/2, 50);
             settingstext.SetTextAlignment(TextAlignMode.Center);
             settingstext.SetFont(FontFace.XanhMono);
             settingstext.SetColor(1f, 1f, 1f);
