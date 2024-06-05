@@ -11,35 +11,36 @@ namespace Aimlabs.App
 {
     public class Startscreen : World
     {
-        private HUDObjectImage _h;
-        private HUDObjectImage _g;
-        private HUDObjectImage _e;
+        private HUDObjectImage start;
+        private HUDObjectImage settings;
+        private HUDObjectImage aimlabslogo;
         private HUDObjectImage left;
         private HUDObjectImage right;
         private HUDObjectImage back;
-        private HUDObjectText settings;
+        private HUDObjectText settingstext;
         private HUDObjectText volume;
+        private HUDObjectText loudness;
         private bool isSettingsVisible = false;
 
         public override void Act()
         {
-            if (_h.IsMouseCursorOnMe() == true)
+            if (start.IsMouseCursorOnMe() == true)
             {
-                _h.SetColorEmissive(0.4f, 0.4f, 0.4f);
-                _h.SetColorEmissiveIntensity(0.3f);
+                start.SetColorEmissive(0.4f, 0.4f, 0.4f);
+                start.SetColorEmissiveIntensity(0.3f);
             }
             else
             {
-                _h.SetColorEmissiveIntensity(0);
+                start.SetColorEmissiveIntensity(0);
             }
-            if (_g.IsMouseCursorOnMe() == true)
+            if (settings.IsMouseCursorOnMe() == true)
             {
-                _g.SetColorEmissive(0.5f, 0.5f, 0.5f);
-                _g.SetColorEmissiveIntensity(0.3f);
+                settings.SetColorEmissive(0.5f, 0.5f, 0.5f);
+                settings.SetColorEmissiveIntensity(0.3f);
             }
             else
             {
-                _g.SetColorEmissiveIntensity(0);
+                settings.SetColorEmissiveIntensity(0);
             }
             if (back.IsMouseCursorOnMe() == true)
             {
@@ -71,43 +72,35 @@ namespace Aimlabs.App
                 right.SetColorEmissive(0, 0, 0);
                 right.SetColorEmissiveIntensity(0.6f);
             }
-            if (isSettingsVisible == false && _h.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
+            if (isSettingsVisible == false && start.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
             {
                 Window.SetWorld(new loading());
             }
             if (left.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
             {
-                Stats.volume -= 0.03f;
+                if (Stats.uservolume > 0)
+                {
+                    Stats.uservolume -= 1;
+                    Stats.volume = (float)Stats.uservolume / 10;
+                    loudness.SetText(" "+ Stats.uservolume);
+                }
             }
             if (right.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
             {
-                Stats.volume += 0.03f;
+                if (Stats.uservolume < 10)
+                {
+                    Stats.uservolume += 1;
+                    Stats.volume = (float)Stats.uservolume / 10;
+                    loudness.SetText(" " + Stats.uservolume);
+                }
             }
-            if (_g.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
+            if (settings.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
             {
-                RemoveHUDObject(_h);
-                RemoveHUDObject(_e);
-                RemoveHUDObject(_g);
-                AddHUDObject(settings);
-                AddHUDObject(volume);
-                AddHUDObject(back);
-                AddHUDObject(left);
-                AddHUDObject(right);
-                SetBackground2D("./App/Textures/Black.png");
-                isSettingsVisible = true;
+                ShowSettings();
             }
             if (back.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
             {
-                RemoveHUDObject(settings);
-                RemoveHUDObject(back);
-                RemoveHUDObject(volume);
-                RemoveHUDObject(left);
-                RemoveHUDObject(right);
-                AddHUDObject(_h);
-                AddHUDObject(_e);
-                AddHUDObject(_g);
-                SetBackground2D("./App/Textures/backround.png");
-                isSettingsVisible = false;
+                HideSettings();
             }
         }
         public override void Prepare()
@@ -119,44 +112,40 @@ namespace Aimlabs.App
             back.SetScale(160);
             back.Name = "back";
 
-            _h = new HUDObjectImage("./App/Textures/startbutton.png");
-            _h.SetPosition(740f, 390f);
-            _h.Name = "start";
-            AddHUDObject(_h);
+            start = new HUDObjectImage("./App/Textures/startbutton.png");
+            start.SetPosition(740f, 390f);
+            start.Name = "start";
+            AddHUDObject(start);
 
-            _g = new HUDObjectImage("./App/Textures/settings.png");
-            _g.SetPosition(1373f, 65f);
-            _g.Name = "settings";
-            _g.SetScale(100f, 100f);
-            AddHUDObject(_g);
+            settings = new HUDObjectImage("./App/Textures/settings.png");
+            settings.SetPosition(1373f, 65f);
+            settings.Name = "settings";
+            settings.SetScale(100f, 100f);
+            AddHUDObject(settings);
 
-            _e = new HUDObjectImage("./App/Textures/aimlabslogo.png");
-            _e.SetPosition(740f, 100f);
-            _e.Name = "aimlabslogo";
-            _e.SetScale(500f, 100f);
-            AddHUDObject(_e);
+            aimlabslogo = new HUDObjectImage("./App/Textures/aimlabslogo.png");
+            aimlabslogo.SetPosition(740f, 100f);
+            aimlabslogo.Name = "aimlabslogo";
+            aimlabslogo.SetScale(500f, 100f);
+            AddHUDObject(aimlabslogo);
 
             left = new HUDObjectImage("./App/Textures/arrowleft.png");
-            left.SetPosition(Window.Width/ 1.86f, Window.Height/ 4);
+            left.SetPosition(Window.Width/ 1.85f, Window.Height/ 4);
             left.SetScale(80, 80);
-            //left.SetColorEmissive(0, 1, 0);
-            //left.SetColorEmissiveIntensity(0.3f);
             left.Name = "arrowleft";
 
             right = new HUDObjectImage("./App/Textures/arrowright.png");
-            right.SetPosition(Window.Width / 1.7f, Window.Height / 4);
+            right.SetPosition(Window.Width / 1.60f, Window.Height / 4);
             right.SetScale(80, 80);
-            //right.SetColorEmissive(0, 1, 0);
-            //right.SetColorEmissiveIntensity(0.3f);
             right.Name = "arrowright";
 
-            settings = new HUDObjectText("Settings");
-            settings.SetPosition(Window.Width / 2, 50);
-            settings.SetTextAlignment(TextAlignMode.Center);
-            settings.SetFont(FontFace.XanhMono);
-            settings.SetColor(1f, 1f, 1f);
-            settings.SetScale(50);
-            settings.Name = "settingsfont";
+            settingstext = new HUDObjectText("Settings");
+            settingstext.SetPosition(Window.Width / 2, 50);
+            settingstext.SetTextAlignment(TextAlignMode.Center);
+            settingstext.SetFont(FontFace.XanhMono);
+            settingstext.SetColor(1f, 1f, 1f);
+            settingstext.SetScale(50);
+            settingstext.Name = "settingstext";
 
             volume = new HUDObjectText("volume");
             volume.SetPosition(Window.Width / 2.5f, Window.Height / 4);
@@ -164,9 +153,45 @@ namespace Aimlabs.App
             volume.SetFont(FontFace.XanhMono);
             volume.SetColor(1f, 1f, 1f);
             volume.SetScale(50);
-            volume.Name = "volumefont";
+            volume.Name = "volumetext";
+
+            loudness = new HUDObjectText(" " + Stats.uservolume);
+            loudness.SetPosition(Window.Width/1.7f, Window.Height / 4);
+            loudness.SetTextAlignment(TextAlignMode.Center);
+            loudness.SetFont(FontFace.XanhMono);
+            loudness.SetColor(1f, 1f, 1f);
+            loudness.SetScale(50);
+            loudness.Name = "volumenumber";
 
             SetBackground2D("./App/Textures/backround.png");
+        }
+        private void ShowSettings()
+        {
+            RemoveHUDObject(start);
+            RemoveHUDObject(aimlabslogo);
+            RemoveHUDObject(settings);
+            AddHUDObject(settingstext);
+            AddHUDObject(volume);
+            AddHUDObject(back);
+            AddHUDObject(left);
+            AddHUDObject(right);
+            AddHUDObject(loudness);
+            SetBackground2D("./App/Textures/Black.png");
+            isSettingsVisible = true;
+        }
+        private void HideSettings()
+        {
+            RemoveHUDObject(settingstext);
+            RemoveHUDObject(back);
+            RemoveHUDObject(volume);
+            RemoveHUDObject(left);
+            RemoveHUDObject(right);
+            RemoveHUDObject(loudness);
+            AddHUDObject(start);
+            AddHUDObject(aimlabslogo);
+            AddHUDObject(settings);
+            SetBackground2D("./App/Textures/backround.png");
+            isSettingsVisible = false;
         }
     }
 }
