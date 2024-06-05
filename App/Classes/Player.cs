@@ -47,7 +47,7 @@ namespace Aimlabs.App.Classes
                 {
                     //Console.WriteLine("ich bin drin");
                     CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
-                    Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
+                    Audio.PlaySound("./App/Sounds/targethit.wav", false, Stats.volume);
                     Stats.ballscore ++;
                     Targetball.spawnnewTargetball();
                     Stats.hit = true;
@@ -60,7 +60,7 @@ namespace Aimlabs.App.Classes
                     {
                         (actualBot as Target).DeleteBotAttachments();
                         CurrentWorld.RemoveGameObject(actualBot);
-                        Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
+                        Audio.PlaySound("./App/Sounds/targethit.wav", false, Stats.volume);
                         Target.spawnnewTarget();
                         Stats.botscore ++;
                     }                    
@@ -69,7 +69,7 @@ namespace Aimlabs.App.Classes
                 {
                     Console.WriteLine(firstObjectHitbyRay);
                     CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
-                    Audio.PlaySound("./App/Sounds/targethit.wav", false, 0.10f);
+                    Audio.PlaySound("./App/Sounds/targethit.wav", false, Stats.volume);
                     MovingTargetBall.SpawnnewMovingTargetball();
                     Stats.MovingBallscore++;
                 }

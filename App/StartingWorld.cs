@@ -326,11 +326,11 @@ namespace Aimlabs.App
                 Name = "Ball"
             };
             huen.SetModel("KWQuad2D");
-            huen.SetScale(1, 2, 1);
+            huen.SetScale(1.6f, 1, 1);
             huen.SetPosition(1, 1, 0);
             huen.SetRotation(0, 90, 0);
             huen.IsCollisionObject = true;
-            huen.SetTexture("./App/Textures/startobject.png");
+            huen.SetTexture("./App/Textures/targets.png");
             huen.HasTransparencyTexture = true;
             AddGameObject(huen);
 
@@ -339,11 +339,11 @@ namespace Aimlabs.App
                 Name = "Bot"
             };
             bots.SetModel("KWQuad2D");
-            bots.SetScale(1, 2, 1);
-            bots.SetPosition(1, 1, 2);
+            bots.SetScale(1.4f, 0.8f, 0.8f);
+            bots.SetPosition(1, 1.2f, 2);
             bots.SetRotation(0, 90, 0);
             bots.IsCollisionObject = true;
-            bots.SetTexture("./App/Textures/startobject.png");
+            bots.SetTexture("./App/Textures/botstest.png");
             bots.HasTransparencyTexture = true;
             AddGameObject(bots);
 
@@ -352,11 +352,11 @@ namespace Aimlabs.App
                 Name = "MovingBall"
             };
             MovingBall.SetModel("KWQuad2D");
-            MovingBall.SetScale(1, 2, 1);
+            MovingBall.SetScale(1.4f, 1, 1);
             MovingBall.SetPosition(1, 1, -2);
             MovingBall.SetRotation(0, 90, 0);
             MovingBall.IsCollisionObject = true;
-            MovingBall.SetTexture("./App/Textures/startobject.png");
+            MovingBall.SetTexture("./App/Textures/Movingtargets.png");
             MovingBall.HasTransparencyTexture = true;
             AddGameObject(MovingBall);
 
@@ -373,13 +373,6 @@ namespace Aimlabs.App
             AddGameObject(new Walls("w6", -2.60f, 4, 0, "./App/Textures/wandtextur.jpg", 15, 20.5f, 0.5f, 90, 0, 0, 3, 3, 1));
             
             AddGameObject(new Walls("w7", 8, 4, 0.2f, "./App/Textures/wandtextur.jpg", 6, 20.5f, 0.5f, 90, 0, 0, 3, 3, 0));
-
-            //AddGameObject(new Walls("w8", 7, 0, 0, "./App/Textures/wandtextur.jpg", 20, 8, 0.5f, 0, 90, 0, 3, 3, 0));
-
-
-
-
-
 
             Weapon fpw = new();
             fpw.SetModel("Gun");
