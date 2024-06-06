@@ -10,7 +10,6 @@ namespace Aimlabs.App.Classes
         private HUDObjectText _prompt;
         private HUDObjectText _text;
         private HUDObjectText _cursor;
-        private float _cursorOpacity = 0.0f;
         private float _height;
         private bool _hasName = false;
         private bool _done = false;
