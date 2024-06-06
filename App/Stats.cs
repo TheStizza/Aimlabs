@@ -24,5 +24,8 @@ namespace Aimlabs.App.Classes
         public static double accuracy = 100;
         public static int uservolume = 1;
         public static float volume = (float)Stats.uservolume / 10;
+        public static int ballcount = 1;
+        public static int botcount = 1;
+        public static int movingcount = 1;
     }
 }

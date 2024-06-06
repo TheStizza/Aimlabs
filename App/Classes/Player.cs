@@ -67,7 +67,7 @@ namespace Aimlabs.App.Classes
                 }
                 else if (firstObjectHitbyRay is MovingTargetBall && Mouse.IsButtonPressed(MouseButton.Left))
                 {
-                    Console.WriteLine(firstObjectHitbyRay);
+                    //Console.WriteLine(firstObjectHitbyRay);
                     CurrentWorld.RemoveGameObject(firstObjectHitbyRay);
                     Audio.PlaySound("./App/Sounds/targethit.wav", false, Stats.volume);
                     MovingTargetBall.SpawnnewMovingTargetball();

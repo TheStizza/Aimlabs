@@ -7,6 +7,7 @@ using KWEngine3.Helper;
 using System;
 using System.Collections.Generic;
 using System.Timers;
+using System.ComponentModel.Design.Serialization;
 
 namespace Aimlabs.App
 {
@@ -67,11 +68,11 @@ namespace Aimlabs.App
                
                 RemoveHUDObject(CrosshairHit);
             }
-            if (realtime == 10)//10 für Test
+            if (realtime == 60)//10 für Test
             {
                 Window.SetWorld(new Scoreboard());
             }
-            Console.WriteLine(Stats.leftmouseclicks);
+            //Console.WriteLine(Stats.leftmouseclicks);
             ingametime.SetText("Time:" + realtime);
             if(Stats.ballscore >= Stats.MovingBallscore)
             {
@@ -102,115 +103,36 @@ namespace Aimlabs.App
             {
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
                 AddHUDObject(botscorex);
-
-                Target t1 = new();
-                t1.SetModel("Bot");
-                t1.SetRotation(0, 90, 0);
-                t1.SetHitboxScale(0.4f, 1f, 1f);
-                t1.SetScale(0.75f);
-                t1.IsShadowCaster = true;
-                t1.Name = "Enemy Bot";
-                AddGameObject(t1);
-                t1.CreateBotAttachments();
-
-                Target t2 = new();
-                t2.SetModel("Bot");
-                t2.SetRotation(0, 90, 0);
-                t2.SetHitboxScale(0.4f, 1f, 1f);
-                t2.SetScale(0.75f);
-                t2.IsShadowCaster = true;
-                t2.Name = "Enemy Bot";
-                AddGameObject(t2);
-                t2.CreateBotAttachments();
-
-                Target t3 = new();
-                t3.SetModel("Bot");
-                t3.SetRotation(0, 90, 0);
-                t3.SetHitboxScale(0.4f, 1f, 1f);
-                t3.SetScale(0.75f);
-                t3.IsShadowCaster = true;
-                t3.Name = "Enemy Bot";
-                AddGameObject(t3);
-                t3.CreateBotAttachments();
-
+                int i2 = 0;
+                while(Stats.botcount > i2)
+                {
+                    Target.spawnnewTarget();
+                    i2++;
+                }
                 Stats.botspawned = true;
             }
             if(Stats.MovingBallstart == true && Stats.MovingBallspawned == false)
             {
                 AddHUDObject(ballscorex);
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
-                MovingTargetBall s1 = new()
+                int i1 = 0;
+                while(Stats.movingcount > i1)
                 {
-                    Name = "Sphere1"
-                };
-                s1.SetModel("KWSphere");
-                s1.SetScale(0.3f, 0.3f, 0.3f);
-                s1.SetPosition(0, 2, 0);
-                s1.SetColor(0, 1, 0.87f);
-                s1.IsCollisionObject = true;
-                AddGameObject(s1);
-
-                MovingTargetBall s2 = new()
-                {
-                    Name = "Sphere1"
-                };
-                s2.SetModel("KWSphere");
-                s2.SetScale(0.3f, 0.3f, 0.3f);
-                s2.SetPosition(1, 2, 0);
-                s2.SetColor(0, 1, 0.87f);
-                s2.IsCollisionObject = true;
-                AddGameObject(s2);
-
-                MovingTargetBall s3 = new()
-                {
-                    Name = "Sphere1"
-                };
-                s3.SetModel("KWSphere");
-                s3.SetScale(0.3f, 0.3f, 0.3f);
-                s3.SetPosition(-1, 2, 0);
-                s3.SetColor(0, 1, 0.87f);
-                s3.IsCollisionObject = true;
-                AddGameObject(s3);
+                    MovingTargetBall.SpawnnewMovingTargetball();
+                    i1++;
+                }            
                 Stats.MovingBallspawned = true;
-               
-                Stats.botspawned = true;
             }
             if (Stats.ballstart == true && Stats.ballsspawned == false)
             {
                 AddHUDObject(ballscorex);
                 KWEngine.CurrentWorld.RemoveGameObjectsOfType<Startbutton>(false);
-                Targetball s1 = new()
+                int i3 = 0;
+                while (Stats.ballcount > i3)
                 {
-                    Name = "Sphere1"
-                };
-                s1.SetModel("KWSphere");
-                s1.SetScale(0.3f, 0.3f, 0.3f);
-                s1.SetPosition(0, 2, 0);
-                s1.SetColor(0, 1, 0.87f);
-                s1.IsCollisionObject = true;
-                AddGameObject(s1);
-
-                Targetball s2 = new()
-                {
-                    Name = "Sphere1"
-                };
-                s2.SetModel("KWSphere");
-                s2.SetScale(0.3f, 0.3f, 0.3f);
-                s2.SetPosition(1, 2, 0);
-                s2.SetColor(0, 1, 0.87f);
-                s2.IsCollisionObject = true;
-                AddGameObject(s2);
-
-                Targetball s3 = new()
-                {
-                    Name = "Sphere1"
-                };
-                s3.SetModel("KWSphere");
-                s3.SetScale(0.3f, 0.3f, 0.3f);
-                s3.SetPosition(-1, 2, 0);
-                s3.SetColor(0, 1, 0.87f);
-                s3.IsCollisionObject = true;
-                AddGameObject(s3);
+                    Targetball.spawnnewTargetball();
+                    i3++;
+                }
                 Stats.ballsspawned = true;
             }
         }
@@ -219,10 +141,10 @@ namespace Aimlabs.App
         {
             Stats.accuracy = 100.0f;
             KWEngine.LoadModel("Bot", "./App/Models/bot.gltf");
-            foreach(string bonename in KWEngine.GetModelBoneNames("Bot"))
+            /*foreach(string bonename in KWEngine.GetModelBoneNames("Bot"))
             {
                 Console.WriteLine(bonename);
-            }
+            }*/
             KWEngine.LoadModel("Gun", "./App/Models/BrowningHP.gltf");
 
             HUDOverlay.SetPosition(720f, 50f);

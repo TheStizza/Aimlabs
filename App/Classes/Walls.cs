@@ -13,7 +13,7 @@ namespace Aimlabs.App.Classes
         {
 
         }
-        public Walls(string name1, float Positionx, float Positiony, float Positionz, string Texture, float Scalex, float Scaley, float Scalez, float Rotationx, float Rotationy, float Rotationz, float x, float y, float z)
+        public Walls(string name1, float Positionx, float Positiony, float Positionz, string Texture, float Scalex, float Scaley, float Scalez, float Rotationx, float Rotationy, float Rotationz, float x, float y, int v)
         {
             Name = name1;
             SetPosition(Positionx, Positiony, Positionz);
@@ -23,7 +23,6 @@ namespace Aimlabs.App.Classes
             SetTextureRepeat(x, y);
             IsCollisionObject = true;
             IsAffectedByLight = false;
-            SetOpacity(z);
         }
     }
 }

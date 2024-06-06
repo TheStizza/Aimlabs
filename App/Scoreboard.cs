@@ -1,14 +1,9 @@
-﻿using OpenTK.Windowing.GraphicsLibraryFramework;
-using OpenTK.Graphics.OpenGL;
-using KWEngine3.GameObjects;
-using KWEngine3;
-using System;
-using Aimlabs.App.Classes;
-using OpenTK.Mathematics;
-using KWEngine3.Helper;
-using System.Collections.Generic;
-using System.Text.Json;
+﻿using Aimlabs.App.Classes;
 using GruppeC.App;
+using KWEngine3;
+using KWEngine3.GameObjects;
+using OpenTK.Windowing.GraphicsLibraryFramework;
+using System.Text.Json;
 
 namespace Aimlabs.App
 {
@@ -19,6 +14,9 @@ namespace Aimlabs.App
         private HUDObjectText clicks;
         private HUDObjectText accuracy;
         private HUDObjectImage playagain;
+        private NameInput nameInput;
+        private List<Score> scoreBoardList;
+
         public override void Act()
         {
             if (playagain.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
@@ -36,7 +34,36 @@ namespace Aimlabs.App
                 Stats.botspawned = false;
                 Stats.MovingBallspawned = false;
                 Stats.volume = 0.1f;
-        Window.SetWorld(new StartingWorld());
+                Window.SetWorld(new StartingWorld());
+                return;
+            }
+
+            if (nameInput.HasName() == false)
+            {
+                nameInput.Update(Keyboard);
+            }
+            else
+            {
+                if (nameInput.IsDone() == false)
+                {
+                    string nameNew = nameInput.GetNameEntered();
+                    Score score = new()
+                    {
+                        timer = Stats.botscore + Stats.ballscore + Stats.MovingBallscore,
+                        accuracy = Stats.accuracy,
+                        name = nameNew
+                    };
+                    scoreBoardList.Add(score);
+                    scoreBoardList.Sort((scoreA, scoreB) =>
+                    {
+                        return scoreA.timer < scoreB.timer ? 1 : -1;
+                    });
+
+                    File.WriteAllText("./scoreboard.json", JsonSerializer.Serialize(scoreBoardList));
+                    nameInput.RemoveHUDObjects();
+
+                    RebuildScoreboard();
+                }
             }
         }
 
@@ -69,17 +96,14 @@ namespace Aimlabs.App
             clicks.SetFont(FontFace.NovaMono);
             AddHUDObject(clicks);
 
-            accuracy = new HUDObjectText("Accuracy:" + Stats.accuracy+"%");
+            accuracy = new HUDObjectText("Accuracy:" + Stats.accuracy + "%");
             accuracy.SetPosition(1000f, 100f);
             accuracy.Name = "accuracy";
             accuracy.SetScale(18);
             accuracy.SetFont(FontFace.NovaMono);
             AddHUDObject(accuracy);
             SetBackground2D("");
-            Console.WriteLine($"Your Time:");
-            Console.Write("Name: ");
 
-            List<Score> scoreBoardList;
             try
             {
                 scoreBoardList = JsonSerializer.Deserialize<List<Score>>(File.ReadAllText("./scoreboard.json"));
@@ -88,32 +112,69 @@ namespace Aimlabs.App
             {
                 scoreBoardList = new List<Score>();
             }
+
+            HUDObjectText scoreboardHeadline = new HUDObjectText(scoreBoardList.Count > 0 ? "Scoreboard" : "wow, such empty... :-/");
+            scoreboardHeadline.SetTextAlignment(TextAlignMode.Center);
+            scoreboardHeadline.SetColor(1.0f, 1.0f, 0.75f);
+            scoreboardHeadline.SetPosition(KWEngine.Window.Width / 2, KWEngine.Window.Height * 0.35f);
+            AddHUDObject(scoreboardHeadline);
+
+            RebuildScoreboard();
+
+            nameInput = new NameInput();
+            nameInput.AddToWorld();
+        }
+
+        private void RebuildScoreboard()
+        {
+            List<HUDObject> objects = KWEngine.CurrentWorld.GetHUDObjectsByName("SCORELIST");
+            foreach (HUDObject h in objects)
+            {
+                RemoveHUDObject(h);
+            }
+
+            float listoffset = KWEngine.Window.Height * 0.4f;
+            float listoffsetStep = Math.Max(16f, KWEngine.Window.Height * 0.05f);
+            int maxNameLengthForDisplay = 12;
+            int step = 0;
             foreach (Score scoreInList in scoreBoardList)
             {
-                Console.WriteLine($"Name: {scoreInList.name} - Zeit: {scoreInList.timer} - Accuracy: {scoreInList.accuracy}");
-            }
-            Score score = new()
-            {
-                timer = Stats.botscore + Stats.ballscore + Stats.MovingBallscore
-            };
-            score.accuracy = Stats.accuracy;
-            if (Stats.ballscore > Stats.botscore)
-            {
-                Console.WriteLine($"Your Ballscore: {score.timer}");
-            }
-            else
-            {
-                Console.WriteLine($"Your Botscore: {score.timer}");
-            }
-            Console.Write("Name: ");
-            score.name = Console.ReadLine();
+                HUDObjectText listObject;
+                if (scoreInList.name.Length > maxNameLengthForDisplay)
+                {
+                    listObject = new HUDObjectText(scoreInList.name.Substring(0, maxNameLengthForDisplay) + "...");
+                }
+                else
+                {
+                    listObject = new HUDObjectText(scoreInList.name);
+                }
 
-            scoreBoardList.Add(score);
-            scoreBoardList.Sort((scoreA, scoreB) =>
-            {
-                return scoreA.timer > scoreB.timer ? 1 : -1;
-            });
-            File.WriteAllText("./scoreboard.json", JsonSerializer.Serialize<List<Score>>(scoreBoardList));
+                listObject.SetPosition(KWEngine.Window.Width * 0.2f, listoffset + listoffsetStep * step);
+                listObject.Name = "SCORELIST";
+                listObject.SetScale(16);
+                listObject.SetColor(0.75f, 0.75f, 0.75f);
+                AddHUDObject(listObject);
+
+                HUDObjectText listObject2 = new HUDObjectText(Convert.ToString(scoreInList.accuracy).PadLeft(3, '0') + "%");
+                listObject2.SetPosition(KWEngine.Window.Width * 0.5f, listoffset + listoffsetStep * step);
+                listObject2.Name = "SCORELIST";
+                listObject2.SetScale(16);
+                listObject2.SetColor(0.75f, 0.75f, 0.75f);
+                AddHUDObject(listObject2);
+
+                HUDObjectText listObject3 = new HUDObjectText(Convert.ToString(scoreInList.timer));
+                listObject3.SetTextAlignment(TextAlignMode.Right);
+                listObject3.SetPosition(KWEngine.Window.Width * 0.8f, listoffset + listoffsetStep * step);
+                listObject3.Name = "SCORELIST";
+                listObject3.SetScale(16);
+                listObject3.SetColor(0.75f, 0.75f, 0.75f);
+                AddHUDObject(listObject3);
+
+
+                step++;
+                if (step > 4)
+                    break;
+            }
         }
     }
 }
