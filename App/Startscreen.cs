@@ -16,10 +16,22 @@ namespace Aimlabs.App
         private HUDObjectImage aimlabslogo;
         private HUDObjectImage left;
         private HUDObjectImage right;
+        private HUDObjectImage ballleft;
+        private HUDObjectImage ballright;
+        private HUDObjectImage botleft;
+        private HUDObjectImage botright;
+        private HUDObjectImage movingleft;
+        private HUDObjectImage movingright;
+        private HUDObjectText movingcount;
+        private HUDObjectText ballcount;
+        private HUDObjectText botcount;
         private HUDObjectImage back;
         private HUDObjectText settingstext;
         private HUDObjectText volume;
         private HUDObjectText loudness;
+        private HUDObjectText ballcounttext;
+        private HUDObjectText botcounttext;
+        private HUDObjectText movingcounttext;
         private bool isSettingsVisible = false;
 
         public override void Act()
@@ -76,6 +88,7 @@ namespace Aimlabs.App
             {
                 Window.SetWorld(new loading());
             }
+            //Sound
             if (left.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
             {
                 if (Stats.uservolume > 0)
@@ -92,6 +105,57 @@ namespace Aimlabs.App
                     Stats.uservolume += 1;
                     Stats.volume = (float)Stats.uservolume / 10;
                     loudness.SetText(" " + Stats.uservolume);
+                }
+            }
+            //Bots
+            if (botleft.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
+            {
+                if (Stats.botcount > 1)
+                {
+                    Stats.botcount -= 1;
+                    botcount.SetText(" " + Stats.botcount);
+                }
+            }
+            if (botright.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
+            {
+                if (Stats.botcount < 10)
+                {
+                    Stats.botcount += 1;
+                    botcount.SetText(" " + Stats.botcount);
+                }
+            }
+            //Balls
+            if (ballleft.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
+            {
+                if (Stats.ballcount > 1)
+                {
+                    Stats.ballcount -= 1;
+                    ballcount.SetText(" " + Stats.ballcount);
+                }
+            }
+            if (ballright.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
+            {
+                if (Stats.ballcount < 10)
+                {
+                    Stats.ballcount += 1;
+                    ballcount.SetText(" " + Stats.ballcount);
+                }
+            }
+            //movingballs
+            if (movingleft.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
+            {
+                if (Stats.movingcount > 1)
+                {
+                    Stats.movingcount -= 1;
+                    movingcount.SetText(" " + Stats.movingcount);
+                }
+            }
+            if (movingright.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
+            {
+                if (Stats.movingcount < 10)
+                {
+                    Stats.movingcount += 1;
+                    movingcount.SetText(" " + Stats.movingcount);
                 }
             }
             if (settings.IsMouseCursorOnMe() == true && Mouse.IsButtonPressed(MouseButton.Left))
@@ -139,6 +203,36 @@ namespace Aimlabs.App
             right.SetScale(80, 80);
             right.Name = "arrowright";
 
+            ballleft = new HUDObjectImage("./App/Textures/arrowleft.png");
+            ballleft.SetPosition(Window.Width / 1.85f, Window.Height / 3);
+            ballleft.SetScale(80, 80);
+            ballleft.Name = "ballleft";
+
+            ballright = new HUDObjectImage("./App/Textures/arrowright.png");
+            ballright.SetPosition(Window.Width / 1.60f, Window.Height / 3);
+            ballright.SetScale(80, 80);
+            ballright.Name = "ballright";
+
+            botleft = new HUDObjectImage("./App/Textures/arrowleft.png");
+            botleft.SetPosition(Window.Width / 1.85f, Window.Height / 2.388f);
+            botleft.SetScale(80, 80);
+            botleft.Name = "botleft";
+
+            botright = new HUDObjectImage("./App/Textures/arrowright.png");
+            botright.SetPosition(Window.Width / 1.60f, Window.Height / 2.388f);
+            botright.SetScale(80, 80);
+            botright.Name = "botright";
+
+            movingleft = new HUDObjectImage("./App/Textures/arrowleft.png");
+            movingleft.SetPosition(Window.Width / 1.85f, Window.Height / 2f);
+            movingleft.SetScale(80, 80);
+            movingleft.Name = "movingleft";
+
+            movingright = new HUDObjectImage("./App/Textures/arrowright.png");
+            movingright.SetPosition(Window.Width / 1.60f, Window.Height / 2f);
+            movingright.SetScale(80, 80);
+            movingright.Name = "movingright";
+
             settingstext = new HUDObjectText("Settings");
             settingstext.SetPosition(Window.Width/2, 50);
             settingstext.SetTextAlignment(TextAlignMode.Center);
@@ -155,6 +249,30 @@ namespace Aimlabs.App
             volume.SetScale(50);
             volume.Name = "volumetext";
 
+            ballcounttext = new HUDObjectText("Ballcount:");
+            ballcounttext.SetPosition(Window.Width / 2.5f, Window.Height / 3);
+            ballcounttext.SetTextAlignment(TextAlignMode.Center);
+            ballcounttext.SetFont(FontFace.XanhMono);
+            ballcounttext.SetColor(1f, 1f, 1f);
+            ballcounttext.SetScale(50);
+            ballcounttext.Name = "ballcounttext";
+
+            botcounttext = new HUDObjectText("Botcount:");
+            botcounttext.SetPosition(Window.Width / 2.5f, Window.Height / 2.388f);
+            botcounttext.SetTextAlignment(TextAlignMode.Center);
+            botcounttext.SetFont(FontFace.XanhMono);
+            botcounttext    .SetColor(1f, 1f, 1f);
+            botcounttext.SetScale(50);
+            botcounttext.Name = "botcounttext";
+
+            movingcounttext = new HUDObjectText("Movingcount:");
+            movingcounttext.SetPosition(Window.Width / 2.5f, Window.Height / 2);
+            movingcounttext.SetTextAlignment(TextAlignMode.Center);
+            movingcounttext.SetFont(FontFace.XanhMono);
+            movingcounttext.SetColor(1f, 1f, 1f);
+            movingcounttext.SetScale(50);
+            movingcounttext.Name = "movingcounttext";
+
             loudness = new HUDObjectText(" " + Stats.uservolume);
             loudness.SetPosition(Window.Width/1.7f, Window.Height / 4);
             loudness.SetTextAlignment(TextAlignMode.Center);
@@ -162,6 +280,30 @@ namespace Aimlabs.App
             loudness.SetColor(1f, 1f, 1f);
             loudness.SetScale(50);
             loudness.Name = "volumenumber";
+
+            ballcount = new HUDObjectText(" " + Stats.ballcount);
+            ballcount.SetPosition(Window.Width / 1.7f, Window.Height / 3);
+            ballcount.SetTextAlignment(TextAlignMode.Center);
+            ballcount.SetFont(FontFace.XanhMono);
+            ballcount.SetColor(1f, 1f, 1f);
+            ballcount.SetScale(50);
+            ballcount.Name = "volumenumber";
+
+            botcount = new HUDObjectText(" " + Stats.botcount);
+            botcount.SetPosition(Window.Width / 1.7f, Window.Height / 2.388f);
+            botcount.SetTextAlignment(TextAlignMode.Center);
+            botcount.SetFont(FontFace.XanhMono);
+            botcount.SetColor(1f, 1f, 1f);
+            botcount.SetScale(50);
+            botcount.Name = "volumenumber";
+
+            movingcount = new HUDObjectText(" " + Stats.movingcount);
+            movingcount.SetPosition(Window.Width / 1.7f, Window.Height / 2);
+            movingcount.SetTextAlignment(TextAlignMode.Center);
+            movingcount.SetFont(FontFace.XanhMono);
+            movingcount.SetColor(1f, 1f, 1f);
+            movingcount.SetScale(50);
+            movingcount.Name = "volumenumber";
 
             SetBackground2D("./App/Textures/backround.png");
         }
@@ -176,6 +318,18 @@ namespace Aimlabs.App
             AddHUDObject(left);
             AddHUDObject(right);
             AddHUDObject(loudness);
+            AddHUDObject(ballcount);
+            AddHUDObject(ballleft);
+            AddHUDObject(ballright);
+            AddHUDObject(botcount);
+            AddHUDObject(botleft);
+            AddHUDObject(botright);
+            AddHUDObject(movingcount);
+            AddHUDObject(movingleft);
+            AddHUDObject(movingright);
+            AddHUDObject(ballcounttext);
+            AddHUDObject(botcounttext);
+            AddHUDObject(movingcounttext);
             SetBackground2D("./App/Textures/Black.png");
             isSettingsVisible = true;
         }
@@ -187,6 +341,18 @@ namespace Aimlabs.App
             RemoveHUDObject(left);
             RemoveHUDObject(right);
             RemoveHUDObject(loudness);
+            RemoveHUDObject(ballcount);
+            RemoveHUDObject(ballleft);
+            RemoveHUDObject(ballright);
+            RemoveHUDObject(botcount);
+            RemoveHUDObject(botleft);
+            RemoveHUDObject(botright);
+            RemoveHUDObject(movingcount);
+            RemoveHUDObject(movingleft);
+            RemoveHUDObject(movingright);
+            RemoveHUDObject(ballcounttext);
+            RemoveHUDObject(botcounttext);
+            RemoveHUDObject(movingcounttext);
             AddHUDObject(start);
             AddHUDObject(aimlabslogo);
             AddHUDObject(settings);
