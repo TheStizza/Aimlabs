@@ -10,6 +10,7 @@ using System.Timers;
 using System.ComponentModel.Design.Serialization;
 using Assimp;
 using System.Collections;
+using System.Security.Principal;
 
 namespace Aimlabs.App
 {
@@ -247,7 +248,7 @@ namespace Aimlabs.App
             }*/
             KWEngine.LoadModel("Gun", "./App/Models/BrowningHP.gltf");
 
-            HUDOverlay.SetPosition(720f, 50f);
+            HUDOverlay.SetPosition(Window.Width/2, 50f);
             HUDOverlay.SetTexture("./App/Textures/hudaimlabs.png");
             AddHUDObject(HUDOverlay);
 
@@ -260,7 +261,7 @@ namespace Aimlabs.App
             SetCameraFOV(100);
 
             ingametime = new HUDObjectText("Time:" + WorldTime);
-            ingametime.SetPosition(670f, 22f);
+            ingametime.SetPosition(Window.Width/2.11f, 22f);
             ingametime.Name = "time";
             ingametime.SetScale(18);
             ingametime.SetFont(FontFace.NovaMono);
@@ -274,20 +275,20 @@ namespace Aimlabs.App
             AddHUDObject(clicks);*/
 
             accuracy = new HUDObjectText("Accuracy:" + Stats.accuracy);
-            accuracy.SetPosition(950f, 22f);
+            accuracy.SetPosition(Window.Width/1.6f, 22f);
             accuracy.Name = "accuracy";
             accuracy.SetScale(18);
             accuracy.SetFont(FontFace.NovaMono);
             AddHUDObject(accuracy);
 
             botscorex = new HUDObjectText("Botscore:" + Stats.botscore);
-            botscorex.SetPosition(285f, 22f);
+            botscorex.SetPosition(Window.Width/3.6f, 22f);
             botscorex.Name = "Botscore";
             botscorex.SetScale(18);
             botscorex.SetFont(FontFace.NovaMono);
 
             ballscorex = new HUDObjectText("Ballscore:" + Stats.ballscore);
-            ballscorex.SetPosition(285f, 22f);
+            ballscorex.SetPosition(Window.Width/3.6f, 22f);
             ballscorex.Name = "Botscore";
             ballscorex.SetScale(18);
             ballscorex.SetFont(FontFace.NovaMono);
