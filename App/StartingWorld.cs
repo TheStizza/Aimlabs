@@ -89,7 +89,7 @@ namespace Aimlabs.App
                
                 RemoveHUDObject(CrosshairHit);
             }
-            if (realtime == 10)//10 für Test
+            if (realtime == 30)//10 für Test
             {
                 Window.SetWorld(new Scoreboard());
             }
