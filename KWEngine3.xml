@@ -3163,6 +3163,14 @@
             <param name="vSync">Begrenzung der FPS an die Bildwiederholrate des Monitors?</param>
             <param name="ppQuality">Qualität der Post-Processing-Pipeline (Standard: hohe Qualität)</param>
         </member>
+        <member name="M:KWEngine3.GLWindow.#ctor(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Standardkonstruktor für den Fenstermodus
+            </summary>
+            <param name="width">Breite des Fensterinhalts in Pixeln</param>
+            <param name="height">Höhe des Fenterinhalts in Pixeln</param>
+            <param name="vSync">Begrenzung der FPS an die Bildwiederholrate des Monitors?</param>
+        </member>
         <member name="M:KWEngine3.GLWindow.#ctor(System.Int32,System.Int32,System.Boolean,KWEngine3.PostProcessingQuality,KWEngine3.WindowMode)">
             <summary>
             Standardkonstruktor für den Fenstermodus
@@ -3172,6 +3180,17 @@
             <param name="vSync">Begrenzung der FPS an die Bildwiederholrate des Monitors?</param>
             <param name="ppQuality">Qualität der Post-Processing-Pipeline (Standard: hohe Qualität)</param>
             <param name="windowMode">Art des Fensters (Standard oder rahmenlos)</param>
+        </member>
+        <member name="M:KWEngine3.GLWindow.#ctor(System.Int32,System.Int32,System.Boolean,KWEngine3.PostProcessingQuality,KWEngine3.WindowMode,OpenTK.Windowing.Common.MonitorHandle)">
+            <summary>
+            Standardkonstruktor für den Fenstermodus
+            </summary>
+            <param name="width">Breite des Fensterinhalts in Pixeln</param>
+            <param name="height">Höhe des Fenterinhalts in Pixeln</param>
+            <param name="vSync">Begrenzung der FPS an die Bildwiederholrate des Monitors?</param>
+            <param name="ppQuality">Qualität der Post-Processing-Pipeline (Standard: hohe Qualität)</param>
+            <param name="windowMode">Art des Fensters (Standard oder rahmenlos)</param>
+            <param name="monitorHandle">Handle des Monitors, auf dem das Fenster geöffnet werden soll</param>
         </member>
         <member name="P:KWEngine3.GLWindow.IsMouseInWindow">
             <summary>
@@ -4721,6 +4740,12 @@
             <param name="modelname">Name des Modells (muss zuvor importiert worden sein)</param>
             <returns>Liste der Knochennamen</returns>
         </member>
+        <member name="P:KWEngine3.KWEngine.ScreenInformation">
+            <summary>
+            Erfragt Informationen über die aktuell angeschlossenen Monitore/Bildschirme
+            </summary>
+            <returns>Monitor-/Bildschirminformationen</returns>
+        </member>
         <member name="T:KWEngine3.Model.GeoAnimation">
             <summary>
             Animationsklasse
@@ -4835,6 +4860,52 @@
             </summary>
             <param name="button">zu prüfende Taste</param>
             <returns>true, wenn die Taste gedrückt und im vorherigen Frame nicht gedrückt wurde</returns>
+        </member>
+        <member name="T:KWEngine3.ScreenInfo">
+            <summary>
+            Informationen über die angeschlossenen Monitore
+            </summary>
+        </member>
+        <member name="P:KWEngine3.ScreenInfo.Count">
+            <summary>
+            Anzahl der angeschlossenen Monitore
+            </summary>
+        </member>
+        <member name="P:KWEngine3.ScreenInfo.PrimaryScreen">
+            <summary>
+            Erfragt Informationen über den primären Bildschirm
+            </summary>
+        </member>
+        <member name="P:KWEngine3.ScreenInfo.PrimaryScreenWidth">
+            <summary>
+            Gibt die horizontale Auflösung des primären Monitors an
+            </summary>
+        </member>
+        <member name="P:KWEngine3.ScreenInfo.PrimaryScreenHeight">
+            <summary>
+            Gibt die vertikale Auflösung des primären Monitors an
+            </summary>
+        </member>
+        <member name="M:KWEngine3.ScreenInfo.GetScreenName(System.Int32)">
+            <summary>
+            Erfragt den Namen des Monitors mit dem angegebenen Index
+            </summary>
+            <param name="index">Index des Monitors (erlaubte Werte >= 0)</param>
+            <returns>Name des Monitors</returns>
+        </member>
+        <member name="M:KWEngine3.ScreenInfo.GetScreenResolution(System.Int32)">
+            <summary>
+            Erfragt die horizontale u. vertikale Auflösung des Monitors mit dem angegebenen Index
+            </summary>
+            <param name="index">Index des Monitors (erlaubte Werte >= 0)</param>
+            <returns>Auflösung des Monitors</returns>
+        </member>
+        <member name="M:KWEngine3.ScreenInfo.GetScreenDPI(System.Int32)">
+            <summary>
+            Erfragt die DPI des Monitors mit dem angegebenen Index
+            </summary>
+            <param name="index">Index des Monitors (erlaubte Werte >= 0)</param>
+            <returns>DPI-Werte (horizontal u. vertikal)</returns>
         </member>
         <member name="T:KWEngine3.World">
             <summary>
