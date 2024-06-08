@@ -166,6 +166,21 @@
             Frees all graphics resources used by the renderer.
             </summary>
         </member>
+        <member name="T:KWEngine3.WindowMode">
+            <summary>
+            Fenstermodus der Anwendung
+            </summary>
+        </member>
+        <member name="F:KWEngine3.WindowMode.Default">
+            <summary>
+            Standardfenster mit Dekoration (Standard, mit Titelleiste und Rahmen)
+            </summary>
+        </member>
+        <member name="F:KWEngine3.WindowMode.BorderlessWindow">
+            <summary>
+            Rahmenloses Fenster
+            </summary>
+        </member>
         <member name="T:KWEngine3.IntersectionTestMode">
             <summary>
             Gibt an, welche Arten von Hitboxen für die Kollisionsmessung berücksichtigt werden sollen
@@ -3143,12 +3158,12 @@
         </member>
         <member name="M:KWEngine3.GLWindow.#ctor(System.Boolean,KWEngine3.PostProcessingQuality)">
             <summary>
-            Standardkonstruktor für den Fullscreen-Modus
+            Standardkonstruktor für den exklusiven Fullscreen-Modus
             </summary>
             <param name="vSync">Begrenzung der FPS an die Bildwiederholrate des Monitors?</param>
             <param name="ppQuality">Qualität der Post-Processing-Pipeline (Standard: hohe Qualität)</param>
         </member>
-        <member name="M:KWEngine3.GLWindow.#ctor(System.Int32,System.Int32,System.Boolean,KWEngine3.PostProcessingQuality)">
+        <member name="M:KWEngine3.GLWindow.#ctor(System.Int32,System.Int32,System.Boolean,KWEngine3.PostProcessingQuality,KWEngine3.WindowMode)">
             <summary>
             Standardkonstruktor für den Fenstermodus
             </summary>
@@ -3156,6 +3171,7 @@
             <param name="height">Höhe des Fenterinhalts in Pixeln</param>
             <param name="vSync">Begrenzung der FPS an die Bildwiederholrate des Monitors?</param>
             <param name="ppQuality">Qualität der Post-Processing-Pipeline (Standard: hohe Qualität)</param>
+            <param name="windowMode">Art des Fensters (Standard oder rahmenlos)</param>
         </member>
         <member name="P:KWEngine3.GLWindow.IsMouseInWindow">
             <summary>
@@ -4930,6 +4946,12 @@
             <param name="x">x-Verschiebung</param>
             <param name="y">y-Verschiebung</param>
         </member>
+        <member name="M:KWEngine3.World.GetBackground2DOffset">
+            <summary>
+            Erfragt die aktuelle Texturverschiebung des 2D-Hintergrundbilds
+            </summary>
+            <returns>Verschiebungswerte</returns>
+        </member>
         <member name="M:KWEngine3.World.SetBackground2DRepeat(System.Single,System.Single)">
             <summary>
             Setzt die Texturwiederholung des 2D-Hintergrundbilds
@@ -4937,12 +4959,24 @@
             <param name="x">x-Wiederholung</param>
             <param name="y">y-Wiederholung</param>
         </member>
+        <member name="M:KWEngine3.World.GetBackground2DRepeat">
+            <summary>
+            Erfragt die aktuelle Texturwiederholung des 2D-Hintergrundbilds
+            </summary>
+            <returns>Wiederholungswerte</returns>
+        </member>
         <member name="M:KWEngine3.World.SetBackground2DClip(System.Single,System.Single)">
             <summary>
             Beschneidet die 2D-Hintergrundtextur
             </summary>
             <param name="x">Beschneidung in x-Richtung</param>
             <param name="y">Beschneidung in y-Richtung</param>
+        </member>
+        <member name="M:KWEngine3.World.GetBackground2DClip">
+            <summary>
+            Erfragt die aktuelle Texturbeschneidung des 2D-Hintergrundbilds
+            </summary>
+            <returns>Beschneidungswerte</returns>
         </member>
         <member name="M:KWEngine3.World.SetFlowField(KWEngine3.Helper.FlowField)">
             <summary>

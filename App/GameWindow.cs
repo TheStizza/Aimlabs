@@ -4,7 +4,7 @@ namespace Aimlabs.App
 {
     public class GameWindow : GLWindow
     {
-        public GameWindow() : base(1920, 1080)
+        public GameWindow() : base(1920, 1080, true, PostProcessingQuality.High, WindowMode.BorderlessWindow)
         {
             Title = "Aimlabs v0.0.1";
 
